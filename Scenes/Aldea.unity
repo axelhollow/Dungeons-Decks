@@ -194,7 +194,7 @@ Transform:
   m_Children:
   - {fileID: 1754869616}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &220835347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: 610434128}
   - component: {fileID: 610434127}
   - component: {fileID: 610434126}
+  - component: {fileID: 610434130}
   m_Layer: 0
   m_Name: Carta
   m_TagString: Untagged
@@ -382,7 +383,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d3b63c8c994e7b34b87e18494e0e5c75, type: 2}
+  - {fileID: 2100000, guid: 79c1c28d7e4815945b979f7f26990a04, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -422,11 +423,26 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 20, y: 0.2, z: 30}
+  m_LocalScale: {x: 20, y: 1, z: 30}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &610434130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610434125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3d2c9c408612342be0323cdccce104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alturaLevante: 10
+  velocidadRotacion: 5
+  anguloMaximo: 25
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
