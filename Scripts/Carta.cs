@@ -6,7 +6,7 @@ using UnityEngine;
 public class Carta : MonoBehaviour
 {
     public TipoCarta tipo;
-    public string name;
+    public string nombre;
 
 }
 public enum TipoCarta
