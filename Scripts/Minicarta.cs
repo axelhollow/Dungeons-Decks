@@ -1,15 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CartaPersonaje : Carta
+public class Minicarta : MonoBehaviour
 {
-
-    public int vida;
-    public int energia;
-    public List<GameObject> minimazo = new();
-
+    public string nombre;
+    public int daño;
+    public int coste;
     public Texture2D imagenCarta;
 
     void Start()
@@ -20,8 +17,4 @@ public class CartaPersonaje : Carta
         // Cambiar la textura en el material
         renderer.material.mainTexture = imagenCarta;
     }
-
 }
-
-
-
