@@ -8,8 +8,8 @@ public class TableroManager : MonoBehaviour
 
     //Mazos
     public List<Carta> mazo;
-    private List<Carta> mazoPersonajes;
-    private List<Carta> mazotilizables;
+    private List<Carta> mazoPersonajes=new();
+    private List<Carta> mazotilizables = new();
 
     //Grid Personajes
     public Transform[] gridPersonajes;
@@ -61,14 +61,12 @@ public class TableroManager : MonoBehaviour
             n++;
         }
 
-
+         n = 0;
         //Metemos las cartas de iteam en su grid
-        foreach (CartaPersonaje carta in mazotilizables)
+        foreach (CartaItems carta in mazotilizables)
         {
             Vector3 posicionCarta = gridItems[n].transform.position;
             carta.transform.position = posicionCarta;
-
-
             n++;
         }
     }

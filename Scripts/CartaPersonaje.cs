@@ -5,4 +5,6 @@ using UnityEngine;
 public class CartaPersonaje : Carta
 {
     int vida;
+    int energia;
+
 }
