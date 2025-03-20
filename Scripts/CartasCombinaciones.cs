@@ -66,17 +66,9 @@ public class CartasCombinaciones : MonoBehaviour
         // Comparar si las dos listas son idénticas
         if (cartasIDs.SequenceEqual(combinacionCorrecta))
         {
-            Debug.Log("¡Combinación correcta! Destruyendo el objeto y creando una nueva carta...");
-
-            // Guardar la posición y rotación del objeto actual antes de destruirlo
-            Vector3 posicionOriginal = transform.position;
-            Quaternion rotacionOriginal = transform.rotation;
-
-            // Destruir el objeto actual
-            Destroy(gameObject);
+            //Destroy(gameObject);
 
             // Instanciar la nueva carta en la misma posición y rotación, pero sin ser hija de nadie
-            Instantiate(Carta, posicionOriginal, rotacionOriginal);
         }
     }
 }

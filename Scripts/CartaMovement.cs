@@ -22,6 +22,8 @@ public class CartaMovement : MonoBehaviour
 
     public bool seleccionadaDungeon = false;
 
+    public bool holderDungeon = false;
+
     void Start()
     {
         // Guardamos la posición original de la carta
@@ -60,19 +62,24 @@ public class CartaMovement : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //Debug.Log(ObtenerProfundidadApilada());
-        estaSiendoArrastrada = true;
-        seleccionadaDungeon = false;
-        transform.SetParent(null);
+        if (holderDungeon)
+        {
+            //Debug.Log(ObtenerProfundidadApilada());
+            estaSiendoArrastrada = true;
+            seleccionadaDungeon = false;
+            transform.SetParent(null);
 
-        // Obtener la posición del ratón en el mundo
-        Vector3 posicionRatón = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
+            // Obtener la posición del ratón en el mundo
+            Vector3 posicionRatón = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.nearClipPlane));
 
-        // Guardar la diferencia entre la posición del ratón y el objeto (offset)
-        offset = posicionRatón - transform.position;
+            // Guardar la diferencia entre la posición del ratón y el objeto (offset)
+            offset = posicionRatón - transform.position;
 
-        // Levantar la carta cuando se hace clic
-        transform.position = new Vector3(transform.position.x, alturaLevante, transform.position.z);
+            // Levantar la carta cuando se hace clic
+            transform.position = new Vector3(transform.position.x, alturaLevante, transform.position.z);
+        }
+
+        
     }
 
     private void OnMouseUp()
