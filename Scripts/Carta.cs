@@ -7,10 +7,12 @@ public class Carta : MonoBehaviour
 {
     public TipoCarta tipo;
     public string nombre;
+    public int id;
 
 }
 public enum TipoCarta
 {
     Item,
-    Personaje
+    Personaje,
+    Material
 }

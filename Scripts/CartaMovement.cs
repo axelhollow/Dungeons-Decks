@@ -8,10 +8,10 @@ public class CartaMovement : MonoBehaviour
     private bool estaSiendoArrastrada = false;
     private Vector3 offset; // Diferencia entre el punto de clic y el centro de la carta
 
-    public float alturaLevante = 2f; // Cuánto se levanta la carta cuando se hace clic
+    public float alturaLevante = 6f; // Cuánto se levanta la carta cuando se hace clic
     public float velocidadRotacion = 5f; // La velocidad de inclinación
-    public float anguloMaximo = 10f; // Ángulo máximo de inclinación
-    public float distanciaRaycast = 1.5f; // Distancia del Raycast para detectar cartas debajo
+    public float anguloMaximo = 15f; // Ángulo máximo de inclinación
+    public float distanciaRaycast = 10f; // Distancia del Raycast para detectar cartas debajo
 
     private Vector3 ultimaPosicionRatón;
 
@@ -117,7 +117,6 @@ public class CartaMovement : MonoBehaviour
             {
                 Transform cartaPadre = hit.collider.transform;
 
-                
                 transform.SetParent(cartaPadre);
                 transform.localPosition = new Vector3(0f, 1f, 0f);
                 transform.localRotation = Quaternion.identity;  
@@ -134,8 +133,9 @@ public class CartaMovement : MonoBehaviour
                 transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             }
 
+            EjecutarEnTodasLasCartasCombinaciones();
+
         }
-        
     }
 
     private float ObtenerProfundidadApilada()
@@ -162,6 +162,20 @@ public class CartaMovement : MonoBehaviour
         }
 
         return profundidad;
+    }
+
+
+
+    public void EjecutarEnTodasLasCartasCombinaciones()
+    {
+        // Buscar todos los objetos que tengan el script CartasCombinaciones
+        CartasCombinaciones[] todasLasCartas = FindObjectsOfType<CartasCombinaciones>();
+
+        // Recorrerlos y ejecutar ComprobacionCartas() en cada uno
+        foreach (CartasCombinaciones carta in todasLasCartas)
+        {
+            carta.ComprobacionCartas();
+        }
     }
 
 }
