@@ -878,9 +878,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carta (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 7093010486824672253, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d509a3d6fdc6a6447a8c8ed22b97c21a, type: 2}
     - target: {fileID: 7863797824151806201, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
       propertyPath: id
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863797824151806201, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
+      propertyPath: tipo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -951,9 +959,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carta (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7093010486824672253, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d509a3d6fdc6a6447a8c8ed22b97c21a, type: 2}
     - target: {fileID: 7863797824151806201, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
       propertyPath: id
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863797824151806201, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
+      propertyPath: tipo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1423,6 +1439,7 @@ GameObject:
   - component: {fileID: 1079650769}
   - component: {fileID: 1079650768}
   - component: {fileID: 1079650767}
+  - component: {fileID: 1079650770}
   m_Layer: 0
   m_Name: PlayDungeonBtn
   m_TagString: Untagged
@@ -1517,6 +1534,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079650764}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1079650770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079650764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1083fd96c25097442be0606513ae462d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personajes:
+  - {fileID: 1669378314}
+  - {fileID: 919644395}
+  - {fileID: 1312920628}
+  objetos:
+  - {fileID: 1516622590}
+  - {fileID: 204851525}
+  - {fileID: 80708811}
+  - {fileID: 1226552683}
+  - {fileID: 1243845793}
+  - {fileID: 1997537192}
+  personajesPaLaDungeon: []
+  objetosPaLaDungeon: []
 --- !u!1 &1226552683
 GameObject:
   m_ObjectHideFlags: 0
@@ -3005,9 +3047,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Carta (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7093010486824672253, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d509a3d6fdc6a6447a8c8ed22b97c21a, type: 2}
     - target: {fileID: 7863797824151806201, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
       propertyPath: id
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7863797824151806201, guid: 9a1e0c3aacae9a54d8ebc70f22aafebc, type: 3}
+      propertyPath: tipo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
