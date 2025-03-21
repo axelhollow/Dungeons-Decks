@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7315737110772551012}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -19, y: 0, z: 28}
   m_LocalScale: {x: 26.255949, y: 1, z: 35}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &8673583984290674287
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -121,8 +121,9 @@ MonoBehaviour:
   tipo: 1
   nombre: Guerrero
   vida: 10
-  energia: 3
-  minimazo:
-  - {fileID: 5122223806699215244, guid: 81ebb865191737942beae7fd7a6d819c, type: 3}
-  - {fileID: 5122223806699215244, guid: 81ebb865191737942beae7fd7a6d819c, type: 3}
-  - {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}
+  mana: 4
+  mazoYaGenerado: 0
+  ataque1: {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}
+  ataque2: {fileID: 5122223806699215244, guid: 81ebb865191737942beae7fd7a6d819c, type: 3}
+  ataque3: {fileID: 7112640407728221363, guid: 98fe9d5f8cf3fab4d92854b8bec7bf97, type: 3}
+  imagenCarta: {fileID: 2800000, guid: 17e685339c870fa4286e7993add3510e, type: 3}

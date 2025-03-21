@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Carta : MonoBehaviour
 {
+
     public TipoCarta tipo;
     public string nombre;
     public int id;

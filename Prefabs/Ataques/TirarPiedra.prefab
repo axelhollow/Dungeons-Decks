@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 8088943063078101099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -26, y: 0, z: -28}
-  m_LocalScale: {x: 13.19, y: 1, z: 26.68613}
+  m_LocalPosition: {x: -50, y: 0, z: -28}
+  m_LocalScale: {x: 22.7, y: 1, z: 29.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -120,5 +120,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nombre: 
   "da\xF1o": 2
-  coste: 0
+  coste: 2
   imagenCarta: {fileID: 2800000, guid: eba3a29ca179b734e8c176f91408d38e, type: 3}
