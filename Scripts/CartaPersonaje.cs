@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,9 @@ public class CartaPersonaje : Carta
 {
 
     public int vida;
+    public int vidaAux;
     public int mana;
+    public ParticleSystem efectoAtaque;
 
     public int manaAux;
 
@@ -21,11 +24,21 @@ public class CartaPersonaje : Carta
 
     public Texture2D imagenCarta;
 
+    //INFO UI
+    public TextMeshPro textoVida;
 
 
+    public void RestarVida(int daño)
+    {
+        vida -= daño;
+        textoVida.text = vida.ToString();
+    }
 
     void Start()
     {
+        vida = vidaAux;
+        textoVida.text = vida.ToString();
+
         manaAux = mana;
 
         // Obtener el material del objeto 3D
@@ -33,11 +46,6 @@ public class CartaPersonaje : Carta
 
         // Cambiar la textura en el material
         renderer.material.mainTexture = imagenCarta;
-    }
-
-    private void Update()
-    {
-
     }
 
 }

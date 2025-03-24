@@ -468,4 +468,5 @@ MonoBehaviour:
   imagenCarta: {fileID: 2800000, guid: eba3a29ca179b734e8c176f91408d38e, type: 3}
   textoVida: {fileID: 8220176253298161990}
   textoMana: {fileID: 7198136336302056116}
+  originalScale: {x: 0, y: 0, z: 0}
   scaleFactor: 1.25

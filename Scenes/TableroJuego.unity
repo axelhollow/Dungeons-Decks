@@ -782,6 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834fc428e61fe084eb556dd137a97ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  efectoActual: {fileID: 0}
   mazo:
   - {fileID: 7315737110772551012, guid: 6156782e53be98a4f8bd52f8e6d340c8, type: 3}
   - {fileID: 5487844783267485474, guid: 4b9c23e27b301f64c9122200cb6b7445, type: 3}
@@ -817,6 +818,7 @@ MonoBehaviour:
   - {fileID: 1293979641554033109}
   textoMana: {fileID: 850771263}
   listaEnemigos: []
+  listaPersonajes: []
 --- !u!4 &542270977
 Transform:
   m_ObjectHideFlags: 0
@@ -1605,6 +1607,37 @@ Transform:
   - {fileID: 212561806}
   - {fileID: 1500676408}
   - {fileID: 499418382}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1309168221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1309168222}
+  m_Layer: 0
+  m_Name: ---------INVERTIR CARTAS--------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1309168222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309168221}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1488168335
@@ -3088,3 +3121,4 @@ SceneRoots:
   - {fileID: 1965294900}
   - {fileID: 1048993490}
   - {fileID: 1064761095}
+  - {fileID: 1309168222}

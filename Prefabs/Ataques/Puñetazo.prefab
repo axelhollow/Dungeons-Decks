@@ -297,6 +297,7 @@ MonoBehaviour:
   imagenCarta: {fileID: 2800000, guid: f9d4a7dd6c173f24e99eecb3adf1abed, type: 3}
   textoVida: {fileID: 5523274740607502760}
   textoMana: {fileID: 6057713125730490082}
+  originalScale: {x: 0, y: 0, z: 0}
   scaleFactor: 1.25
 --- !u!1 &6700026387435225606
 GameObject:

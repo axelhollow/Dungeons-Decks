@@ -5,10 +5,14 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Progress;
+using Random = UnityEngine.Random;
 
 public class TableroManager : MonoBehaviour
 {
     public static TableroManager Instance { get; private set; }
+
+    public GameObject efectoActual;
 
     //Mazos
     public List<GameObject> mazo;
@@ -42,6 +46,9 @@ public class TableroManager : MonoBehaviour
     //listaEnemigosCarta
     public List<GameObject> listaEnemigos=new();
 
+    public List<GameObject> listaPersonajes = new();
+
+    int numPersonajes;
 
     //AtaqueSeleccionado
     private GameObject ataqueSeleccioando;
@@ -63,6 +70,7 @@ public class TableroManager : MonoBehaviour
 
     void Start()
     {
+        
         //Clasificamos las cartas que nos pasan
         if (mazo != null)
         {
@@ -73,7 +81,6 @@ public class TableroManager : MonoBehaviour
                     Carta cartita = carta.GetComponentInChildren<Carta>();
                     if (cartita.tipo == TipoCarta.Personaje)
                     {
-                        print(carta.name);
                         mazoPersonajes.Add(carta);
                     }
                     if (cartita.tipo == TipoCarta.Item)
@@ -89,16 +96,19 @@ public class TableroManager : MonoBehaviour
         {
             Vector3 posicionCarta = gridPersonajes[n].transform.position;
             carta.transform.position = posicionCarta;
-            Instantiate(carta);
+            var cartita=Instantiate(carta);
+            listaPersonajes.Add(cartita);
             n++;
         }
-         n = 0;
+        numPersonajes = listaPersonajes.Count();
+        n = 0;
         //Metemos las cartas de iteam en su grid
         foreach (GameObject carta in mazotilizables)
         {
             Vector3 posicionCarta = gridItems[n].transform.position;
             carta.transform.position = posicionCarta;
             Instantiate(carta);
+            //GenerarMinimazo(carta);//to do 
             n++;
         }
         n = 0;
@@ -119,19 +129,49 @@ public class TableroManager : MonoBehaviour
 
     private void Update()
     {
+        //gestionarMuertePersonajes Y Derrota
+        try
+        {
+            if (listaPersonajes.Count > 0)
+            {
+                for (int i = listaPersonajes.Count - 1; i >= 0; i--)
+                {
+                    if (listaPersonajes[i].GetComponent<CartaPersonaje>().vida <= 0)
+                    {
+                        listaPersonajes[i].SetActive(false);
+                        listaPersonajes.RemoveAt(i);
+                        numPersonajes--;
+                        if (numPersonajes < 0) numPersonajes = 0;
+                    }
+                }
+               
+            }
+
+        }
+        catch (System.IndexOutOfRangeException e)
+        {
+            //Ganaste mi pana
+            print("Exception de derrota");
+        }
+        if (listaPersonajes == null || listaPersonajes.Count == 0)
+        {
+            print("perdiste");
+
+        }
+
         //gestionarEnemigos y victoria
         try
         {
             if (listaEnemigos.Count > 0)
             {
-                foreach (var item in listaEnemigos)
+
+
+                for (int i = listaEnemigos.Count - 1; i >= 0; i--)
                 {
-
-
-                    if (item.GetComponent<Enemigo>().vida <= 0)
+                    if (listaEnemigos[i].GetComponent<Enemigo>().vida <= 0)
                     {
-                        item.SetActive(false);
-                        listaEnemigos.Remove(item);
+                        listaEnemigos[i].SetActive(false);
+                        listaEnemigos.Remove(listaEnemigos[i]);
 
 
                     }
@@ -161,8 +201,6 @@ public class TableroManager : MonoBehaviour
                 GameObject obj = hit.collider.gameObject;
                 if (obj.CompareTag("TerminarTurno"))
                 {
-                    print("turno terminado");
-                    // ReactivarCartas();
                     StartCoroutine("AcabarTurno");
                 }
 
@@ -234,14 +272,13 @@ public class TableroManager : MonoBehaviour
                     {
                         colorOriginal = rend.material.color; // Guarda el color original la primera vez
                         rend.material.color = Color.red;
-                        textoMana.text = ataqueSeleccioando.GetComponent<CartaPersonaje>().mana.ToString();
+                        //textoMana.text = ataqueSeleccioando.GetComponent<CartaPersonaje>().mana.ToString();
                     }
                     return;
                 }
 
                 if (ataqueSeleccioando != null && obj.tag == "Enemigo")
                 {
-                    print("Enemigo seleccionado");
                     int manaActual = int.Parse(textoMana.text);
                     int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
                     int manaRestante = manaActual - costeCarta;
@@ -261,7 +298,6 @@ public class TableroManager : MonoBehaviour
 
                         //Restar vida al enemigo
                         int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().daño;
-                        print("Aplicaste " + dañoCarta + " de daño, al " + obj.GetComponent<Enemigo>().nombre);
                         obj.GetComponent<Enemigo>().RestarVida(dañoCarta);
                     }
 
@@ -276,7 +312,7 @@ public class TableroManager : MonoBehaviour
         
         if (cartaP.manoActual == null || cartaP.manoActual.Count==0)
         {
-                print("minimazo tiene cosas");
+     
             cartaP.manoActual = new Dictionary<GameObject, bool>();
                         Vector3 posicionCarta = gridAtaques[0].transform.position;
                         cartaP.ataque1.transform.position = posicionCarta;
@@ -298,7 +334,6 @@ public class TableroManager : MonoBehaviour
         }
         else
         {
-            print(cartaP.manoActual);
 
             foreach (var carta in cartaP.manoActual)
             {
@@ -316,18 +351,35 @@ public class TableroManager : MonoBehaviour
     }
 
     IEnumerator AcabarTurno()
-    {
-
-      
-        Cursor.lockState = CursorLockMode.Locked; 
+    { 
         Cursor.visible = false;
 
-        yield return new WaitForSeconds(2f);
-        ReactivarCartas();
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true; 
+        //Turno Enemigo
+        foreach (GameObject enemigo in listaEnemigos) 
+        {
+            yield return new WaitForSeconds(0.4f);
+            Enemigo enemiguito = enemigo.GetComponent<Enemigo>();
+            //seleccionamos objetivo al que atacar
+            int numeroAleatorio = Random.Range(0, numPersonajes);
 
+            print(numPersonajes);
+            CartaPersonaje personaje = listaPersonajes[numeroAleatorio].GetComponent<CartaPersonaje>();
+
+            efectoActual= enemiguito.efectoAtaque;
+            efectoActual.transform.position = personaje.transform.position;
+            enemiguito.transform.localScale = enemiguito.originalScale * enemiguito.scaleFactor;
+            Instantiate(efectoActual);
+            print(efectoActual);
+            yield return new WaitForSeconds(1f);
+            personaje.RestarVida(enemiguito.daño);
+            enemiguito.transform.localScale = enemiguito.originalScale;
+        }
+        ReactivarCartas();
+        Cursor.visible = true;
+        
     }
+
+
 
     public void ReactivarCartas() 
     {
@@ -341,16 +393,25 @@ public class TableroManager : MonoBehaviour
             foreach (Transform hijo in obj.transform) // Recorre todos los hijos
             {
                 obj.GetComponent<CartaPersonaje>().manoActual[hijo.gameObject] = true;
-                //hijo.gameObject.SetActive(true); // Activa cada hijo
-                Debug.Log($"Activado: {hijo.gameObject.name} (hijo de {obj.name})");
+               
             }
         }
 
-        foreach (Transform hijo in objetoSeleccionado.transform) // Recorre todos los hijos
+        try
         {
-            hijo.gameObject.SetActive(true);  
+            if (objetoSeleccionado.transform != null && objetoSeleccionado.transform.childCount > 0)
+            {
+                foreach (Transform hijo in objetoSeleccionado.transform) // Recorre todos los hijos
+                {
+                    hijo.gameObject.SetActive(true);
+                }
+            }
+        }catch(Exception ex) 
+        { }
+
+        if (objetoSeleccionado != null) 
+        {
+            textoMana.text = objetoSeleccionado.GetComponent<CartaPersonaje>().mana.ToString();
         }
-        //ponemos el valor al mana
-        textoMana.text = objetoSeleccionado.GetComponent<CartaPersonaje>().mana.ToString();
     }
 }

@@ -18,7 +18,7 @@ public class Minicarta : MonoBehaviour
 
 
     //tamaño
-    private Vector3 originalScale; // Guarda el tamaño original
+    public Vector3 originalScale; // Guarda el tamaño original
     public float scaleFactor = 1.25f; // Factor de escala (25% más grande)
 
 

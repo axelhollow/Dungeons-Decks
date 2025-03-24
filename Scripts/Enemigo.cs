@@ -14,9 +14,11 @@ public class Enemigo : MonoBehaviour
 
     //INFO UI
    public TextMeshPro textoVida;
+    //Efectos
+    public GameObject efectoAtaque;
 
     //tamaño
-    private Vector3 originalScale; // Guarda el tamaño original
+    public Vector3 originalScale; // Guarda el tamaño original
     public float scaleFactor = 1.25f; // Factor de escala (25% más grande)
 
     void Start()
