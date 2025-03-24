@@ -11,6 +11,8 @@ public class CartasCombinaciones : MonoBehaviour
 
     public string prefabNamePrueba = "CubePrueba";
 
+
+
     public void ComprobacionCartas()
     {
 
