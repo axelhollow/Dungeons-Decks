@@ -62,7 +62,7 @@ public class CartaMovement : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (holderDungeon)
+        if (!holderDungeon)
         {
             //Debug.Log(ObtenerProfundidadApilada());
             estaSiendoArrastrada = true;
@@ -79,70 +79,82 @@ public class CartaMovement : MonoBehaviour
             transform.position = new Vector3(transform.position.x, alturaLevante, transform.position.z);
         }
 
-        
+
     }
 
     private void OnMouseUp()
     {
-        estaSiendoArrastrada = false;
 
-        
-
-        // Restablecer la rotación al soltar la carta
-        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-        // **Lanzar Raycast hacia abajo para detectar una carta debajo**
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, distanciaRaycast))
+        if (!holderDungeon)
         {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Carta") && hit.collider.GetComponent<CartaMovement>() != null && !hit.collider.GetComponent<CartaMovement>().seleccionadaDungeon)
-            {
-                Transform cartaPadre = hit.collider.transform;
+            estaSiendoArrastrada = false;
 
-                // Si la carta padre tiene hijas, encontrar la última hija
-                while (cartaPadre.childCount > 0)
+
+
+            // Restablecer la rotación al soltar la carta
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+            // **Lanzar Raycast hacia abajo para detectar una carta debajo**
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, distanciaRaycast))
+            {
+
+                Carta cartaActual = GetComponent<Carta>();
+
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Carta") && hit.collider.GetComponent<CartaMovement>() != null && !hit.collider.GetComponent<CartaMovement>().seleccionadaDungeon)
                 {
-                    cartaPadre = cartaPadre.GetChild(cartaPadre.childCount - 1);
+                    Transform cartaPadre = hit.collider.transform;
+
+                    // Si la carta padre tiene hijas, encontrar la última hija
+                    while (cartaPadre.childCount > 0)
+                    {
+                        cartaPadre = cartaPadre.GetChild(cartaPadre.childCount - 1);
+                    }
+
+                    // Hacer que la carta se convierta en hija de la última hija encontrada (o de la original si no tenía hijas)
+                    transform.SetParent(cartaPadre);
+                    transform.localPosition = new Vector3(0f, 1f, -0.25f);
+                    transform.localRotation = Quaternion.identity;
+
+                }
+                else if (cartaActual.tipo == TipoCarta.Personaje && hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderPersonaje")&& ObtenerProfundidadApilada() == 0)
+                {
+                    if (ObtenerProfundidadApilada() == 0)
+                    {
+                        Transform cartaPadre = hit.collider.transform;
+                        transform.SetParent(cartaPadre);
+                        transform.localPosition = new Vector3(0f, 1f, 0f);
+                        transform.localRotation = Quaternion.identity;
+                        seleccionadaDungeon = true;
+                    }
+                }
+                // Si la carta es de tipo Item y está sobre HolderObjeto
+                else if (cartaActual.tipo == TipoCarta.Item && hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderObjeto")&& ObtenerProfundidadApilada() == 0)
+                {
+                    if (ObtenerProfundidadApilada() == 0)
+                    {
+                        Transform cartaPadre = hit.collider.transform;
+                        transform.SetParent(cartaPadre);
+                        transform.localPosition = new Vector3(0f, 1f, 0f);
+                        transform.localRotation = Quaternion.identity;
+                        seleccionadaDungeon = true;
+                    }
+                }
+                else
+                {
+                    // Si no se cumple ninguna condición, la carta vuelve a su posición ajustada
+                    Vector3 posicionFinal = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
+                    float posX = Mathf.Clamp(posicionFinal.x, limiteXMin, limiteXMax);
+                    float posZ = Mathf.Clamp(posicionFinal.z, limiteZMin + ObtenerProfundidadApilada() * 30, 75);
+                    transform.position = new Vector3(posX, 0f, posZ);
+                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 }
 
-                // Hacer que la carta se convierta en hija de la última hija encontrada (o de la original si no tenía hijas)
-                transform.SetParent(cartaPadre);
-                transform.localPosition = new Vector3(0f, 1f, -0.25f);
-                transform.localRotation = Quaternion.identity;
+                EjecutarEnTodasLasCartasCombinaciones();
 
             }
-            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderPersonaje") && ObtenerProfundidadApilada()==0 && hit.collider.GetComponent<CartaMovement>() != null &&!hit.collider.GetComponent<CartaMovement>().seleccionadaDungeon)
-            {
-                Transform cartaPadre = hit.collider.transform;
-
-                transform.SetParent(cartaPadre);
-                transform.localPosition = new Vector3(0f, 1f, 0f);
-                transform.localRotation = Quaternion.identity;  
-                seleccionadaDungeon = true;
-            }
-            else if (hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderObjeto") && ObtenerProfundidadApilada() == 0 && hit.collider.GetComponent<CartaMovement>() != null && !hit.collider.GetComponent<CartaMovement>().seleccionadaDungeon)
-            {
-                Transform cartaPadre = hit.collider.transform;
-
-                transform.SetParent(cartaPadre);
-                transform.localPosition = new Vector3(0f, 1f, 0f);
-                transform.localRotation = Quaternion.identity;  
-                seleccionadaDungeon = true;
-            }
-            else
-            {
-                Vector3 posicionFinal = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
-                // Ajustamos la posición dentro de los límites
-                float posX = Mathf.Clamp(posicionFinal.x, limiteXMin, limiteXMax);
-                float posZ = Mathf.Clamp(posicionFinal.z, limiteZMin + ObtenerProfundidadApilada() * 30, 75);
-                transform.position = new Vector3(posX, 0f, posZ);
-
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            }
-
-            EjecutarEnTodasLasCartasCombinaciones();
-
         }
+        
     }
 
     private float ObtenerProfundidadApilada()
@@ -184,5 +196,4 @@ public class CartaMovement : MonoBehaviour
             carta.ComprobacionCartas();
         }
     }
-
 }
