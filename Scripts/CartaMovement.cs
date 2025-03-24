@@ -66,72 +66,87 @@ public class CartaMovement : MonoBehaviour
             }
         }
 
-        private void OnMouseUp()
+    private void OnMouseUp()
+    {
+        if (!holderDungeon)
         {
-            if (!holderDungeon)
+            estaSiendoArrastrada = false;
+
+            // Restablecer la rotación al soltar la carta
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+
+            // Lanzar Raycast hacia abajo para detectar una carta debajo
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, distanciaRaycast))
             {
-                estaSiendoArrastrada = false;
+                Carta cartaActual = GetComponent<Carta>();
 
-                // Restablecer la rotación al soltar la carta
-                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-
-                // Lanzar Raycast hacia abajo para detectar una carta debajo
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, Vector3.down, out hit, distanciaRaycast))
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Carta") &&
+                    hit.collider.GetComponent<CartaMovement>() != null &&
+                    !hit.collider.GetComponent<CartaMovement>().seleccionadaDungeon)
                 {
-                    Carta cartaActual = GetComponent<Carta>();
+                    Transform cartaPadre = hit.collider.transform;
 
-                    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Carta") &&
-                        hit.collider.GetComponent<CartaMovement>() != null &&
-                        !hit.collider.GetComponent<CartaMovement>().seleccionadaDungeon)
+                    // Buscar el último hijo de tipo Carta en el objeto
+                    Transform ultimaCartaHija = null;
+                    foreach (Transform child in cartaPadre)
                     {
-                        Transform cartaPadre = hit.collider.transform;
-
-                        // Si la carta padre tiene hijas, encontrar la última hija
-                        while (cartaPadre.childCount > 0)
+                        Carta cartaHija = child.GetComponent<Carta>();
+                        if (cartaHija != null && cartaHija.tipo == TipoCarta.Personaje)
                         {
-                            cartaPadre = cartaPadre.GetChild(cartaPadre.childCount - 1);
+                            ultimaCartaHija = child;
                         }
+                    }
 
-                        // Convertir la carta en hija de la última carta encontrada
+                    // Si hay una carta hija de tipo Personaje, asignamos a la nueva carta como la última hija
+                    if (ultimaCartaHija != null)
+                    {
+                        transform.SetParent(ultimaCartaHija);
+                        transform.localPosition = new Vector3(0f, 1f, -0.25f);
+                        transform.localRotation = Quaternion.identity;
+                    }
+                    else
+                    {
+                        // Si no se encuentra ninguna carta de tipo Personaje, se queda como la última hija del padre
                         transform.SetParent(cartaPadre);
                         transform.localPosition = new Vector3(0f, 1f, -0.25f);
                         transform.localRotation = Quaternion.identity;
                     }
-                    else if (cartaActual.tipo == TipoCarta.Personaje &&
-                             hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderPersonaje") &&
-                             ObtenerProfundidadApilada() == 0)
-                    {
-                        Transform cartaPadre = hit.collider.transform;
-                        transform.SetParent(cartaPadre);
-                        transform.localPosition = new Vector3(0f, 1f, 0f);
-                        transform.localRotation = Quaternion.identity;
-                        seleccionadaDungeon = true;
-                    }
-                    else if (cartaActual.tipo == TipoCarta.Item &&
-                             hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderObjeto") &&
-                             ObtenerProfundidadApilada() == 0)
-                    {
-                        Transform cartaPadre = hit.collider.transform;
-                        transform.SetParent(cartaPadre);
-                        transform.localPosition = new Vector3(0f, 1f, 0f);
-                        transform.localRotation = Quaternion.identity;
-                        seleccionadaDungeon = true;
-                    }
-                    else
-                    {
-                        // Si no se cumple ninguna condición, la carta vuelve a su posición ajustada
-                        Vector3 posicionFinal = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
-                        float posX = Mathf.Clamp(posicionFinal.x, limiteXMin, limiteXMax);
-                        float posZ = Mathf.Clamp(posicionFinal.z, limiteZMin + ObtenerProfundidadApilada() * 30, 75);
-                        transform.position = new Vector3(posX, 0f, posZ);
-                        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                    }
+                }
+                else if (cartaActual.tipo == TipoCarta.Personaje &&
+                         hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderPersonaje") &&
+                         ObtenerProfundidadApilada() == 0)
+                {
+                    Transform cartaPadre = hit.collider.transform;
+                    transform.SetParent(cartaPadre);
+                    transform.localPosition = new Vector3(0f, 1f, 0f);
+                    transform.localRotation = Quaternion.identity;
+                    seleccionadaDungeon = true;
+                }
+                else if (cartaActual.tipo == TipoCarta.Item &&
+                         hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderObjeto") &&
+                         ObtenerProfundidadApilada() == 0)
+                {
+                    Transform cartaPadre = hit.collider.transform;
+                    transform.SetParent(cartaPadre);
+                    transform.localPosition = new Vector3(0f, 1f, 0f);
+                    transform.localRotation = Quaternion.identity;
+                    seleccionadaDungeon = true;
+                }
+                else
+                {
+                    // Si no se cumple ninguna condición, la carta vuelve a su posición ajustada
+                    Vector3 posicionFinal = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
+                    float posX = Mathf.Clamp(posicionFinal.x, limiteXMin, limiteXMax);
+                    float posZ = Mathf.Clamp(posicionFinal.z, limiteZMin + ObtenerProfundidadApilada() * 30, 75);
+                    transform.position = new Vector3(posX, 0f, posZ);
+                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 }
             }
         }
+    }
 
-        private float ObtenerProfundidadApilada()
+    private float ObtenerProfundidadApilada()
         {
             float profundidadBase = 0f;
 
