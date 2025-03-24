@@ -9,8 +9,6 @@ public class CartasCombinaciones : MonoBehaviour
 
     public GameObject Carta;
 
-    public string prefabNamePrueba = "CubePrueba";
-
     public void ComprobacionCartas()
     {
 
@@ -29,6 +27,8 @@ public class CartasCombinaciones : MonoBehaviour
             // Llamar a la función recursiva para recorrer los hijos y sus hijos
             RecorrerHijos(transform);
 
+            // Imprimir los IDs en la consola
+            Debug.Log("IDs de todas las cartas hijas y subhijas: " + string.Join(", ", cartasIDs));
         }else if (transform.parent != null)
         {
             cartasIDs.Clear();
@@ -44,7 +44,7 @@ public class CartasCombinaciones : MonoBehaviour
             // Obtener el componente "Carta"
             Carta carta = hijo.GetComponent<Carta>();
 
-            if (carta != null) 
+            if (carta != null) // Si el objeto tiene el script "Carta"
             {
                 cartasIDs.Add(carta.id); // Guardar el ID en la lista
             }
@@ -57,7 +57,7 @@ public class CartasCombinaciones : MonoBehaviour
     private void ComprobarCombinaciones()
     {
         // Lista de la combinación exacta que queremos verificar
-        List<int> combinacionCorrecta = new List<int> { 2, 10 };
+        List<int> combinacionCorrecta = new List<int> { 1, 1, 1, 2, 10 };
 
         // Ordenar ambas listas para compararlas correctamente
         cartasIDs.Sort();
@@ -66,19 +66,9 @@ public class CartasCombinaciones : MonoBehaviour
         // Comparar si las dos listas son idénticas
         if (cartasIDs.SequenceEqual(combinacionCorrecta))
         {
+            //Destroy(gameObject);
 
-            Vector3 posicionOriginal = transform.position;
-            Quaternion rotacionOriginal = transform.rotation;
-
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/" + prefabNamePrueba);
-
-            if (prefab != null)
-            {
-                Instantiate(prefab, posicionOriginal, rotacionOriginal);
-                Destroy(gameObject);
-            }
-
-            
+            // Instanciar la nueva carta en la misma posición y rotación, pero sin ser hija de nadie
         }
     }
 }

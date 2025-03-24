@@ -10,6 +10,9 @@ public class Carta : MonoBehaviour
     public string nombre;
     public int id;
 
+
+
+
 }
 public enum TipoCarta
 {
@@ -17,3 +20,4 @@ public enum TipoCarta
     Personaje,
     Material
 }
+

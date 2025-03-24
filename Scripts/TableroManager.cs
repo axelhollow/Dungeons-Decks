@@ -34,11 +34,18 @@ public class TableroManager : MonoBehaviour
     GameObject objetoSeleccionado = null; // Guarda el objeto previamente seleccionado
     Color colorOriginal = Color.white; // Define el color original de las cartas
 
+    GameObject ataqueSelecionado = null; // Guarda el objeto previamente seleccionado
+
     //Mana
     public TextMeshProUGUI textoMana;
 
     //listaEnemigosCarta
     public List<GameObject> listaEnemigos=new();
+
+
+    //AtaqueSeleccionado
+    private GameObject ataqueSeleccioando;
+    private GameObject personajeSeleccionado;
 
 
     void Awake()
@@ -117,14 +124,20 @@ public class TableroManager : MonoBehaviour
         {
             if (listaEnemigos.Count > 0)
             {
-                if (listaEnemigos[0].GetComponent<Enemigo>().vida <= 0)
+                foreach (var item in listaEnemigos)
                 {
-                    listaEnemigos[0].SetActive(false);
-                    listaEnemigos.Remove(listaEnemigos[0]);
 
 
+                    if (item.GetComponent<Enemigo>().vida <= 0)
+                    {
+                        item.SetActive(false);
+                        listaEnemigos.Remove(item);
+
+
+                    }
                 }
             }
+            
         }
         catch (System.IndexOutOfRangeException e)
         {
@@ -155,8 +168,19 @@ public class TableroManager : MonoBehaviour
 
                 if (obj.CompareTag("CartaPersonaje"))
                 {
+                    //cambiar de color el ataque
+                    if (ataqueSeleccioando != null && ataqueSeleccioando != obj)
+                    {
+                        Renderer renderAtaque = ataqueSeleccioando.GetComponent<Renderer>();
+                        if (renderAtaque != null)
+                        {
+                            renderAtaque.material.color = colorOriginal;
+                        }
+                    }
+                    ataqueSeleccioando = null;
+
                     // Restaurar el color del objeto anterior
-                    if (objetoSeleccionado != null /*&& objetoSeleccionado != obj*/)
+                    if (objetoSeleccionado != null )
                     {
                         Renderer rendPrev = objetoSeleccionado.GetComponent<Renderer>();
                         if (rendPrev != null)
@@ -168,6 +192,7 @@ public class TableroManager : MonoBehaviour
 
                     // Guardar el nuevo objeto seleccionado
                     objetoSeleccionado = obj;
+                    personajeSeleccionado=objetoSeleccionado;
 
                     // Cambiar su color
                     Renderer rend = obj.GetComponent<Renderer>();
@@ -178,14 +203,13 @@ public class TableroManager : MonoBehaviour
                         textoMana.text = obj.GetComponent<CartaPersonaje>().mana.ToString();
                     }
 
-                    Debug.Log("¡Carta seleccionada!");
                     if (obj.GetComponent<CartaPersonaje>().mazoYaGenerado == false)
                     {
                         GenerarMinimazo(obj);
                     }
                     else
                     {
-                        print("uwu");
+  
                         //MostrarMinimazo(obj);
                         GenerarMinimazo(obj);
                     }
@@ -193,34 +217,54 @@ public class TableroManager : MonoBehaviour
                 }
                 if (obj.CompareTag("CartaAtaque"))
                 {
-                    if (objetoSeleccionado != null && objetoSeleccionado != obj)
+                    if (ataqueSeleccioando != null && ataqueSeleccioando != obj)
                     {
-                        int manaActual = int.Parse(textoMana.text);
-                        int costeCarta = obj.GetComponentInChildren<Minicarta>().coste;
-
-                        int manaRestante = manaActual - costeCarta;
-                        if (manaRestante >= 0)
+                        //volver a ponerle su color original
+                        Renderer rendPrev = ataqueSeleccioando.GetComponent<Renderer>();
+                        if (rendPrev != null)
                         {
-
-                            //Gestionar uso de mana
-                            manaActual = manaRestante;
-                            textoMana.text = manaActual.ToString();
-                            obj.transform.parent.GetComponent<CartaPersonaje>().mana = manaActual;
-
-                            //Marcar Carta Como Usada
-                            CartaPersonaje cartaPersonaje = obj.transform.parent.GetComponent<CartaPersonaje>();
-                            obj.SetActive(false);
-                            cartaPersonaje.manoActual[obj] = !cartaPersonaje.manoActual[obj];
-
-                            //Restar vida al enemigo
-                            int dañoCarta = obj.GetComponentInChildren<Minicarta>().daño;
-                            print("Aplicaste " + dañoCarta + " de daño, al " + listaEnemigos[0].GetComponent<Enemigo>().nombre);
-                            listaEnemigos[0].GetComponent<Enemigo>().RestarVida(dañoCarta);
-
-
+                            rendPrev.material.color = colorOriginal;
                         }
+
+                    }
+                    ataqueSeleccioando = obj;
+                    // Cambiar su color
+                    Renderer rend = ataqueSeleccioando.GetComponent<Renderer>();
+                    if (rend != null)
+                    {
+                        colorOriginal = rend.material.color; // Guarda el color original la primera vez
+                        rend.material.color = Color.red;
+                        textoMana.text = ataqueSeleccioando.GetComponent<CartaPersonaje>().mana.ToString();
                     }
                     return;
+                }
+
+                if (ataqueSeleccioando != null && obj.tag == "Enemigo")
+                {
+                    print("Enemigo seleccionado");
+                    int manaActual = int.Parse(textoMana.text);
+                    int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
+                    int manaRestante = manaActual - costeCarta;
+
+                    if (manaRestante >= 0)
+                    {
+
+                        //Gestionar uso de mana
+                        manaActual = manaRestante;
+                        textoMana.text = manaActual.ToString();
+                        ataqueSeleccioando.transform.parent.GetComponent<CartaPersonaje>().mana = manaActual;
+
+                        //Marcar Carta Como Usada
+                        CartaPersonaje cartaPersonaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
+                        cartaPersonaje.manoActual[ataqueSeleccioando] = !cartaPersonaje.manoActual[ataqueSeleccioando];
+                        ataqueSeleccioando.SetActive(false);
+
+                        //Restar vida al enemigo
+                        int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().daño;
+                        print("Aplicaste " + dañoCarta + " de daño, al " + obj.GetComponent<Enemigo>().nombre);
+                        obj.GetComponent<Enemigo>().RestarVida(dañoCarta);
+                    }
+
                 }
             }
         }
@@ -274,10 +318,12 @@ public class TableroManager : MonoBehaviour
     IEnumerator AcabarTurno()
     {
 
-        ReactivarCartas();
+      
         Cursor.lockState = CursorLockMode.Locked; 
-        Cursor.visible = false; 
-        yield return new WaitForSeconds(2f); 
+        Cursor.visible = false;
+
+        yield return new WaitForSeconds(2f);
+        ReactivarCartas();
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true; 
 

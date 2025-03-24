@@ -12,7 +12,7 @@ public class CartaPersonaje : Carta
     public int manaAux;
 
     public bool mazoYaGenerado=false;
-    public Dictionary<GameObject, bool> manoActual;
+    public Dictionary<GameObject, bool> manoActual=new();
 
 
     public GameObject ataque1;
@@ -20,6 +20,9 @@ public class CartaPersonaje : Carta
     public GameObject ataque3;
 
     public Texture2D imagenCarta;
+
+
+
 
     void Start()
     {
