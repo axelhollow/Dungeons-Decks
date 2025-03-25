@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CraftingScript : MonoBehaviour
+public class HornoScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
     public string prefabNamePrueba = "CubePrueba";
@@ -19,7 +19,7 @@ public class CraftingScript : MonoBehaviour
     void Update()
     {
         List<int> currentCartasIDs = ObtenerIDsCartas();
-        List<int> combinacionCorrecta = new List<int> { 2, 10 };
+        List<int> combinacionCorrecta = new List<int> { 2 };
         combinacionCorrecta.Sort();
 
         if (!currentCartasIDs.SequenceEqual(lastCartasIDs))
@@ -73,7 +73,7 @@ public class CraftingScript : MonoBehaviour
         }
 
         List<int> currentCartasIDs = ObtenerIDsCartas();
-        List<int> combinacionCorrecta = new List<int> { 2, 10 };
+        List<int> combinacionCorrecta = new List<int> { 2 };
         combinacionCorrecta.Sort();
 
         if (currentCartasIDs.SequenceEqual(combinacionCorrecta))
