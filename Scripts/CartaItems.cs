@@ -4,5 +4,36 @@ using UnityEngine;
 
 public class CartaItems : Carta
 {
+
+    public TipoPocion tipoPocion;
+    public int cantidadEfecto;
     private bool usada;
+    //tamaño
+    public Vector3 originalScale; // Guarda el tamaño original
+    private float scaleFactor = 2.5f; // Factor de escala (75% más grande)
+    void Start()
+    {
+        originalScale = transform.localScale;
+        // Obtener el material del objeto 3D
+        Renderer renderer = GetComponent<Renderer>();
+
+        // Cambiar la textura en el material
+        renderer.material.mainTexture = imagenCarta;
+    }
+    void OnMouseEnter()
+    {
+        transform.localScale = originalScale * scaleFactor; // Aumenta el tamaño
+    }
+
+    void OnMouseExit()
+    {
+        transform.localScale = originalScale; // Restaura el tamaño original
+    }
 }
+public enum TipoPocion
+{
+    vida,
+    mana,
+    ataque
+}
+

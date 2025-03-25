@@ -11,18 +11,14 @@ public class CartaPersonaje : Carta
     public int vidaAux;
     public int mana;
     public ParticleSystem efectoAtaque;
-
     public int manaAux;
-
     public bool mazoYaGenerado=false;
     public Dictionary<GameObject, bool> manoActual=new();
-
-
     public GameObject ataque1;
     public GameObject ataque2;
     public GameObject ataque3;
 
-    public Texture2D imagenCarta;
+
 
     //INFO UI
     public TextMeshPro textoVida;
@@ -33,6 +29,14 @@ public class CartaPersonaje : Carta
         vida -= daño;
         textoVida.text = vida.ToString();
     }
+    public void CurarVida(int cura)
+    {
+        vida += cura;
+        if (vida > vidaAux) vida = vidaAux;
+        textoVida.text = vida.ToString();
+    }
+
+
 
     void Start()
     {

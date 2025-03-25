@@ -9,8 +9,7 @@ public class Carta : MonoBehaviour
     public TipoCarta tipo;
     public string nombre;
     public int id;
-
-
+    public Texture2D imagenCarta;
 
 
 }

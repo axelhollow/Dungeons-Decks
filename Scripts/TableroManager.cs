@@ -10,8 +10,10 @@ using Random = UnityEngine.Random;
 
 public class TableroManager : MonoBehaviour
 {
+    //Singleton
     public static TableroManager Instance { get; private set; }
 
+    //Particulas
     public GameObject efectoActual;
 
     //Mazos
@@ -22,14 +24,10 @@ public class TableroManager : MonoBehaviour
 
     //Grid Personajes
     public Transform[] gridPersonajes;
-
-
     //Grid Items
     public Transform[] gridItems;
-
     //Grid Ataques
     public Transform[] gridAtaques;
-
     //Grid Ataques
     public Transform[] gridEnemigos;
 
@@ -38,21 +36,20 @@ public class TableroManager : MonoBehaviour
     GameObject objetoSeleccionado = null; // Guarda el objeto previamente seleccionado
     Color colorOriginal = Color.white; // Define el color original de las cartas
 
-    GameObject ataqueSelecionado = null; // Guarda el objeto previamente seleccionado
-
     //Mana
     public TextMeshProUGUI textoMana;
 
-    //listaEnemigosCarta
+    //listas
     public List<GameObject> listaEnemigos=new();
-
     public List<GameObject> listaPersonajes = new();
+    public List<GameObject> listaItems= new();
 
     int numPersonajes;
 
-    //AtaqueSeleccionado
+    //elementos seleccionados
     private GameObject ataqueSeleccioando;
     private GameObject personajeSeleccionado;
+    private GameObject pocionSeleccionada;
 
 
     void Awake()
@@ -98,8 +95,10 @@ public class TableroManager : MonoBehaviour
             carta.transform.position = posicionCarta;
             var cartita=Instantiate(carta);
             listaPersonajes.Add(cartita);
+            GenerarMinimazo(cartita);
             n++;
         }
+
         numPersonajes = listaPersonajes.Count();
         n = 0;
         //Metemos las cartas de iteam en su grid
@@ -107,8 +106,8 @@ public class TableroManager : MonoBehaviour
         {
             Vector3 posicionCarta = gridItems[n].transform.position;
             carta.transform.position = posicionCarta;
-            Instantiate(carta);
-            //GenerarMinimazo(carta);//to do 
+            var cartita=Instantiate(carta);
+            listaItems.Add(cartita);
             n++;
         }
         n = 0;
@@ -122,6 +121,21 @@ public class TableroManager : MonoBehaviour
             cartita.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
             listaEnemigos.Add(cartita);
             n++;
+        }
+
+        foreach (GameObject personaje in listaPersonajes)
+        {
+            foreach (Transform hijo in personaje.transform)
+            {
+
+                if (hijo.tag == "CartaAtaque")
+                {
+                    hijo.gameObject.SetActive(false);
+
+                }
+            }
+
+
         }
 
 
@@ -241,16 +255,8 @@ public class TableroManager : MonoBehaviour
                         textoMana.text = obj.GetComponent<CartaPersonaje>().mana.ToString();
                     }
 
-                    if (obj.GetComponent<CartaPersonaje>().mazoYaGenerado == false)
-                    {
-                        GenerarMinimazo(obj);
-                    }
-                    else
-                    {
-  
-                        //MostrarMinimazo(obj);
-                        GenerarMinimazo(obj);
-                    }
+                    GenerarMinimazo(obj);
+                    
                     return;
                 }
                 if (obj.CompareTag("CartaAtaque"))
@@ -272,9 +278,35 @@ public class TableroManager : MonoBehaviour
                     {
                         colorOriginal = rend.material.color; // Guarda el color original la primera vez
                         rend.material.color = Color.red;
-                        //textoMana.text = ataqueSeleccioando.GetComponent<CartaPersonaje>().mana.ToString();
                     }
                     return;
+                }
+                if (obj.CompareTag("Pocion")) 
+                {
+                    if (personajeSeleccionado != null)
+                    {
+                        if (pocionSeleccionada != null && pocionSeleccionada != obj)
+                        {
+                            //volver a ponerle su color original
+                            Renderer rendPrev = pocionSeleccionada.GetComponent<Renderer>();
+                            if (rendPrev != null)
+                            {
+                                rendPrev.material.color = colorOriginal;
+                            }
+
+                        }
+                        pocionSeleccionada = obj;
+                        // Cambiar su color
+                        Renderer rend = pocionSeleccionada.GetComponent<Renderer>();
+                        if (rend != null)
+                        {
+                            colorOriginal = rend.material.color; // Guarda el color original la primera vez
+                            rend.material.color = Color.red;
+
+                        }
+                    }
+                    return;
+
                 }
 
                 if (ataqueSeleccioando != null && obj.tag == "Enemigo")
@@ -297,12 +329,67 @@ public class TableroManager : MonoBehaviour
                         ataqueSeleccioando.SetActive(false);
 
                         //Restar vida al enemigo
-                        int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().daño;
+                        int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().damage;
                         obj.GetComponent<Enemigo>().RestarVida(dañoCarta);
+
+                        foreach(Transform hijo in ataqueSeleccioando.transform.parent.transform) 
+                        {
+                            if (hijo.tag == "CartaAtaque")
+                            {
+                                hijo.gameObject.GetComponent<Minicarta>().RestaurarDamage();
+                            }
+
+                        }
                     }
 
                 }
             }
+        }
+        if (personajeSeleccionado != null && pocionSeleccionada != null)
+        {
+            print("usando poti");
+
+            //pillamos el personaje
+            CartaPersonaje personaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
+            
+            for (int i = listaItems.Count - 1; i >= 0; i--)
+            {
+               
+                if (listaItems[i] == pocionSeleccionada)
+                {
+                    CartaItems pocion = pocionSeleccionada.GetComponent<CartaItems>();
+
+                    if (pocion.tipoPocion == TipoPocion.vida)
+                    {
+                        personaje.CurarVida(pocion.cantidadEfecto);
+                    }
+                    if (pocion.tipoPocion == TipoPocion.mana)
+                    {
+                        personaje.mana += pocion.cantidadEfecto;
+                        textoMana.text = personaje.mana.ToString();
+                    }
+                    if (pocion.tipoPocion == TipoPocion.ataque)
+                    {
+                        foreach(Transform hijo in personaje.transform) 
+                        {
+
+                            if (hijo.tag=="CartaAtaque")
+                            {
+                                
+                               hijo.transform.gameObject.GetComponent<Minicarta>().AumentarDamage(pocion.cantidadEfecto);
+
+                            }
+                        }
+                    }
+
+                    listaItems[i].SetActive(false);
+                    listaItems.Remove(listaItems[i]);
+                    pocionSeleccionada = null;
+
+                }
+            }
+
+
         }
     }
     public void GenerarMinimazo(GameObject cartaPersonaje)
@@ -393,7 +480,13 @@ public class TableroManager : MonoBehaviour
             foreach (Transform hijo in obj.transform) // Recorre todos los hijos
             {
                 obj.GetComponent<CartaPersonaje>().manoActual[hijo.gameObject] = true;
-               
+
+                if (hijo.gameObject.tag == "CartaAtaque") 
+                {
+                    hijo.gameObject.GetComponent<Minicarta>().RestaurarDamage();
+
+
+                }
             }
         }
 

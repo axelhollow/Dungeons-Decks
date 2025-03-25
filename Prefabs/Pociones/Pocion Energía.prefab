@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8471963437550557104}
   m_Layer: 0
   m_Name: "Pocion Energ\xEDa"
-  m_TagString: Untagged
+  m_TagString: Pocion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2430071327202803451}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -129.3, y: 0, z: -17}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 83.1, y: 0, z: -18.5}
   m_LocalScale: {x: 11.15696, y: 17.8158, z: 18.5513}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &687752754257427344
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -120,3 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 0
   nombre: 
+  id: 0
+  imagenCarta: {fileID: 2800000, guid: 5222489f96f08014c8c1b4151209e56b, type: 3}
+  tipoPocion: 1
+  cantidadEfecto: 2
+  originalScale: {x: 0, y: 0, z: 0}

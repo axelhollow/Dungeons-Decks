@@ -6,14 +6,15 @@ using UnityEngine;
 public class Minicarta : MonoBehaviour
 {
     public string nombre;
-    public int daño;
+    public int damage;
+    public int damageAux;
     public int coste;
     public Texture2D imagenCarta;
 
 
 
     //INFO UI
-    public TextMeshPro textoVida;
+    public TextMeshPro textoDamage;
     public TextMeshPro textoMana;
 
 
@@ -24,7 +25,8 @@ public class Minicarta : MonoBehaviour
 
     void Start()
     {
-        textoVida.text = daño.ToString();
+        damage = damageAux;
+        textoDamage.text = damage.ToString();
         textoMana.text = coste.ToString();
 
         originalScale = transform.localScale;
@@ -34,6 +36,18 @@ public class Minicarta : MonoBehaviour
 
         // Cambiar la textura en el material
         renderer.material.mainTexture = imagenCarta;
+    }
+
+    public void AumentarDamage(int damaguito) 
+    {
+        damage += damaguito;
+        textoDamage.text = damage.ToString();
+
+    }
+    public void RestaurarDamage() 
+    {
+        damage = damageAux;
+        textoDamage.text = damage.ToString();
     }
     void OnMouseEnter()
     {

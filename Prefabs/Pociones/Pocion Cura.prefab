@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 8638833809849287382}
   - component: {fileID: 4236370626203478602}
   m_Layer: 0
-  m_Name: Pocion
-  m_TagString: Untagged
+  m_Name: Pocion Cura
+  m_TagString: Pocion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6163239401546268038}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -129.3, y: 0, z: -17}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 38, y: 0, z: -18.5}
   m_LocalScale: {x: 11.15696, y: 17.8158, z: 18.5513}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &2148967596226413461
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -120,3 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 0
   nombre: 
+  id: 0
+  imagenCarta: {fileID: 2800000, guid: d5a0e6dffb840fd42b8d9568afcb3f10, type: 3}
+  tipoPocion: 0
+  cantidadEfecto: 5
+  originalScale: {x: 0, y: 0, z: 0}
