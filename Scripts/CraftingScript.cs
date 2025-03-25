@@ -6,7 +6,8 @@ using UnityEngine;
 public class CraftingScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
-    public string prefabNamePrueba = "CubePrueba";
+    public List<string> prefabsNames = new List<string> { "CubePrueba", "SpherePrueba", "CylinderPrueba" };
+    public List<float> tiemposDeCrafting = new List<float> { 2f, 7f, 10f }; // Diferentes tiempos de crafting
     private List<int> lastCartasIDs = new List<int>();
     private Coroutine craftingCoroutine;
 
@@ -14,13 +15,18 @@ public class CraftingScript : MonoBehaviour
     public GameObject barraProgresoPrefab;
     private GameObject fondoBarra;
     private GameObject barraProgreso;
-    private float tiempoTotal = 5f;
+
+    private List<List<int>> combinacionesCorrectas = new List<List<int>>
+    {
+        new List<int> { 2 },
+        new List<int> { 3, 4 },
+        new List<int> { 5, 6, 7 }
+    };
 
     void Update()
     {
         List<int> currentCartasIDs = ObtenerIDsCartas();
-        List<int> combinacionCorrecta = new List<int> { 2, 10 };
-        combinacionCorrecta.Sort();
+        currentCartasIDs.Sort();
 
         if (!currentCartasIDs.SequenceEqual(lastCartasIDs))
         {
@@ -31,10 +37,12 @@ public class CraftingScript : MonoBehaviour
                 ResetearBarra();
             }
         }
-        else if (craftingCoroutine == null && currentCartasIDs.SequenceEqual(combinacionCorrecta))
+        else if (craftingCoroutine == null && ObtenerPrefabIndex(currentCartasIDs) != -1)
         {
+            int prefabIndex = ObtenerPrefabIndex(currentCartasIDs);
+            float tiempoCrafting = tiemposDeCrafting[prefabIndex];
             CrearBarraProgreso();
-            craftingCoroutine = StartCoroutine(CraftDespuesDeTiempo(tiempoTotal));
+            craftingCoroutine = StartCoroutine(CraftDespuesDeTiempo(tiempoCrafting, prefabIndex));
         }
 
         lastCartasIDs = new List<int>(currentCartasIDs);
@@ -61,31 +69,38 @@ public class CraftingScript : MonoBehaviour
         }
     }
 
-    private IEnumerator CraftDespuesDeTiempo(float tiempo)
+    private int ObtenerPrefabIndex(List<int> ids)
+    {
+        for (int i = 0; i < combinacionesCorrectas.Count; i++)
+        {
+            if (ids.SequenceEqual(combinacionesCorrectas[i]))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private IEnumerator CraftDespuesDeTiempo(float tiempo, int prefabIndex)
     {
         float tiempoRestante = tiempo;
 
         while (tiempoRestante > 0)
         {
             tiempoRestante -= Time.deltaTime;
-            ActualizarBarraProgreso(tiempoRestante / tiempoTotal);
+            ActualizarBarraProgreso(tiempoRestante / tiempo);
             yield return null;
         }
 
-        List<int> currentCartasIDs = ObtenerIDsCartas();
-        List<int> combinacionCorrecta = new List<int> { 2, 10 };
-        combinacionCorrecta.Sort();
-
-        if (currentCartasIDs.SequenceEqual(combinacionCorrecta))
+        if (prefabIndex != -1 && prefabIndex < prefabsNames.Count)
         {
             Vector3 posicionOriginal = transform.position;
             Quaternion rotacionOriginal = transform.rotation;
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/" + prefabNamePrueba);
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/" + prefabsNames[prefabIndex]);
 
             if (prefab != null)
             {
                 Instantiate(prefab, posicionOriginal, rotacionOriginal);
-
                 foreach (Transform hijo in transform)
                 {
                     Destroy(hijo.gameObject);

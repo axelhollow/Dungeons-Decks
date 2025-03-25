@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ public class AttackCardsSelection : MonoBehaviour
     public Canvas canvas;
     public List<GameObject> cartasGuerrero;
     public List<Button> botones;
+    public List<TMP_Text> textos;
     public Button clearButton;
 
     CartaPersonaje carta;
@@ -36,7 +38,10 @@ public class AttackCardsSelection : MonoBehaviour
         ataque2select = false;
         ataque3select = false;
 
-
+        foreach (TMP_Text text in textos)
+        {
+            text.text = "0";
+        }
 
         foreach (Transform child in transform)
         {
@@ -95,20 +100,23 @@ public class AttackCardsSelection : MonoBehaviour
                     colors.normalColor *= 0.8f; // Reduce el brillo en un 20% para oscurecerlo
                     botones[i].colors = colors;
                     ataque1select = true;
+                    textos[i].text = (int.Parse(textos[i].text) + 1).ToString();
                 }
-                else if (minicarta.name == cartaPersonaje.ataque2.name)
+                if (minicarta.name == cartaPersonaje.ataque2.name)
                 {
                     ColorBlock colors = botones[i].colors;
                     colors.normalColor *= 0.8f; // Reduce el brillo en un 20% para oscurecerlo
                     botones[i].colors = colors;
                     ataque2select = true;
+                    textos[i].text = (int.Parse(textos[i].text) + 1).ToString();
                 }
-                else if (minicarta.name == cartaPersonaje.ataque3.name)
+                if (minicarta.name == cartaPersonaje.ataque3.name)
                 {
                     ColorBlock colors = botones[i].colors;
                     colors.normalColor *= 0.8f; // Reduce el brillo en un 20% para oscurecerlo
                     botones[i].colors = colors;
                     ataque3select = true;
+                    textos[i].text = (int.Parse(textos[i].text) + 1).ToString();
                 }
 
 
@@ -128,6 +136,11 @@ public class AttackCardsSelection : MonoBehaviour
         ataque1select = false;
         ataque2select = false;
         ataque3select = false;
+
+        foreach(TMP_Text text in textos)
+        {
+            text.text = "0";
+        }
 
         foreach (var boton in botones)
         {
@@ -160,16 +173,19 @@ public class AttackCardsSelection : MonoBehaviour
         {
             ataque1select = true;
             carta.ataque1 = cartasGuerrero[index];
+            textos[index].text = (int.Parse(textos[index].text) + 1).ToString();
         }
         else if (!ataque2select)
         {
             ataque2select = true;
             carta.ataque2 = cartasGuerrero[index];
+            textos[index].text = (int.Parse(textos[index].text) + 1).ToString();
         }
         else if (!ataque3select)
         {
             ataque3select = true;
             carta.ataque3 = cartasGuerrero[index];
+            textos[index].text = (int.Parse(textos[index].text) + 1).ToString();
         }
         else
         {

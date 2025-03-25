@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class HornoScript : MonoBehaviour
+public class MesaAlquimicaScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
     public List<string> prefabsNames = new List<string> { "CubePrueba", "SpherePrueba", "CylinderPrueba" };
-    public List<float> tiemposDeCrafting = new List<float> { 15f, 7f, 10f }; // Diferentes tiempos de crafting
+    public List<float> tiemposDeCrafting = new List<float> { 5f, 7f, 10f }; // Diferentes tiempos de crafting
     private List<int> lastCartasIDs = new List<int>();
     private Coroutine craftingCoroutine;
 
