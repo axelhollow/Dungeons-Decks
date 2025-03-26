@@ -17,10 +17,6 @@ public class CartaPersonaje : Carta
     public GameObject ataque1;
     public GameObject ataque2;
     public GameObject ataque3;
-
-
-
-    //INFO UI
     public TextMeshPro textoVida;
 
 
