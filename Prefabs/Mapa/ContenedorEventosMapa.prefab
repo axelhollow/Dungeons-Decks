@@ -1,5 +1,110 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2546150780341630249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4673798019576705421}
+  - component: {fileID: 4243799492917697199}
+  - component: {fileID: 6699948794170108581}
+  - component: {fileID: 2571055665215262137}
+  m_Layer: 0
+  m_Name: Seleccion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4673798019576705421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546150780341630249}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.63}
+  m_LocalScale: {x: 1, y: 1, z: 0.12848}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6985903808052168260}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4243799492917697199
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546150780341630249}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6699948794170108581
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546150780341630249}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: d3b63c8c994e7b34b87e18494e0e5c75, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2571055665215262137
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546150780341630249}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5811345375861632294
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,7 +120,7 @@ GameObject:
   - component: {fileID: 650385621065947484}
   m_Layer: 0
   m_Name: ContenedorEventosMapa
-  m_TagString: Untagged
+  m_TagString: Nodo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +137,8 @@ Transform:
   m_LocalPosition: {x: -85.9, y: 0, z: 3.4}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4673798019576705421}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4748994147752979011
@@ -63,7 +169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9cda19ba977e95b44a47e774ee004285, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -119,11 +225,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boss: 0
+  combate: 0
   tp: 0
+  elejido: 0
   caminoIzqu: {fileID: 0}
   caminoDerech: {fileID: 0}
   tipoEvento: 0
-  "Dise\xF1oCombate": {fileID: 2800000, guid: 750e8ed4e1d00a54782911a61fb74950, type: 3}
-  "Dise\xF1oTienda": {fileID: 2800000, guid: 95238af1fa5d4c34e83db705cb974d39, type: 3}
-  "Dise\xF1oAldeano": {fileID: 2800000, guid: 073690e64c7e70746873360f3785e335, type: 3}
-  "Dise\xF1oRecursos": {fileID: 2800000, guid: 32e515fca158ac34d9ed6b2e8f02a733, type: 3}
+  DisenoCombate: {fileID: 2100000, guid: 5547420480c53d349a2e45947bc25697, type: 2}
+  DisenoTienda: {fileID: 2100000, guid: 4b748d09cd5fbe34a96dbab0f5b37159, type: 2}
+  DisenoAldeano: {fileID: 2100000, guid: 5728e1c368fea584bae19f5ca92c1ebf, type: 2}
+  DisenoRecursos: {fileID: 2100000, guid: ff513f77c6d3bc74baa53cd8b383082c, type: 2}
+  DisenoTP: {fileID: 2100000, guid: 5c4b7c4526fe5944799f75a8b537f63d, type: 2}
+  DisenoBoss: {fileID: 2100000, guid: e73cb08f1c2ce314c8e7bbb5811e060c, type: 2}
+  DisenoX: {fileID: 2100000, guid: 58146f05c88933e4e8d90040fe201539, type: 2}
+  selector: {fileID: 2546150780341630249}

@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Progress;
 using Random = UnityEngine.Random;
 
@@ -67,7 +68,14 @@ public class TableroManager : MonoBehaviour
 
     void Start()
     {
-        
+
+        GameObject objeto = GameObject.Find("MapaScene");
+        if (objeto != null) 
+        {
+            objeto.SetActive(false);
+
+
+        }
         //Clasificamos las cartas que nos pasan
         if (mazo != null)
         {
@@ -201,7 +209,14 @@ public class TableroManager : MonoBehaviour
         if(listaEnemigos==null || listaEnemigos.Count == 0) 
         {
             print("ganaste");
+            SceneManager.UnloadSceneAsync("NombreDeLaEscena");
+            GameObject objeto = GameObject.Find("MapaScene");
+            if (objeto != null)
+            {
+                objeto.SetActive(true);
 
+
+            }
         }
 
 
