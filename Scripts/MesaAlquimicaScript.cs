@@ -7,7 +7,8 @@ public class MesaAlquimicaScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
     public List<string> prefabsNames = new List<string> { "CubePrueba", "SpherePrueba", "CylinderPrueba" };
-    public List<float> tiemposDeCrafting = new List<float> { 5f, 7f, 10f }; // Diferentes tiempos de crafting
+    public List<float> tiemposDeCrafting = new List<float> { 5f, 7f, 10f };
+
     private List<int> lastCartasIDs = new List<int>();
     private Coroutine craftingCoroutine;
 
@@ -25,6 +26,8 @@ public class MesaAlquimicaScript : MonoBehaviour
 
     void Update()
     {
+
+        // Seguir detectando combinaciones y cambios en las cartas
         List<int> currentCartasIDs = ObtenerIDsCartas();
         currentCartasIDs.Sort();
 
@@ -46,6 +49,43 @@ public class MesaAlquimicaScript : MonoBehaviour
         }
 
         lastCartasIDs = new List<int>(currentCartasIDs);
+    }
+
+    private IEnumerator CraftDespuesDeTiempo(float tiempo, int prefabIndex)
+    {
+        float tiempoRestante = tiempo;
+
+        while (tiempoRestante > 0)
+        {
+            while (GameManager.gameSpeed == 0f) // Si está en pausa, espera
+            {
+                yield return null;
+            }
+
+            tiempoRestante -= Time.deltaTime * GameManager.gameSpeed;
+            ActualizarBarraProgreso(tiempoRestante / tiempo);
+            yield return null;
+        }
+
+        // Creación del objeto
+        if (prefabIndex != -1 && prefabIndex < prefabsNames.Count)
+        {
+            Vector3 posicionOriginal = transform.position;
+            Quaternion rotacionOriginal = transform.rotation;
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/" + prefabsNames[prefabIndex]);
+
+            if (prefab != null)
+            {
+                Instantiate(prefab, posicionOriginal, rotacionOriginal);
+                foreach (Transform hijo in transform)
+                {
+                    Destroy(hijo.gameObject);
+                }
+            }
+        }
+
+        ResetearBarra();
+        craftingCoroutine = null;
     }
 
     private List<int> ObtenerIDsCartas()
@@ -79,37 +119,6 @@ public class MesaAlquimicaScript : MonoBehaviour
             }
         }
         return -1;
-    }
-
-    private IEnumerator CraftDespuesDeTiempo(float tiempo, int prefabIndex)
-    {
-        float tiempoRestante = tiempo;
-
-        while (tiempoRestante > 0)
-        {
-            tiempoRestante -= Time.deltaTime;
-            ActualizarBarraProgreso(tiempoRestante / tiempo);
-            yield return null;
-        }
-
-        if (prefabIndex != -1 && prefabIndex < prefabsNames.Count)
-        {
-            Vector3 posicionOriginal = transform.position;
-            Quaternion rotacionOriginal = transform.rotation;
-            GameObject prefab = Resources.Load<GameObject>("Prefabs/" + prefabsNames[prefabIndex]);
-
-            if (prefab != null)
-            {
-                Instantiate(prefab, posicionOriginal, rotacionOriginal);
-                foreach (Transform hijo in transform)
-                {
-                    Destroy(hijo.gameObject);
-                }
-            }
-        }
-
-        ResetearBarra();
-        craftingCoroutine = null;
     }
 
     private void CrearBarraProgreso()
