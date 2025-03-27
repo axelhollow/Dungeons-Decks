@@ -15,6 +15,21 @@ public class PlayDungeon : MonoBehaviour
     //-----------BORRAR DESPUES-----------
     public List<GameObject> personajesPaLaDungeon;
     public List<GameObject> objetosPaLaDungeon;
+
+    public static PlayDungeon instance;
+    protected virtual void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void OnMouseDown()
     {
         isMouseDown = true;
