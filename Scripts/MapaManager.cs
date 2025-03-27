@@ -17,11 +17,14 @@ public class MapaManager : MonoBehaviour
     {
         nodoActual = listaNodos[0];
         nodoMapaActual = nodoActual.GetComponent<NodoMapa>();
+
+
         print(nodoActual.name);
     }
     private void Update()
     {
-        foreach( Transform hijo in nodoActual.transform) 
+
+        foreach ( Transform hijo in nodoActual.transform) 
         {
             hijo.GetComponent<MeshRenderer>().enabled = true;
             if (nodoAnterior != null) 
@@ -50,25 +53,13 @@ public class MapaManager : MonoBehaviour
 
                     if (gameObject == nodoMapaActual.caminoIzqu)
                     {
-                        print("Has elegido la izquierda");
-
-
-                        nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
-
                         nodoMapaActual.caminoIzqu.GetComponent<NodoMapa>().elejido = true;
-                        CambiarNodo(nodoMapaActual.caminoIzqu);
-
-
-
+                        StartCoroutine( CambiarNodo(nodoMapaActual.caminoIzqu));
                     }
                     if (gameObject == nodoMapaActual.caminoDerech)
                     {
-                        print("Has elegido la derecha");
-
-                        nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
-
                         nodoMapaActual.caminoDerech.GetComponent<NodoMapa>().elejido = true;
-                        CambiarNodo(nodoMapaActual.caminoDerech);
+                        StartCoroutine(CambiarNodo(nodoMapaActual.caminoDerech));
                     }
 
                 }
@@ -76,11 +67,15 @@ public class MapaManager : MonoBehaviour
         }
     }
 
-    public void CambiarNodo(GameObject nodoNuevo) 
+    IEnumerator CambiarNodo(GameObject nodoNuevo) 
     {
+       
         nodoAnterior = nodoActual;
         nodoActual = nodoNuevo;
         nodoMapaActual = nodoActual.GetComponent<NodoMapa>();
+        nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
+
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("TableroJuego", LoadSceneMode.Additive);
 
         print("Nodo Actual: " + nodoActual);

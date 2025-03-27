@@ -459,7 +459,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: combate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoIzqu
@@ -469,6 +469,10 @@ PrefabInstance:
       propertyPath: caminoDerech
       value: 
       objectReference: {fileID: 1629355766}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: puntoPartida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: "Dise\xF1oTienda"
       value: 
@@ -485,6 +489,10 @@ PrefabInstance:
       propertyPath: "Dise\xF1oRecursos"
       value: 
       objectReference: {fileID: 2100000, guid: ff513f77c6d3bc74baa53cd8b383082c, type: 2}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: DisenoPuntoPartida
+      value: 
+      objectReference: {fileID: 2100000, guid: ed2f1993e6f7cc643b0b432b5def61b7, type: 2}
     - target: {fileID: 5811345375861632294, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: m_Name
       value: ContenedorEventosMapa 1

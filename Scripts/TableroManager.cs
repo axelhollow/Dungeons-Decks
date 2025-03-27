@@ -68,39 +68,43 @@ public class TableroManager : MonoBehaviour
 
     void Start()
     {
+        mazoPersonajes = PlayDungeon.instance.RecuperarPersonajes();
+        mazotilizables= PlayDungeon.instance.RecuperarObjetos();
+
+
+
 
         GameObject obj = GameObject.Find("MapaScene");
         if (obj != null)
         {
             foreach (Transform child in obj.transform)
             {
-                child.gameObject.SetActive(false); // Desactiva cada hijo individualmente
+                child.gameObject.SetActive(false); 
             }
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
         }
 
-        //Clasificamos las cartas que nos pasan
-        if (mazo != null)
-        {
-            foreach (GameObject carta in mazo)
-            {
-                if (carta != null)
-                {
-                    Carta cartita = carta.GetComponentInChildren<Carta>();
-                    if (cartita.tipo == TipoCarta.Personaje)
-                    {
-                        mazoPersonajes.Add(carta);
-                    }
-                    if (cartita.tipo == TipoCarta.Item)
-                    {
-                        mazotilizables.Add(carta);
-                    }
-                }
-            }
-        }
+        ////Clasificamos las cartas que nos pasan
+        //if (mazo != null)
+        //{
+        //    foreach (GameObject carta in mazo)
+        //    {
+        //        if (carta != null)
+        //        {
+        //            Carta cartita = carta.GetComponentInChildren<Carta>();
+        //            if (cartita.tipo == TipoCarta.Personaje)
+        //            {
+        //                mazoPersonajes.Add(carta);
+        //            }
+        //            if (cartita.tipo == TipoCarta.Item)
+        //            {
+        //                mazotilizables.Add(carta);
+        //            }
+        //        }
+        //    }
+        //}
+
+
+
         int n = 0;
         //Metemos las cartas de persoanje en su grid
         foreach (GameObject carta in mazoPersonajes)
@@ -109,6 +113,7 @@ public class TableroManager : MonoBehaviour
             carta.transform.position = posicionCarta;
             var cartita=Instantiate(carta);
             listaPersonajes.Add(cartita);
+            cartita.transform.SetParent(GameObject.FindWithTag("ListaDeAliados").transform);
             GenerarMinimazo(cartita);
             n++;
         }
@@ -122,6 +127,7 @@ public class TableroManager : MonoBehaviour
             carta.transform.position = posicionCarta;
             var cartita=Instantiate(carta);
             listaItems.Add(cartita);
+            cartita.transform.SetParent(GameObject.FindWithTag("ListaDePotis").transform);
             n++;
         }
         n = 0;
@@ -226,15 +232,15 @@ public class TableroManager : MonoBehaviour
                 }
                 SceneManager.UnloadSceneAsync("TableroJuego");
 
-                GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(); // Obtiene todos los objetos de la escena
+                //GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(); // Obtiene todos los objetos de la escena
 
-                foreach (GameObject obji in allObjects)
-                {
-                    if (obji.name != "MapaScene" && obji.transform.parent!= obj.transform) // Si no es el objeto que queremos conservar
-                    {
-                        Destroy(obji); // Lo destruimos
-                    }
-                }
+                //foreach (GameObject obji in allObjects)
+                //{
+                //    if (obji.name != "MapaScene" && obji.transform.parent!= obj.transform) // Si no es el objeto que queremos conservar
+                //    {
+                //        Destroy(obji); // Lo destruimos
+                //    }
+                //}
 
             }
             else

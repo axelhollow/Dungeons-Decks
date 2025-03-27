@@ -7,6 +7,7 @@ public class NodoMapa : MonoBehaviour
     public bool boss;
     public bool combate;
     public bool tp;
+    public bool puntoPartida;
     public bool elejido = false;
     public GameObject caminoIzqu;
     public GameObject caminoDerech;
@@ -18,6 +19,7 @@ public class NodoMapa : MonoBehaviour
     public Material DisenoTP;
     public Material DisenoBoss;
     public Material DisenoX;
+    public Material DisenoPuntoPartida;
     public Dictionary<string, Material> DiccionarioCartas;
     private Renderer renderer;
     public GameObject selector;
@@ -53,12 +55,16 @@ public class NodoMapa : MonoBehaviour
             tipoEvento = TipoEvento.Recursos;
         }
 
-        DiccionarioCartas = new() { { "Combate", DisenoCombate }, { "Tienda", DisenoTienda }, { "Aldeanos", DisenoAldeano }, { "Recursos", DisenoRecursos }, { "Tp", DisenoTP }, { "Boss", DisenoBoss }, { "X", DisenoX } };
+        DiccionarioCartas = new() { { "Combate", DisenoCombate }, { "Tienda", DisenoTienda }, { "Aldeanos", DisenoAldeano }, { "Recursos", DisenoRecursos }, { "Tp", DisenoTP }, { "Boss", DisenoBoss }, { "X", DisenoX },{"PuntoPartida",DisenoPuntoPartida } };
 
 
         // Cambiar la textura en el material
         GetComponent<Renderer>().material = DiccionarioCartas[tipoEvento.ToString()];
+        if (puntoPartida)
+        {
+            GetComponent<Renderer>().material = DiccionarioCartas["PuntoPartida"];
 
+        }
         if (combate) 
         {
             GetComponent<Renderer>().material = DiccionarioCartas["Combate"];
