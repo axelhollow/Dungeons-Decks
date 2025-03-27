@@ -101,8 +101,10 @@ public class PlayDungeon : MonoBehaviour
         Debug.Log("Número de personajes en la dungeon: " + personajesPaLaDungeon.Count);
         Debug.Log("Número de objetos en la dungeon: " + objetosPaLaDungeon.Count);
 
+        GameManager.instance.StopDayShowMap();
+
         SceneManager.LoadScene("Mapa",LoadSceneMode.Additive);
         CameraMovementAldea.instance.BloquearCamaraCombate();
-        GameManager.instance.StopDayShowMap();
+        
     }
 }
