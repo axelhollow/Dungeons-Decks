@@ -2,29 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static float gameSpeed = 1f; // Velocidad del juego
-    public float velocidad;
     public TMP_Text textoVelocidad;
+
+    public Slider diaSlider;         // Asigna el Slider en el Inspector
+    public TMP_Text diaTexto;        // Asigna el TextMeshPro para mostrar el día
+    public float duration = 10f;     // Tiempo en segundos para vaciar el slider (100% -> 0%)
+
+    private int currentDay = 1;
+    private float currentPercentage = 100f;
+
+    private bool endDay = false;
+    public List<CartaPersonaje> cartasPersonaje = new List<CartaPersonaje>(); // Lista de cartas encontradas
+    public List<Carta> cartasComida = new List<Carta>(); // Lista para cartas de comida
+
 
     private void Start()
     {
-        velocidad = gameSpeed;
         textoVelocidad.text = "x1";
+        diaTexto.text = "Día " + currentDay;
+        diaSlider.maxValue = 100f;
+        diaSlider.value = currentPercentage;
+
     }
 
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && endDay == false)
         {
             // Cambiar entre pausa, normal y velocidad x2
             if (gameSpeed == 1f)
             {
                 gameSpeed = 2f;
-                textoVelocidad.text = "x2"; // Aumenta velocidad
+                textoVelocidad.text = "x2";
             }
             else if (gameSpeed == 2f)
             {
@@ -36,8 +50,110 @@ public class GameManager : MonoBehaviour
                 gameSpeed = 1f;
                 textoVelocidad.text = "x1";
             }
-            velocidad = gameSpeed;
-            
         }
+
+        if (currentPercentage > 0)
+        {
+            if (GameManager.gameSpeed > 0f) // Si gameSpeed es mayor a 0, el tiempo avanza
+            {
+                currentPercentage -= (100f / duration) * Time.deltaTime * GameManager.gameSpeed;
+                currentPercentage = Mathf.Max(currentPercentage, 0);
+                diaSlider.value = currentPercentage;
+            }
+        }
+        else
+        {
+            // Al llegar a 0, incrementa el día y reinicia el slider
+            currentDay++;
+            diaTexto.text = "Día " + currentDay;
+            currentPercentage = 100f;
+            diaSlider.value = currentPercentage;
+            StopDay();
+            if (currentDay > 1)
+            {
+                StartCoroutine("BuscarCartasPersonaje");
+            }
+
+        }
+
     }
+
+    public void StopDay()
+    {
+        endDay = true;
+        gameSpeed = 0f;
+        textoVelocidad.text = "x0";
+    }
+    public void SeguirDay()
+    {
+        endDay = false;
+        gameSpeed = 1f;
+        textoVelocidad.text = "x1";
+    }
+
+
+
+    IEnumerator BuscarCartasPersonaje()
+    {
+        yield return new WaitForSeconds(0.3f); // Espera un momento para que los objetos se inicialicen
+
+        CartaPersonaje[] cartasEncontradas = FindObjectsOfType<CartaPersonaje>(); // Busca todas las cartas en la escena
+
+        cartasPersonaje.Clear(); // Limpiar la lista antes de llenarla
+
+        foreach (CartaPersonaje carta in cartasEncontradas)
+        {
+            cartasPersonaje.Add(carta);
+        }
+        Debug.Log("Se encontraron " + cartasPersonaje.Count + " cartas de personaje.");
+
+        BuscarCartasComida();
+
+        for (int i = 0; i < cartasPersonaje.Count; i++)
+        {
+            if (cartasComida.Count > 0) // Si hay comida disponible
+            {
+                Destroy(cartasComida[0].gameObject); // Destruye la primera comida
+                cartasComida.RemoveAt(0); // Elimina la comida de la lista
+            }
+            else // Si no hay comida, se destruye el personaje
+            {
+                Destroy(cartasPersonaje[i].gameObject);
+                cartasPersonaje.RemoveAt(i);
+                i--; // Ajustar el índice tras eliminar un elemento
+            }
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        if (cartasPersonaje.Count == 0 && currentDay > 1)
+        {
+            StopDay();
+
+            Debug.Log("HAS PERDIDO BOBO");
+        }
+        else
+        {
+            Debug.Log("Fin Del dia");
+            SeguirDay();
+        }
+
+            
+    }
+
+    public void BuscarCartasComida()
+    {
+        Carta[] todasLasCartas = FindObjectsOfType<Carta>(); // Busca todas las cartas en la escena
+        cartasComida.Clear(); // Limpia la lista antes de llenarla
+
+        foreach (Carta carta in todasLasCartas)
+        {
+            if (carta.tipo == TipoCarta.Comida) // Filtra las cartas de tipo Comida
+            {
+                cartasComida.Add(carta);
+            }
+        }
+
+        Debug.Log("Se encontraron " + cartasComida.Count + " cartas de comida.");
+    }
+
 }

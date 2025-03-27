@@ -39,6 +39,7 @@ public class DiaScript : MonoBehaviour
             diaTexto.text = "Día " + currentDay;
             currentPercentage = 100f;
             diaSlider.value = currentPercentage;
+            //GameManager.StopDay();
         }
         
     }
