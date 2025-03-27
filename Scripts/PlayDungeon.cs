@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -68,6 +69,16 @@ public class PlayDungeon : MonoBehaviour
         }
 
         GenerarDungeon();
+    }
+
+    public List<GameObject> RecuperarPersonajes()
+    {
+        return personajesPaLaDungeon;
+    }
+
+    public List<GameObject> RecuperarObjetos()
+    {
+        return objetosPaLaDungeon;
     }
 
     public void GenerarDungeon()
