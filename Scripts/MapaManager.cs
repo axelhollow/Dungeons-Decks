@@ -5,28 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MapaManager : MonoBehaviour
 {
-    public static MapaManager Instancia { get; private set; }  // Singleton
     public GameObject nodoActual;
     public GameObject nodoAnterior;
     private NodoMapa nodoMapaActual;
     public List<GameObject> listaNodos;
 
 
-    void Awake()
-    {
-        if (Instancia == null)
-        {
-            Instancia = this; // Asigna esta instancia
-            DontDestroyOnLoad(gameObject); // Mantener en todas las escenas
-        }
-        else
-        {
-            Destroy(gameObject); // Elimina duplicados si existen
-        }
-    }
+
 
     private void Start()
     {
+
 
         nodoActual = listaNodos[0];
         nodoMapaActual = nodoActual.GetComponent<NodoMapa>();
@@ -46,7 +35,6 @@ public class MapaManager : MonoBehaviour
                         hijito.GetComponent<MeshRenderer>().enabled = false;
                     }
                 }
-
 
             }
         }
@@ -95,7 +83,7 @@ public class MapaManager : MonoBehaviour
         nodoAnterior = nodoActual;
         nodoActual = nodoNuevo;
         nodoMapaActual = nodoActual.GetComponent<NodoMapa>();
-        SceneManager.LoadScene("TableroJuego");
+        SceneManager.LoadScene("TableroJuego", LoadSceneMode.Additive);
 
         print("Nodo Actual: " + nodoActual);
         print("Nodo Anterior: "+nodoAnterior);

@@ -69,13 +69,19 @@ public class TableroManager : MonoBehaviour
     void Start()
     {
 
-        GameObject objeto = GameObject.Find("MapaScene");
-        if (objeto != null) 
+        GameObject obj = GameObject.Find("MapaScene");
+        if (obj != null)
         {
-            objeto.SetActive(false);
-
-
+            foreach (Transform child in obj.transform)
+            {
+                child.gameObject.SetActive(false); // Desactiva cada hijo individualmente
+            }
         }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
+        }
+
         //Clasificamos las cartas que nos pasan
         if (mazo != null)
         {
@@ -208,15 +214,35 @@ public class TableroManager : MonoBehaviour
         }
         if(listaEnemigos==null || listaEnemigos.Count == 0) 
         {
-            print("ganaste");
-            SceneManager.UnloadSceneAsync("NombreDeLaEscena");
-            GameObject objeto = GameObject.Find("MapaScene");
-            if (objeto != null)
-            {
-                objeto.SetActive(true);
 
+            print("ganaste");
+
+            GameObject obj = GameObject.Find("MapaScene");
+            if (obj != null)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    child.gameObject.SetActive(true); // Desactiva cada hijo individualmente
+                }
+                SceneManager.UnloadSceneAsync("TableroJuego");
+
+                GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(); // Obtiene todos los objetos de la escena
+
+                foreach (GameObject obji in allObjects)
+                {
+                    if (obji.name != "MapaScene" && obji.transform.parent!= obj.transform) // Si no es el objeto que queremos conservar
+                    {
+                        Destroy(obji); // Lo destruimos
+                    }
+                }
 
             }
+            else
+            {
+                Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
+            }
+
+
         }
 
 
@@ -321,7 +347,6 @@ public class TableroManager : MonoBehaviour
                         }
                     }
                     return;
-
                 }
 
                 if (ataqueSeleccioando != null && obj.tag == "Enemigo")
@@ -362,8 +387,6 @@ public class TableroManager : MonoBehaviour
         }
         if (personajeSeleccionado != null && pocionSeleccionada != null)
         {
-            print("usando poti");
-
             //pillamos el personaje
             CartaPersonaje personaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
             
@@ -499,12 +522,9 @@ public class TableroManager : MonoBehaviour
                 if (hijo.gameObject.tag == "CartaAtaque") 
                 {
                     hijo.gameObject.GetComponent<Minicarta>().RestaurarDamage();
-
-
                 }
             }
         }
-
         try
         {
             if (objetoSeleccionado.transform != null && objetoSeleccionado.transform.childCount > 0)
@@ -514,8 +534,11 @@ public class TableroManager : MonoBehaviour
                     hijo.gameObject.SetActive(true);
                 }
             }
-        }catch(Exception ex) 
-        { }
+        }
+        catch(Exception ex) 
+        {
+        
+        }
 
         if (objetoSeleccionado != null) 
         {
