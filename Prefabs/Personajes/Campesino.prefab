@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 5487844783267485474}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -49, y: 0, z: 28}
+  m_LocalPosition: {x: -49, y: 30, z: 28}
   m_LocalScale: {x: 26.255949, y: 1, z: 35}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -293,13 +293,14 @@ MonoBehaviour:
   tipo: 1
   nombre: 
   id: 0
+  imagenCarta: {fileID: 2800000, guid: adb7209df8329ae46b09e5c34218effd, type: 3}
   vida: 5
   vidaAux: 5
   mana: 3
+  efectoAtaque: {fileID: 0}
   manaAux: 0
   mazoYaGenerado: 0
   ataque1: {fileID: 5122223806699215244, guid: 81ebb865191737942beae7fd7a6d819c, type: 3}
   ataque2: {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}
   ataque3: {fileID: 7112640407728221363, guid: 98fe9d5f8cf3fab4d92854b8bec7bf97, type: 3}
-  imagenCarta: {fileID: 2800000, guid: adb7209df8329ae46b09e5c34218effd, type: 3}
   textoVida: {fileID: 8284592265377117960}

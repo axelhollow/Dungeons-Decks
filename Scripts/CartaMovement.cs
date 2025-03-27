@@ -152,8 +152,12 @@ public class CartaMovement : MonoBehaviour
 
             foreach (Transform hijo in transform)
             {
-                profundidadBase += 0.25f; // Ajusta esto según el tamaño real de cada carta
-                profundidadBase += ObtenerProfundidadHijos(hijo); // Recursión para contar todas las cartas en la pila
+                if(hijo.gameObject.layer == LayerMask.NameToLayer("Carta"))
+                {
+                    profundidadBase += 0.25f; // Ajusta esto según el tamaño real de cada carta
+                    profundidadBase += ObtenerProfundidadHijos(hijo); // Recursión para contar todas las cartas en la pila
+                }
+                
             }
 
             return profundidadBase;
@@ -165,8 +169,12 @@ public class CartaMovement : MonoBehaviour
 
             foreach (Transform hijo in carta)
             {
-                profundidad += 0.25f;
-                profundidad += ObtenerProfundidadHijos(hijo);
+                if (hijo.gameObject.layer == LayerMask.NameToLayer("Carta"))
+                {
+                    profundidad += 0.25f;
+                    profundidad += ObtenerProfundidadHijos(hijo);
+                }
+                
             }
 
             return profundidad;
