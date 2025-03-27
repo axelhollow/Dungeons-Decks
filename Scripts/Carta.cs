@@ -17,6 +17,7 @@ public enum TipoCarta
 {
     Item,
     Personaje,
-    Material
+    Material,
+    Comida
 }
 
