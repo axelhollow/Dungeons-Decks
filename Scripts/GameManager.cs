@@ -102,10 +102,11 @@ public class GameManager : MonoBehaviour
 
     public void StopDayShowMap()
     {
-        canvas.gameObject.SetActive(false);
+        
         endDay = true;
         gameSpeed = 0f;
         textoVelocidad.text = "x0";
+        canvas.gameObject.SetActive(false);
     }
     public void SeguirDay()
     {
