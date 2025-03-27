@@ -20,6 +20,21 @@ public class GameManager : MonoBehaviour
     public List<CartaPersonaje> cartasPersonaje = new List<CartaPersonaje>(); // Lista de cartas encontradas
     public List<Carta> cartasComida = new List<Carta>(); // Lista para cartas de comida
 
+    public Canvas canvas;
+
+    public static GameManager instance;
+    protected virtual void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -80,6 +95,14 @@ public class GameManager : MonoBehaviour
 
     public void StopDay()
     {
+        endDay = true;
+        gameSpeed = 0f;
+        textoVelocidad.text = "x0";
+    }
+
+    public void StopDayShowMap()
+    {
+        canvas.gameObject.SetActive(false);
         endDay = true;
         gameSpeed = 0f;
         textoVelocidad.text = "x0";

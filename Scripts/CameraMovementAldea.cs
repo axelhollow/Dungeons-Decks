@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,6 +19,22 @@ public class CameraMovementAldea : MonoBehaviour
     public float minX = -200f, maxX = 200f;
     public float minZ = -100f, maxZ = 100f;
 
+    public bool combatiendo=false;
+
+    public static CameraMovementAldea instance;
+    protected virtual void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
@@ -30,33 +47,44 @@ public class CameraMovementAldea : MonoBehaviour
 
     void Update()
     {
-        // Movimiento con WASD
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        Vector3 move = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
-        followTarget.Translate(move, Space.World);
-
-        // Limitar el movimiento dentro del área permitida
-        Vector3 clampedPosition = followTarget.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
-        clampedPosition.z = Mathf.Clamp(clampedPosition.z, minZ, maxZ);
-        followTarget.position = clampedPosition;
-
-        // **Evitar Zoom si el cursor está sobre UI**
-        if (EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        // Zoom con el scroll del ratón
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll != 0)
+        if (combatiendo == false)
         {
-            currentZoom -= scroll * zoomSpeed;
-            currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+            // Movimiento con WASD
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+            Vector3 move = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
+            followTarget.Translate(move, Space.World);
 
-            if (virtualCamera != null && virtualCamera.m_Lens.Orthographic)
+            // Limitar el movimiento dentro del área permitida
+            Vector3 clampedPosition = followTarget.position;
+            clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
+            clampedPosition.z = Mathf.Clamp(clampedPosition.z, minZ, maxZ);
+            followTarget.position = clampedPosition;
+
+            // **Evitar Zoom si el cursor está sobre UI**
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            // Zoom con el scroll del ratón
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (scroll != 0)
             {
-                virtualCamera.m_Lens.OrthographicSize = currentZoom;
+                currentZoom -= scroll * zoomSpeed;
+                currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+
+                if (virtualCamera != null && virtualCamera.m_Lens.Orthographic)
+                {
+                    virtualCamera.m_Lens.OrthographicSize = currentZoom;
+                }
             }
         }
+        
+    }
+
+    public void BloquearCamaraCombate()
+    {
+        combatiendo = true;
+        virtualCamera.m_Lens.OrthographicSize = 54;
+        followTarget.position = new Vector3(0f, 100f, 10f);
     }
 }

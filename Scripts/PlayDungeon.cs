@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayDungeon : MonoBehaviour
 {
@@ -12,7 +14,6 @@ public class PlayDungeon : MonoBehaviour
     //-----------BORRAR DESPUES-----------
     public List<GameObject> personajesPaLaDungeon;
     public List<GameObject> objetosPaLaDungeon;
-
     private void OnMouseDown()
     {
         isMouseDown = true;
@@ -73,5 +74,9 @@ public class PlayDungeon : MonoBehaviour
     {
         Debug.Log("Número de personajes en la dungeon: " + personajesPaLaDungeon.Count);
         Debug.Log("Número de objetos en la dungeon: " + objetosPaLaDungeon.Count);
+
+        SceneManager.LoadScene("Mapa",LoadSceneMode.Additive);
+        CameraMovementAldea.instance.BloquearCamaraCombate();
+        GameManager.instance.StopDayShowMap();
     }
 }

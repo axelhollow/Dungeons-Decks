@@ -1386,6 +1386,7 @@ MonoBehaviour:
   maxX: 200
   minZ: -100
   maxZ: 100
+  combatiendo: 0
 --- !u!1 &264340389
 GameObject:
   m_ObjectHideFlags: 0
@@ -6746,6 +6747,7 @@ MonoBehaviour:
   duration: 15
   cartasPersonaje: []
   cartasComida: []
+  canvas: {fileID: 59264945}
 --- !u!1 &1408449987
 GameObject:
   m_ObjectHideFlags: 0
