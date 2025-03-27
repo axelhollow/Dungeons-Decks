@@ -15,8 +15,6 @@ public class MapaManager : MonoBehaviour
 
     private void Start()
     {
-
-
         nodoActual = listaNodos[0];
         nodoMapaActual = nodoActual.GetComponent<NodoMapa>();
         print(nodoActual.name);

@@ -222,7 +222,7 @@ public class TableroManager : MonoBehaviour
             {
                 foreach (Transform child in obj.transform)
                 {
-                    child.gameObject.SetActive(true); // Desactiva cada hijo individualmente
+                    child.gameObject.SetActive(true); // Activan cada hijo individualmente
                 }
                 SceneManager.UnloadSceneAsync("TableroJuego");
 
