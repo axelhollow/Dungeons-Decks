@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4080440797006505090}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 49, y: 30, z: 28}
+  m_LocalPosition: {x: 49, y: 64.8, z: 28}
   m_LocalScale: {x: 26.255949, y: 1, z: 35}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -125,7 +125,7 @@ MonoBehaviour:
   vidaAux: 5
   nombre: 
   textoVida: {fileID: 9193853404561215295}
-  efectoAtaque: {fileID: 8193506202291902384, guid: 1b0bd5d5765c72f4da9c250c4c757483, type: 3}
+  efectoAtaque: {fileID: 6855314210357232287, guid: 7c2a9b83b809a0848915fabd9596b68b, type: 3}
   originalScale: {x: 0, y: 0, z: 0}
   scaleFactor: 1.25
 --- !u!1 &9032303275812363124

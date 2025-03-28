@@ -4634,6 +4634,10 @@ PrefabInstance:
       propertyPath: imagenCarta
       value: 
       objectReference: {fileID: 2800000, guid: 17e685339c870fa4286e7993add3510e, type: 3}
+    - target: {fileID: 7801751034109323678, guid: 6156782e53be98a4f8bd52f8e6d340c8, type: 3}
+      propertyPath: mazoYaGenerado
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

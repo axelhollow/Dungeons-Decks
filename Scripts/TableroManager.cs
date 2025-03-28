@@ -6,7 +6,9 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using static UnityEditor.Progress;
+using Cursor = UnityEngine.Cursor;
 using Random = UnityEngine.Random;
 
 public class TableroManager : MonoBehaviour
@@ -42,7 +44,6 @@ public class TableroManager : MonoBehaviour
 
     //listas
     public List<GameObject> listaEnemigos=new();
-    public List<GameObject> listaPersonajes = new();
     public List<GameObject> listaItems= new();
 
     int numPersonajes;
@@ -51,6 +52,9 @@ public class TableroManager : MonoBehaviour
     private GameObject ataqueSeleccioando;
     private GameObject personajeSeleccionado;
     private GameObject pocionSeleccionada;
+
+    //listas padres
+    public GameObject listaPersonajesPadre;
 
 
     void Awake()
@@ -111,14 +115,14 @@ public class TableroManager : MonoBehaviour
         {
             Vector3 posicionCarta = gridPersonajes[n].transform.position;
             carta.transform.position = posicionCarta;
-            var cartita=Instantiate(carta);
-            listaPersonajes.Add(cartita);
-            cartita.transform.SetParent(GameObject.FindWithTag("ListaDeAliados").transform);
-            GenerarMinimazo(cartita);
+            print(GameObject.FindWithTag("ListaDeAliados"));
+            carta.GetComponent<CartaMovement>().holderDungeon=true;
+            carta.transform.SetParent(GameObject.FindWithTag("ListaDeAliados").transform);
+            GenerarMinimazo(carta);
             n++;
         }
 
-        numPersonajes = listaPersonajes.Count();
+        numPersonajes = mazoPersonajes.Count();
         n = 0;
         //Metemos las cartas de iteam en su grid
         foreach (GameObject carta in mazotilizables)
@@ -143,7 +147,7 @@ public class TableroManager : MonoBehaviour
             n++;
         }
 
-        foreach (GameObject personaje in listaPersonajes)
+        foreach (GameObject personaje in mazoPersonajes)
         {
             foreach (Transform hijo in personaje.transform)
             {
@@ -166,14 +170,14 @@ public class TableroManager : MonoBehaviour
         //gestionarMuertePersonajes Y Derrota
         try
         {
-            if (listaPersonajes.Count > 0)
+            if (mazoPersonajes.Count > 0)
             {
-                for (int i = listaPersonajes.Count - 1; i >= 0; i--)
+                for (int i = mazoPersonajes.Count - 1; i >= 0; i--)
                 {
-                    if (listaPersonajes[i].GetComponent<CartaPersonaje>().vida <= 0)
+                    if (mazoPersonajes[i].GetComponent<CartaPersonaje>().vida <= 0)
                     {
-                        listaPersonajes[i].SetActive(false);
-                        listaPersonajes.RemoveAt(i);
+                        mazoPersonajes[i].SetActive(false);
+                        mazoPersonajes.RemoveAt(i);
                         numPersonajes--;
                         if (numPersonajes < 0) numPersonajes = 0;
                     }
@@ -187,7 +191,7 @@ public class TableroManager : MonoBehaviour
             //Ganaste mi pana
             print("Exception de derrota");
         }
-        if (listaPersonajes == null || listaPersonajes.Count == 0)
+        if (mazoPersonajes == null || mazoPersonajes.Count == 0)
         {
             print("perdiste");
 
@@ -210,8 +214,7 @@ public class TableroManager : MonoBehaviour
 
                     }
                 }
-            }
-            
+            }  
         }
         catch (System.IndexOutOfRangeException e)
         {
@@ -231,24 +234,11 @@ public class TableroManager : MonoBehaviour
                     child.gameObject.SetActive(true); // Activan cada hijo individualmente
                 }
                 SceneManager.UnloadSceneAsync("TableroJuego");
-
-                //GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>(); // Obtiene todos los objetos de la escena
-
-                //foreach (GameObject obji in allObjects)
-                //{
-                //    if (obji.name != "MapaScene" && obji.transform.parent!= obj.transform) // Si no es el objeto que queremos conservar
-                //    {
-                //        Destroy(obji); // Lo destruimos
-                //    }
-                //}
-
             }
             else
             {
                 Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
             }
-
-
         }
 
 
@@ -267,7 +257,7 @@ public class TableroManager : MonoBehaviour
 
                 if (obj.CompareTag("CartaPersonaje"))
                 {
-                    //cambiar de color el ataque
+                    //restaurar de color el ataque
                     if (ataqueSeleccioando != null && ataqueSeleccioando != obj)
                     {
                         Renderer renderAtaque = ataqueSeleccioando.GetComponent<Renderer>();
@@ -290,9 +280,7 @@ public class TableroManager : MonoBehaviour
                     }
 
                     // Guardar el nuevo objeto seleccionado
-                    objetoSeleccionado = obj;
-                    personajeSeleccionado=objetoSeleccionado;
-
+                    personajeSeleccionado = obj;
                     // Cambiar su color
                     Renderer rend = obj.GetComponent<Renderer>();
                     if (rend != null)
@@ -465,10 +453,12 @@ public class TableroManager : MonoBehaviour
         }
         else
         {
-
-            foreach (var carta in cartaP.manoActual)
+            if (cartaP.manoActual != null)
             {
-                if (carta.Value) carta.Key.SetActive(true);
+                foreach (var carta in cartaP.manoActual)
+                {
+                    if (carta.Value) carta.Key.SetActive(true);
+                }
             }
         }
     }
@@ -494,7 +484,7 @@ public class TableroManager : MonoBehaviour
             int numeroAleatorio = Random.Range(0, numPersonajes);
 
             print(numPersonajes);
-            CartaPersonaje personaje = listaPersonajes[numeroAleatorio].GetComponent<CartaPersonaje>();
+            CartaPersonaje personaje = mazoPersonajes[numeroAleatorio].GetComponent<CartaPersonaje>();
 
             efectoActual= enemiguito.efectoAtaque;
             efectoActual.transform.position = personaje.transform.position;
