@@ -103,7 +103,6 @@ public class PlayDungeon : MonoBehaviour
 
         GameManager.instance.StopDayShowMap();
         CameraMovementAldea.instance.BloquearCamaraCombate();
-
         SceneManager.LoadScene("Mapa",LoadSceneMode.Additive);
         
         

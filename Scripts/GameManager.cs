@@ -142,6 +142,24 @@ public class GameManager : MonoBehaviour
             }
             else // Si no hay comida, se destruye el personaje
             {
+                // Desvincular todos los hijos que sean de la capa "Carta"
+                List<Transform> hijosCarta = new List<Transform>();
+
+                foreach (Transform hijo in cartasPersonaje[i].transform)
+                {
+                    if (hijo.gameObject.layer == LayerMask.NameToLayer("Carta"))
+                    {
+                        hijosCarta.Add(hijo);
+                    }
+                }
+
+                // Desvincular los hijos encontrados
+                foreach (Transform hijo in hijosCarta)
+                {
+                    hijo.SetParent(null);
+                }
+
+                // Ahora sí, destruir la carta del personaje
                 Destroy(cartasPersonaje[i].gameObject);
                 cartasPersonaje.RemoveAt(i);
                 i--; // Ajustar el índice tras eliminar un elemento
@@ -152,7 +170,6 @@ public class GameManager : MonoBehaviour
         if (cartasPersonaje.Count == 0 && currentDay > 1)
         {
             StopDay();
-
             Debug.Log("HAS PERDIDO BOBO");
         }
         else
@@ -160,8 +177,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("Fin Del dia");
             SeguirDay();
         }
-
-            
     }
 
     public void BuscarCartasComida()
