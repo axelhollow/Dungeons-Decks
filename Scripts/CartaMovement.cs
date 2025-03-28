@@ -45,10 +45,6 @@ public class CartaMovement : MonoBehaviour
             }
         }
 
-        /// <summary>
-        /// Actualiza la rotación de la carta para que se mantenga sin inclinación mientras se arrastra.
-        /// </summary>
-
         private void OnMouseDown()
         {
             if (!holderDungeon)
