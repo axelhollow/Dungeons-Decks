@@ -292,8 +292,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imagenCarta: {fileID: 2800000, guid: c0e1d180ff03b31458592027fbf69453, type: 3}
   "da\xF1o": 3
-  vida: 5
-  vidaAux: 5
+  vida: 1
+  vidaAux: 1
   nombre: 
   textoVida: {fileID: 2080303544382607061}
   efectoAtaque: {fileID: 6855314210357232287, guid: 7c2a9b83b809a0848915fabd9596b68b, type: 3}

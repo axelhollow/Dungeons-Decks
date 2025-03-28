@@ -23,7 +23,9 @@ public class TableroManager : MonoBehaviour
     public List<GameObject> mazo;
     private List<GameObject> mazoPersonajes =new();
     private List<GameObject> mazotilizables = new();
+
     public List<GameObject> mazoEnemigos;
+    public List<GameObject> mazoEnemigosAux;
 
     //Grid Personajes
     public Transform[] gridPersonajes;
@@ -72,7 +74,11 @@ public class TableroManager : MonoBehaviour
 
     void Start()
     {
-        mazoPersonajes = PlayDungeon.instance.RecuperarPersonajes();
+        mazoEnemigos = mazoEnemigosAux;
+        if (mazoPersonajes == null)
+        {
+            mazoPersonajes = PlayDungeon.instance.RecuperarPersonajes();
+        }
         mazotilizables= PlayDungeon.instance.RecuperarObjetos();
 
 
@@ -114,7 +120,11 @@ public class TableroManager : MonoBehaviour
         foreach (GameObject carta in mazoPersonajes)
         {
             Vector3 posicionCarta = gridPersonajes[n].transform.position;
-            carta.transform.position = posicionCarta;
+            print("PosicionCarta: " + posicionCarta);print("Carta: " + carta);
+            if (posicionCarta != null)
+            {
+                carta.transform.position = posicionCarta;
+            }
             print(GameObject.FindWithTag("ListaDeAliados"));
             carta.GetComponent<CartaMovement>().holderDungeon=true;
             carta.transform.SetParent(GameObject.FindWithTag("ListaDeAliados").transform);
@@ -174,12 +184,20 @@ public class TableroManager : MonoBehaviour
             {
                 for (int i = mazoPersonajes.Count - 1; i >= 0; i--)
                 {
-                    if (mazoPersonajes[i].GetComponent<CartaPersonaje>().vida <= 0)
+                   
+                    if ( mazoPersonajes[i] != null)
                     {
-                        mazoPersonajes[i].SetActive(false);
-                        mazoPersonajes.RemoveAt(i);
-                        numPersonajes--;
-                        if (numPersonajes < 0) numPersonajes = 0;
+                        var mazo = mazoPersonajes[i].GetComponent<CartaPersonaje>();
+                        if (mazo != null && mazo.vida <= 0) 
+                        {
+                            mazoPersonajes[i].SetActive(false);
+                            mazoPersonajes.RemoveAt(i);
+                            numPersonajes--;
+                            if (numPersonajes < 0) numPersonajes = 0;
+
+                        }
+                        
+                        
                     }
                 }
                
