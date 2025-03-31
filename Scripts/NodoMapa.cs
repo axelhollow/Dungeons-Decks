@@ -21,7 +21,7 @@ public class NodoMapa : MonoBehaviour
     public Material DisenoX;
     public Material DisenoPuntoPartida;
     public Dictionary<string, Material> DiccionarioCartas;
-    private Renderer renderer;
+    private Renderer rendererito;
     public GameObject selector;
 
 
@@ -32,7 +32,7 @@ public class NodoMapa : MonoBehaviour
     {
 
 
-        renderer = GetComponent<Renderer>();
+        rendererito = GetComponent<Renderer>();
 
         selector.GetComponent<MeshRenderer>().enabled = false;
 

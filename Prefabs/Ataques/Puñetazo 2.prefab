@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 5122223806699215244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -50, y: 0, z: -28}
+  m_LocalPosition: {x: -74, y: 57.84, z: -28}
   m_LocalScale: {x: 22.7, y: 1, z: 29.8}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -292,10 +292,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombre: 
-  "da\xF1o": 2
+  damage: 0
+  damageAux: 0
   coste: 2
   imagenCarta: {fileID: 2800000, guid: f9d4a7dd6c173f24e99eecb3adf1abed, type: 3}
-  textoVida: {fileID: 5523274740607502760}
+  textoDamage: {fileID: 0}
   textoMana: {fileID: 6057713125730490082}
   originalScale: {x: 0, y: 0, z: 0}
   scaleFactor: 1.25

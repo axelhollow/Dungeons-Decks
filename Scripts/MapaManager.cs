@@ -17,9 +17,6 @@ public class MapaManager : MonoBehaviour
     {
         nodoActual = listaNodos[0];
         nodoMapaActual = nodoActual.GetComponent<NodoMapa>();
-
-
-        print(nodoActual.name);
     }
     private void Update()
     {
@@ -77,9 +74,6 @@ public class MapaManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("TableroJuego", LoadSceneMode.Additive);
-
-        print("Nodo Actual: " + nodoActual);
-        print("Nodo Anterior: "+nodoAnterior);
     
     }
 }
