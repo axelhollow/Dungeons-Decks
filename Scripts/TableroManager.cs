@@ -604,6 +604,8 @@ public class TableroManager : MonoBehaviour
             {
                 Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
             }
+
+            PlayDungeon.instance.CartasRecuperdasAventura(listaAliados);
         }
 
     }

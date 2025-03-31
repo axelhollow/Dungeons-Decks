@@ -17,6 +17,20 @@ public class PlayDungeon : MonoBehaviour
     public List<GameObject> objetosPaLaDungeon;
 
     public static PlayDungeon instance;
+    public List<GameObject> listaCartasRecuperadas;
+
+    public GameObject padreCartasRecuperadas;
+
+
+    public void CartasRecuperdasAventura(List<GameObject> listaCartas) 
+    {
+        listaCartasRecuperadas = listaCartas;
+        foreach (GameObject carta in listaCartasRecuperadas) 
+        {
+            carta.transform.SetParent(padreCartasRecuperadas.transform);
+        
+        }
+    }
     protected virtual void Awake()
     {
         if (instance == null)
