@@ -40,12 +40,6 @@ public class CartaPersonaje : Carta
         textoVida.text = vida.ToString();
 
         manaAux = mana;
-
-        // Obtener el material del objeto 3D
-        Renderer renderer = GetComponent<Renderer>();
-
-        // Cambiar la textura en el material
-        renderer.material.mainTexture = imagenCarta;
     }
 
 }

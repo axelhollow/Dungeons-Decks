@@ -22,7 +22,7 @@ public class TableroManager : MonoBehaviour
     //Mazos
     public List<GameObject> mazo;
     private List<GameObject> mazoPersonajes;
-    private List<GameObject> mazotilizables;
+    private List<GameObject> mazotilizables=new();
 
     public List<GameObject> mazoEnemigos;
     public List<GameObject> mazoEnemigosAux;
@@ -152,7 +152,6 @@ public class TableroManager : MonoBehaviour
                 diccVivos.Add(cartita, carta);
                 carta.SetActive(false);
             }
-            print("dic vivos numero: " + diccVivos.Count());
             n++;
         }
         MazoActual.Instancia.mazoIniciado = true;
@@ -232,37 +231,35 @@ public class TableroManager : MonoBehaviour
         {
             print("ENTRA objetos");
             Vector3 posicionCarta = gridItems[n].transform.position;
-            Vector3 tamanoCarta = gridPersonajes[n].transform.localScale;
-            gridPersonajes[n].gameObject.SetActive(false);
+            Vector3 tamanoCarta = gridItems[n].transform.localScale;
+            gridItems[n].gameObject.SetActive(false);
             if (carta != null)
             {
                 GameObject cartita = Instantiate(carta);
 
                 cartita.GetComponent<CartaMovement>().holderDungeon = true;
                 cartita.transform.position = posicionCarta;
-                cartita.transform.SetParent(GameObject.FindWithTag("ListaDeAliados").transform);
+                cartita.transform.SetParent(GameObject.FindWithTag("ListaDePotis").transform);
                 cartita.transform.localScale = tamanoCarta;
 
 
 
                 cartita.SetActive(true);
-                GenerarMinimazo(cartita);
-                listaAliados.Add(cartita);
-                if (MazoActual.Instancia.mazoIniciado == false)
+             
+           
+                if (MazoActual.Instancia.mazoObjetosIniciado == false)
                 {
-                    MazoActual.Instancia.mazoActual.Add(carta, true);
+                    MazoActual.Instancia.mazoObjetosActual.Add(carta, true);
 
                 }
-                diccVivos.Add(cartita, carta);
+                //diccVivos.Add(cartita, carta);
                 carta.SetActive(false);
             }
             print("dic vivos numero: " + diccVivos.Count());
             n++;
         }
-        MazoActual.Instancia.mazoIniciado = true;
+        MazoActual.Instancia.mazoObjetosIniciado = true;
 
-
-        numPersonajes = listaAliados.Count();
 
 
 
@@ -546,8 +543,6 @@ public class TableroManager : MonoBehaviour
             {
                 for (int i = listaAliados.Count - 1; i >= 0; i--)
                 {
-                    print(listaAliados.Count - 1);
-
                     if (listaAliados[i] != null)
                     {
                         GameObject personaje = listaAliados[i];
@@ -558,8 +553,6 @@ public class TableroManager : MonoBehaviour
                             numPersonajes--;
                             if (numPersonajes < 0) numPersonajes = 0;
                             if (i < 0) i = 0;
-                            print(i);
-                            print(diccVivos);
                             if (diccVivos.ContainsKey(personaje))
                             {
                                 print("diccVivos contiene ese personaje");
