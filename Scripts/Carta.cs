@@ -18,6 +18,7 @@ public enum TipoCarta
     Item,
     Personaje,
     Material,
-    Comida
+    Comida,
+    Edificio
 }
 

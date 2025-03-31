@@ -6,7 +6,7 @@ using UnityEngine;
 public class CraftingScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
-    public List<string> prefabsNames = new List<string> { "CubePrueba", "SpherePrueba", "CylinderPrueba" };
+    public List<string> prefabsNames = new List<string> { "Palo", "SpherePrueba", "CylinderPrueba" };
     public List<float> tiemposDeCrafting = new List<float> { 5f, 7f, 10f };
 
     private List<int> lastCartasIDs = new List<int>();
@@ -19,9 +19,9 @@ public class CraftingScript : MonoBehaviour
 
     private List<List<int>> combinacionesCorrectas = new List<List<int>>
     {
-        new List<int> { 2 },
-        new List<int> { 3, 4 },
-        new List<int> { 5, 6, 7 }
+        new List<int> { 1 },
+        //new List<int> { 3, 4 },
+        //new List<int> { 5, 6, 7 }
     };
 
     void Update()
