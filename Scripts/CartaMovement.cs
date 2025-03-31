@@ -98,14 +98,14 @@ public class CartaMovement : MonoBehaviour
                     if (ultimaCartaHija != null)
                     {
                         transform.SetParent(ultimaCartaHija);
-                        transform.localPosition = new Vector3(0f, 1f, -0.25f);
+                        transform.localPosition = new Vector3(0f, 1f, -0.15f);
                         transform.localRotation = Quaternion.identity;
                     }
                     else
                     {
                         // Si no se encuentra ninguna carta de tipo Personaje, se queda como la última hija del padre
                         transform.SetParent(cartaPadre);
-                        transform.localPosition = new Vector3(0f, 1f, -0.25f);
+                        transform.localPosition = new Vector3(0f, 1f, -0.15f);
                         transform.localRotation = Quaternion.identity;
                     }
                 }
