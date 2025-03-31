@@ -37,13 +37,11 @@ public class TableroManager : MonoBehaviour
     public Transform[] gridEnemigos;
 
     public Dictionary<GameObject, GameObject> diccVivos = new();
+    public Dictionary<GameObject, GameObject> diccObjetosVivos = new();
 
 
     private Dictionary<GameObject, Color> coloresOriginales = new Dictionary<GameObject, Color>();
     Color colorOriginal = Color.white; // Define el color original de las cartas
-
-    //Mana
-    public TextMeshProUGUI textoMana;
 
     //listas
     public List<GameObject> listaEnemigos = new();
@@ -61,6 +59,8 @@ public class TableroManager : MonoBehaviour
     //listas padres
     public GameObject listaPersonajesPadre;
 
+    //tamano item
+    Vector3 tamanoItem = new Vector3(12.4047499f, 0.206034645f, 18.6071262f);
 
 
     void Awake()
@@ -155,21 +155,9 @@ public class TableroManager : MonoBehaviour
             n++;
         }
         MazoActual.Instancia.mazoIniciado = true;
-
-
         numPersonajes = listaAliados.Count();
         n = 0;
-        //Metemos las cartas de iteam en su grid
-        foreach (GameObject carta in mazotilizables)
-        {
-            Vector3 posicionCarta = gridItems[n].transform.position;
-            carta.transform.position = posicionCarta;
-            var cartita = Instantiate(carta);
-            listaItems.Add(cartita);
-            cartita.transform.SetParent(GameObject.FindWithTag("ListaDePotis").transform);
-            n++;
-        }
-        n = 0;
+       
 
         mazoEnemigos = mazoEnemigosAux;
         //Metemos las cartas de enemigas en su grid
@@ -226,44 +214,35 @@ public class TableroManager : MonoBehaviour
 
         }
          n = 0;
-        //Metemos las cartas de persoanje en su grid
+        //Metemos las cartas de Objeto en su grid
         foreach (GameObject carta in mazotilizables)
         {
             print("ENTRA objetos");
             Vector3 posicionCarta = gridItems[n].transform.position;
-            Vector3 tamanoCarta = gridItems[n].transform.localScale;
             gridItems[n].gameObject.SetActive(false);
             if (carta != null)
             {
-                GameObject cartita = Instantiate(carta);
 
+                GameObject cartita = Instantiate(carta);
+                cartita.SetActive(true);
                 cartita.GetComponent<CartaMovement>().holderDungeon = true;
+                cartita.GetComponent<CartaItems>().aldea = false;
                 cartita.transform.position = posicionCarta;
                 cartita.transform.SetParent(GameObject.FindWithTag("ListaDePotis").transform);
-                cartita.transform.localScale = tamanoCarta;
+                cartita.transform.localScale = tamanoItem;
 
-
-
-                cartita.SetActive(true);
-             
-           
+                listaItems.Add(cartita);
                 if (MazoActual.Instancia.mazoObjetosIniciado == false)
                 {
                     MazoActual.Instancia.mazoObjetosActual.Add(carta, true);
 
                 }
-                //diccVivos.Add(cartita, carta);
+                diccObjetosVivos.Add(cartita, carta);
                 carta.SetActive(false);
             }
-            print("dic vivos numero: " + diccVivos.Count());
             n++;
         }
         MazoActual.Instancia.mazoObjetosIniciado = true;
-
-
-
-
-
     }
 
     private void Update()
@@ -292,7 +271,6 @@ public class TableroManager : MonoBehaviour
                     {
                         RestaurarColor(personajeSeleccionado);
                         personajeSeleccionado = null;
-                        textoMana.text = "";
                         return;
                     }
 
@@ -307,21 +285,7 @@ public class TableroManager : MonoBehaviour
 
                     // Guardar el nuevo personaje seleccionado
                     personajeSeleccionado = obj;
-
                     GenerarMinimazo(personajeSeleccionado);
-
-
-                    print("OBJETO SELECCIONADO: " + personajeSeleccionado);
-
-
-                    // Mostrar el mana
-                    CartaPersonaje carta = obj.GetComponent<CartaPersonaje>();
-                    if (carta != null)
-                    {
-                        textoMana.text = carta.mana.ToString();
-                    }
-
-                 
                     return;
                 }
                 if (obj.CompareTag("CartaAtaque"))
@@ -376,7 +340,8 @@ public class TableroManager : MonoBehaviour
 
                 if (ataqueSeleccioando != null && obj.tag == "Enemigo")
                 {
-                    int manaActual = int.Parse(textoMana.text);
+
+                    int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;
                     int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
                     int manaRestante = manaActual - costeCarta;
 
@@ -385,7 +350,7 @@ public class TableroManager : MonoBehaviour
 
                         //Gestionar uso de mana
                         manaActual = manaRestante;
-                        textoMana.text = manaActual.ToString();
+                        personajeSeleccionado.GetComponent<CartaPersonaje>().TextoMana.text = manaActual.ToString();
                         ataqueSeleccioando.transform.parent.GetComponent<CartaPersonaje>().mana = manaActual;
 
                         //Marcar Carta Como Usada
@@ -419,6 +384,7 @@ public class TableroManager : MonoBehaviour
         }
         if (personajeSeleccionado != null && pocionSeleccionada != null)
         {
+            print("poti");
             //pillamos el personaje
             CartaPersonaje personaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
 
@@ -436,7 +402,7 @@ public class TableroManager : MonoBehaviour
                     if (pocion.tipoPocion == TipoPocion.mana)
                     {
                         personaje.mana += pocion.cantidadEfecto;
-                        textoMana.text = personaje.mana.ToString();
+                        personaje.TextoMana.text = personaje.mana.ToString();
                     }
                     if (pocion.tipoPocion == TipoPocion.ataque)
                     {
@@ -451,10 +417,19 @@ public class TableroManager : MonoBehaviour
                             }
                         }
                     }
+                    if (diccObjetosVivos.ContainsKey(listaItems[i]))
+                    {
+                        GameObject poti = diccObjetosVivos[listaItems[i]];
+                        if (MazoActual.Instancia.mazoObjetosActual.ContainsKey(poti)) 
+                        { 
+                            MazoActual.Instancia.mazoObjetosActual[poti] = false;
+                            listaItems[i].SetActive(false);
+                            listaItems.Remove(listaItems[i]);
+                            pocionSeleccionada = null;
 
-                    listaItems[i].SetActive(false);
-                    listaItems.Remove(listaItems[i]);
-                    pocionSeleccionada = null;
+                        }
+                    }
+
 
                 }
             }
@@ -672,6 +647,7 @@ public class TableroManager : MonoBehaviour
         {
             //Reactivamos el mana
             obj.GetComponent<CartaPersonaje>().mana = obj.GetComponent<CartaPersonaje>().manaAux;
+            obj.GetComponent<CartaPersonaje>().TextoMana.text = obj.GetComponent<CartaPersonaje>().mana.ToString();
             foreach (Transform hijo in obj.transform) // Recorre todos los hijos
             {
                 obj.GetComponent<CartaPersonaje>().manoActual[hijo.gameObject] = true;
@@ -689,7 +665,6 @@ public class TableroManager : MonoBehaviour
                 hijo.gameObject.SetActive(true);
             }
         }
-        textoMana.text = listaAliados[0].GetComponent<CartaPersonaje>().mana.ToString();
 
     }
 }

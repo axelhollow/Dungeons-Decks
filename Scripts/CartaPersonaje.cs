@@ -18,6 +18,7 @@ public class CartaPersonaje : Carta
     public GameObject ataque2;
     public GameObject ataque3;
     public TextMeshPro textoVida;
+    public TextMeshPro TextoMana;
 
 
     public void RestarVida(int daño)
@@ -34,12 +35,24 @@ public class CartaPersonaje : Carta
 
 
 
+    public void RestarMana(int manaUsado)
+    {
+        mana -= manaUsado;
+        TextoMana.text = vida.ToString();
+    }
+    public void SumarMana(int anadir)
+    {
+        mana += anadir;
+        TextoMana.text = vida.ToString();
+    }
+
+
     void Start()
     {
         vida = vidaAux;
         textoVida.text = vida.ToString();
-
         manaAux = mana;
+        TextoMana.text = mana.ToString();
     }
 
 }
