@@ -6029,6 +6029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barracon
       objectReference: {fileID: 0}
+    - target: {fileID: 2624786301826329814, guid: 8113e334396682e42a5a4a67615b201c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4926956722778343567, guid: 8113e334396682e42a5a4a67615b201c, type: 3}
       propertyPath: m_Camera
       value: 
