@@ -5,8 +5,12 @@ using UnityEngine;
 public class MazoActual : MonoBehaviour
 {
     public static MazoActual Instancia { get; private set; }
+
     public bool mazoIniciado=false;
+    public bool mazoObjetosIniciado = false;
+
     public Dictionary<GameObject, bool> mazoActual = new();
+    public Dictionary<GameObject, bool> mazoObjetosActual = new();
 
     private void Awake()
     {

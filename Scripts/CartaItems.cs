@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CartaItems : Carta
 {
-
+    public bool aldea;
     public TipoPocion tipoPocion;
     public int cantidadEfecto;
     private bool usada;
@@ -22,12 +22,18 @@ public class CartaItems : Carta
     }
     void OnMouseEnter()
     {
-        transform.localScale = originalScale * scaleFactor; // Aumenta el tamaño
+        if (aldea != true)
+        {
+            transform.localScale = originalScale * scaleFactor; // Aumenta el tamaño
+        }
     }
 
     void OnMouseExit()
     {
-        transform.localScale = originalScale; // Restaura el tamaño original
+        if (aldea != true)
+        {
+            transform.localScale = originalScale; // Restaura el tamaño original
+        }
     }
 }
 public enum TipoPocion

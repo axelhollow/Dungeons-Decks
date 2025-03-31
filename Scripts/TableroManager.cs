@@ -22,7 +22,7 @@ public class TableroManager : MonoBehaviour
     //Mazos
     public List<GameObject> mazo;
     private List<GameObject> mazoPersonajes;
-    private List<GameObject> mazotilizables = new();
+    private List<GameObject> mazotilizables;
 
     public List<GameObject> mazoEnemigos;
     public List<GameObject> mazoEnemigosAux;
@@ -79,13 +79,14 @@ public class TableroManager : MonoBehaviour
     void Start()
     {
         GameObject mazoObject = new GameObject();
-
         if (MazoActual.Instancia == null)
         {
-            print("GENERANDO SINGLE");
             mazoObject.AddComponent<MazoActual>();
         }
-        print("EMPEZAMOS");
+        #region AliadosYEnemigos
+       
+
+
         if (MazoActual.Instancia.mazoActual.Count == 0)
         {
             print("Mazo Vacio");
@@ -199,6 +200,71 @@ public class TableroManager : MonoBehaviour
 
 
         }
+        #endregion
+       
+        if (MazoActual.Instancia.mazoObjetosActual.Count == 0)
+        {
+            print("Mazo Objeto Vacio");
+            mazotilizables = new();
+            mazotilizables = PlayDungeon.instance.RecuperarObjetos();
+
+        }
+        else
+        {
+            print("recuperamos mazo Objetos");
+            mazotilizables = new();
+
+            foreach (KeyValuePair<GameObject, bool> par in MazoActual.Instancia.mazoObjetosActual)
+            {
+                GameObject cartaGuardada = par.Key;   // Accede a la clave (GameObject)
+                bool viva = par.Value;// Accede al valor (bool)
+                if (viva != false)
+                {
+                    mazotilizables.Add(cartaGuardada);
+                }
+
+            }
+
+        }
+         n = 0;
+        //Metemos las cartas de persoanje en su grid
+        foreach (GameObject carta in mazotilizables)
+        {
+            print("ENTRA objetos");
+            Vector3 posicionCarta = gridItems[n].transform.position;
+            Vector3 tamanoCarta = gridPersonajes[n].transform.localScale;
+            gridPersonajes[n].gameObject.SetActive(false);
+            if (carta != null)
+            {
+                GameObject cartita = Instantiate(carta);
+
+                cartita.GetComponent<CartaMovement>().holderDungeon = true;
+                cartita.transform.position = posicionCarta;
+                cartita.transform.SetParent(GameObject.FindWithTag("ListaDeAliados").transform);
+                cartita.transform.localScale = tamanoCarta;
+
+
+
+                cartita.SetActive(true);
+                GenerarMinimazo(cartita);
+                listaAliados.Add(cartita);
+                if (MazoActual.Instancia.mazoIniciado == false)
+                {
+                    MazoActual.Instancia.mazoActual.Add(carta, true);
+
+                }
+                diccVivos.Add(cartita, carta);
+                carta.SetActive(false);
+            }
+            print("dic vivos numero: " + diccVivos.Count());
+            n++;
+        }
+        MazoActual.Instancia.mazoIniciado = true;
+
+
+        numPersonajes = listaAliados.Count();
+
+
 
 
     }
