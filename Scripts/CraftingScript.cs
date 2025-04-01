@@ -6,8 +6,7 @@ using UnityEngine;
 public class CraftingScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
-    public List<string> prefabsNames = new List<string> { "Palo", "SpherePrueba", "CylinderPrueba" };
-    public List<float> tiemposDeCrafting = new List<float> { 5f, 7f, 10f };
+    
 
     private List<int> lastCartasIDs = new List<int>();
     private Coroutine craftingCoroutine;
@@ -17,11 +16,17 @@ public class CraftingScript : MonoBehaviour
     private GameObject fondoBarra;
     private GameObject barraProgreso;
 
+    private List<string> prefabsNames = new List<string> { "Palo", "Tablon", "Ladrillo", "Daga", "Espada", "Baston" };
+    private List<float> tiemposDeCrafting = new List<float> { 5f, 6f, 10f, 10f, 10f, 15f };
     private List<List<int>> combinacionesCorrectas = new List<List<int>>
     {
-        new List<int> { 1 },
-        //new List<int> { 3, 4 },
-        //new List<int> { 5, 6, 7 }
+        new List<int> { 1 },//1 Tronco -> 1 palo
+        new List<int> { 1, 1 },//2 Troncos -> 1 Tabla
+        new List<int> { 3, 3 },//2 piedras -> 1 ladrillo
+        new List<int> { 2,2,4,4 },//2Palos+2Lingotes -> 1 Daga
+        new List<int> { 2,4,4 },//1Palos+2Lingotes -> 1 Espada
+        new List<int> { 2,2,2,11,11 },//3 Palos+2 PolvosMagicos -> 1 Baston
+
     };
 
     void Update()

@@ -6,8 +6,7 @@ using UnityEngine;
 public class HornoScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
-    public List<string> prefabsNames = new List<string> { "Hierro", "SpherePrueba", "CylinderPrueba" };
-    public List<float> tiemposDeCrafting = new List<float> { 8f };
+    
 
     private List<int> lastCartasIDs = new List<int>();
     private Coroutine craftingCoroutine;
@@ -17,11 +16,13 @@ public class HornoScript : MonoBehaviour
     private GameObject fondoBarra;
     private GameObject barraProgreso;
 
+    private List<string> prefabsNames = new List<string> { "Hierro", "ManzanaAsada", "Botella" };
+    private List<float> tiemposDeCrafting = new List<float> { 15f, 8f, 12f };
     private List<List<int>> combinacionesCorrectas = new List<List<int>>
     {
-        new List<int> { 6 },
-        //new List<int> { 3, 4 },
-        //new List<int> { 5, 6, 7 }
+        new List<int> { 6 },//1 MineralHierro -> 1 Hierro
+        new List<int> { 5 },//1 Manzana -> 1 ManzanaAsada
+        new List<int> { 12, 12 },//2 Cristal -> 1 Botella
     };
 
     void Update()
