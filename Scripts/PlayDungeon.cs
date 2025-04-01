@@ -24,24 +24,44 @@ public class PlayDungeon : MonoBehaviour
 
 
 
-    public void CartasRecuperdasAventura(List<GameObject> listaCartas) 
+    public void CartasRecuperdasAventura(List<GameObject> listaCartas,List<GameObject> listaObjetos) 
     {
-        listaCartasRecuperadas = listaCartas;
-        GameObject objeto = GameObject.Find("New Game Object");
 
-        if (objeto != null)
+        print(listaCartasRecuperadas.Count);
+        float z = 2f;
+        float y = 0.3f;
+        foreach (GameObject carta in listaCartas) 
         {
-            Destroy(objeto);
-        }
-        foreach (GameObject carta in listaCartasRecuperadas) 
-        {
+            if (carta.tag == "Pocion") 
+            {
+                carta.GetComponent<CartaItems>().aldea = true;
+            
+            }
             carta.GetComponent<CartaMovement>().holderDungeon = false;
             carta.GetComponent<Renderer>().material.color= Color.white;
-            carta.transform.position = padreCartasRecuperadas.transform.position;
-            carta.transform.localScale=padreCartasRecuperadas.transform.localScale;
+            carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+            carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
             carta.transform.SetParent(padreCartasRecuperadas.transform);
-        
+            z += 20f;
+            y += 0.3f;
         }
+
+        foreach (GameObject carta in listaObjetos)
+        {
+            if (carta.tag == "Pocion")
+            {
+                carta.GetComponent<CartaItems>().aldea = true;
+
+            }
+            carta.GetComponent<CartaMovement>().holderDungeon = false;
+            carta.GetComponent<Renderer>().material.color = Color.white;
+            carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
+            carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
+            carta.transform.SetParent(padreCartasRecuperadas.transform);
+            z += 20f;
+            y += 0.3f;
+        }
+
         GameManager.instance.ContinueDayShowMap();
         GameManager.instance.SeguirDay();
         CameraMovementAldea.instance.DesbloquearBloquearCamaraCombate();

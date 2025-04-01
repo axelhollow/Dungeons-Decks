@@ -615,8 +615,7 @@ public class TableroManager : MonoBehaviour
                 }
             
             }
-            PlayDungeon.instance.CartasRecuperdasAventura(listaAliados);
-            PlayDungeon.instance.CartasRecuperdasAventura(listaItems);
+            PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
             SceneManager.UnloadSceneAsync("Mapa");
         }
 
