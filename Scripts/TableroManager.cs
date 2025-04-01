@@ -79,6 +79,7 @@ public class TableroManager : MonoBehaviour
     void Start()
     {
         GameObject mazoObject = new GameObject();
+
         if (MazoActual.Instancia == null)
         {
             mazoObject.AddComponent<MazoActual>();
@@ -553,9 +554,7 @@ public class TableroManager : MonoBehaviour
         }
         catch (System.IndexOutOfRangeException e)
         {
-            //Ganaste mi pana
             print("Exception de derrota" + e);
-
         }
         if (listaAliados == null || listaAliados.Count == 0)
         {
@@ -604,8 +603,21 @@ public class TableroManager : MonoBehaviour
             {
                 Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
             }
-
+            foreach(GameObject aliado in listaAliados) 
+            {
+                foreach(Transform hijoTrans in aliado.transform) 
+                {
+                    if (hijoTrans.gameObject.tag == "CartaAtaque") 
+                    {
+                        Destroy(hijoTrans.gameObject);
+                    }
+                    
+                }
+            
+            }
             PlayDungeon.instance.CartasRecuperdasAventura(listaAliados);
+            PlayDungeon.instance.CartasRecuperdasAventura(listaItems);
+            SceneManager.UnloadSceneAsync("Mapa");
         }
 
     }

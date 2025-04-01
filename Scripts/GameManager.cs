@@ -115,6 +115,12 @@ public class GameManager : MonoBehaviour
         textoVelocidad.text = "x1";
     }
 
+    public void ContinueDayShowMap()
+    {
+        textoVelocidad.text = "x1";
+        canvas.gameObject.SetActive(true);
+    }
+
 
 
     IEnumerator BuscarCartasPersonaje()

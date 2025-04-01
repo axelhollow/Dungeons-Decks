@@ -13,7 +13,7 @@ public class CameraMovementAldea : MonoBehaviour
     public float minZoom = 40f;           // Zoom mínimo (Orthographic Size)
     public float maxZoom = 80f;           // Zoom máximo (Orthographic Size)
 
-    private CinemachineVirtualCamera virtualCamera;  // La cámara virtual de Cinemachine
+    public CinemachineVirtualCamera virtualCamera;  // La cámara virtual de Cinemachine
     private float currentZoom = 60f;      // Valor de zoom actual
 
     public float minX = -200f, maxX = 200f;
@@ -85,6 +85,12 @@ public class CameraMovementAldea : MonoBehaviour
     {
         combatiendo = true;
         virtualCamera.m_Lens.OrthographicSize = 54;
+        followTarget.position = new Vector3(0f, 100f, 10f);
+    }
+    public void DesbloquearBloquearCamaraCombate()
+    {
+        combatiendo = false;
+        virtualCamera.m_Lens.OrthographicSize = 150;
         followTarget.position = new Vector3(0f, 100f, 10f);
     }
 }

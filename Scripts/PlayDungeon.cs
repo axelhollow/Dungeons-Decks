@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using JetBrains.Annotations;
 using UnityEditor.SearchService;
 using UnityEngine;
@@ -22,14 +23,28 @@ public class PlayDungeon : MonoBehaviour
     public GameObject padreCartasRecuperadas;
 
 
+
     public void CartasRecuperdasAventura(List<GameObject> listaCartas) 
     {
         listaCartasRecuperadas = listaCartas;
+        GameObject objeto = GameObject.Find("New Game Object");
+
+        if (objeto != null)
+        {
+            Destroy(objeto);
+        }
         foreach (GameObject carta in listaCartasRecuperadas) 
         {
+            carta.GetComponent<CartaMovement>().holderDungeon = false;
+            carta.GetComponent<Renderer>().material.color= Color.white;
+            carta.transform.position = padreCartasRecuperadas.transform.position;
+            carta.transform.localScale=padreCartasRecuperadas.transform.localScale;
             carta.transform.SetParent(padreCartasRecuperadas.transform);
         
         }
+        GameManager.instance.ContinueDayShowMap();
+        GameManager.instance.SeguirDay();
+        CameraMovementAldea.instance.DesbloquearBloquearCamaraCombate();
     }
     protected virtual void Awake()
     {
