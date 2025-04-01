@@ -341,42 +341,44 @@ public class TableroManager : MonoBehaviour
 
                 if (ataqueSeleccioando != null && obj.tag == "Enemigo")
                 {
-
-                    int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;
-                    int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
-                    int manaRestante = manaActual - costeCarta;
-
-                    if (manaRestante >= 0)
+                    if (ataqueSeleccioando.transform.parent == personajeSeleccionado.transform)
                     {
+                        int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;
+                        int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
+                        int manaRestante = manaActual - costeCarta;
 
-                        //Gestionar uso de mana
-                        manaActual = manaRestante;
-                        personajeSeleccionado.GetComponent<CartaPersonaje>().TextoMana.text = manaActual.ToString();
-                        ataqueSeleccioando.transform.parent.GetComponent<CartaPersonaje>().mana = manaActual;
-
-                        //Marcar Carta Como Usada
-                        if (personajeSeleccionado != null)
+                        if (manaRestante >= 0)
                         {
-                            CartaPersonaje cartaPersonaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
 
-                            if (cartaPersonaje.manoActual.ContainsKey(ataqueSeleccioando))
+                            //Gestionar uso de mana
+                            manaActual = manaRestante;
+                            personajeSeleccionado.GetComponent<CartaPersonaje>().TextoMana.text = manaActual.ToString();
+                            ataqueSeleccioando.transform.parent.GetComponent<CartaPersonaje>().mana = manaActual;
+
+                            //Marcar Carta Como Usada
+                            if (personajeSeleccionado != null)
                             {
-                                cartaPersonaje.manoActual[ataqueSeleccioando] = !cartaPersonaje.manoActual[ataqueSeleccioando];
+                                CartaPersonaje cartaPersonaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
 
-                                ataqueSeleccioando.SetActive(false);
+                                if (cartaPersonaje.manoActual.ContainsKey(ataqueSeleccioando))
+                                {
+                                    cartaPersonaje.manoActual[ataqueSeleccioando] = !cartaPersonaje.manoActual[ataqueSeleccioando];
 
-                                //Restar vida al enemigo
-                                int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().damage;
-                                obj.GetComponent<Enemigo>().RestarVida(dañoCarta);
+                                    ataqueSeleccioando.SetActive(false);
+
+                                    //Restar vida al enemigo
+                                    int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().damage;
+                                    obj.GetComponent<Enemigo>().RestarVida(dañoCarta);
+                                }
                             }
-                        }
-                        foreach (Transform hijo in ataqueSeleccioando.transform.parent.transform)
-                        {
-                            if (hijo.tag == "CartaAtaque")
+                            foreach (Transform hijo in ataqueSeleccioando.transform.parent.transform)
                             {
-                                hijo.gameObject.GetComponent<Minicarta>().RestaurarDamage();
-                            }
+                                if (hijo.tag == "CartaAtaque")
+                                {
+                                    hijo.gameObject.GetComponent<Minicarta>().RestaurarDamage();
+                                }
 
+                            }
                         }
                     }
 
