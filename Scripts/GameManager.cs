@@ -143,7 +143,22 @@ public class GameManager : MonoBehaviour
         {
             if (cartasComida.Count > 0) // Si hay comida disponible
             {
-                Destroy(cartasComida[0].gameObject); // Destruye la primera comida
+                // Desvincular la carta de comida antes de eliminarla
+                Transform cartaComida = cartasComida[0].transform;
+                cartaComida.SetParent(null);
+
+                List<Transform> hijosCartaComida = new List<Transform>();
+                foreach (Transform hijo in cartaComida)
+                {
+                    hijosCartaComida.Add(hijo);
+                }
+
+                foreach (Transform hijo in hijosCartaComida)
+                {
+                    hijo.SetParent(null);
+                }
+
+                Destroy(cartasComida[0].gameObject); // Destruye la carta de comida
                 cartasComida.RemoveAt(0); // Elimina la comida de la lista
             }
             else // Si no hay comida, se destruye el personaje

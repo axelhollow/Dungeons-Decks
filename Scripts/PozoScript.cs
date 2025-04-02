@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class MesaAlquimicaScript : MonoBehaviour
+public class PozoScript : MonoBehaviour
 {
     public List<int> cartasIDs = new List<int>();
 
@@ -16,13 +16,11 @@ public class MesaAlquimicaScript : MonoBehaviour
     private GameObject fondoBarra;
     private GameObject barraProgreso;
 
-    private List<string> prefabsNames = new List<string> { "PocionVida", "PocionDano", "PocionMana" };
-    private List<float> tiemposDeCrafting = new List<float> { 10f, 10f, 10f };
+    private List<string> prefabsNames = new List<string> { "Agua" };
+    private List<float> tiemposDeCrafting = new List<float> { 15f, 10f, 10f };
     private List<List<int>> combinacionesCorrectas = new List<List<int>>
     {
-        new List<int> { 9,10,13 },//1 Botella+ 1 ManzanaAsada+ 1 Agua -> 1 PocionVida
-        new List<int> { 6,10,13 },//1 Botella+ 1 MineralHierro+ 1 Agua -> 1 PocionDano
-        new List<int> { 10,11,13 }//1 Botella+ 1 PolvoMagico+ 1 Agua -> 1 PocionMana
+        new List<int> { 99 }//Guerrero
     };
 
     void Update()
@@ -46,12 +44,13 @@ public class MesaAlquimicaScript : MonoBehaviour
             int prefabIndex = ObtenerPrefabIndex(currentCartasIDs);
             float tiempoCrafting = tiemposDeCrafting[prefabIndex];
             CrearBarraProgreso();
-            craftingCoroutine = StartCoroutine(CraftDespuesDeTiempo(tiempoCrafting, prefabIndex));
+            craftingCoroutine = StartCoroutine(CraftDespuesDeTiempo3(tiempoCrafting, prefabIndex));
         }
+
         lastCartasIDs = new List<int>(currentCartasIDs);
     }
 
-    private IEnumerator CraftDespuesDeTiempo(float tiempo, int prefabIndex)
+    private IEnumerator CraftDespuesDeTiempo3(float tiempo, int prefabIndex)
     {
         float tiempoRestante = tiempo;
 
@@ -76,11 +75,8 @@ public class MesaAlquimicaScript : MonoBehaviour
 
             if (prefab != null)
             {
-                Instantiate(prefab, posicionOriginal + new Vector3(0f, 2f, -4f), rotacionOriginal);
-                foreach (Transform hijo in transform)
-                {
-                    Destroy(hijo.gameObject);
-                }
+                Instantiate(prefab, posicionOriginal + new Vector3(22f, 2f, 0f), rotacionOriginal);
+
             }
         }
 

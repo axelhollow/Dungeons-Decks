@@ -25,7 +25,7 @@ public class CraftingScript : MonoBehaviour
         new List<int> { 3, 3 },//2 piedras -> 1 ladrillo
         new List<int> { 2,2,4,4 },//2Palos+2Lingotes -> 1 Daga
         new List<int> { 2,4,4 },//1Palos+2Lingotes -> 1 Espada
-        new List<int> { 2,2,2,11,11 },//3 Palos+2 PolvosMagicos -> 1 Baston
+        new List<int> { 2,2,2,11,11 }//3 Palos+2 PolvosMagicos -> 1 Baston
 
     };
 
@@ -81,7 +81,7 @@ public class CraftingScript : MonoBehaviour
 
             if (prefab != null)
             {
-                Instantiate(prefab, posicionOriginal, rotacionOriginal);
+                Instantiate(prefab, posicionOriginal + new Vector3(0f, 2f, -4f), rotacionOriginal);
                 foreach (Transform hijo in transform)
                 {
                     Destroy(hijo.gameObject);

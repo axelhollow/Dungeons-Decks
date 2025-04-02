@@ -22,7 +22,7 @@ public class HornoScript : MonoBehaviour
     {
         new List<int> { 6 },//1 MineralHierro -> 1 Hierro
         new List<int> { 5 },//1 Manzana -> 1 ManzanaAsada
-        new List<int> { 12, 12 },//2 Cristal -> 1 Botella
+        new List<int> { 12, 12 }//2 Cristal -> 1 Botella
     };
 
     void Update()
@@ -46,13 +46,13 @@ public class HornoScript : MonoBehaviour
             int prefabIndex = ObtenerPrefabIndex(currentCartasIDs);
             float tiempoCrafting = tiemposDeCrafting[prefabIndex];
             CrearBarraProgreso();
-            craftingCoroutine = StartCoroutine(CraftDespuesDeTiempo(tiempoCrafting, prefabIndex));
+            craftingCoroutine = StartCoroutine(CraftDespuesDeTiempo1(tiempoCrafting, prefabIndex));
         }
 
         lastCartasIDs = new List<int>(currentCartasIDs);
     }
 
-    private IEnumerator CraftDespuesDeTiempo(float tiempo, int prefabIndex)
+    private IEnumerator CraftDespuesDeTiempo1(float tiempo, int prefabIndex)
     {
         float tiempoRestante = tiempo;
 
@@ -77,7 +77,7 @@ public class HornoScript : MonoBehaviour
 
             if (prefab != null)
             {
-                Instantiate(prefab, posicionOriginal, rotacionOriginal);
+                Instantiate(prefab, posicionOriginal + new Vector3(0f, 2f, -4f), rotacionOriginal);
                 foreach (Transform hijo in transform)
                 {
                     Destroy(hijo.gameObject);

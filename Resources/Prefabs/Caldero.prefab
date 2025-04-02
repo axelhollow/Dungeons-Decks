@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3540483738902160013}
   - component: {fileID: 198842899942430687}
   - component: {fileID: 4770766670003397315}
-  - component: {fileID: 7959045022239425785}
+  - component: {fileID: 3288266396241816374}
   m_Layer: 6
   m_Name: Caldero
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3685909486159143786}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -100, y: 0, z: -36}
   m_LocalScale: {x: 22.3, y: 1, z: 30}
   m_ConstrainProportionsScale: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   nombre: Caldero
   id: 0
   imagenCarta: {fileID: 0}
---- !u!114 &7959045022239425785
+--- !u!114 &3288266396241816374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,13 +153,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cartasIDs: 
-  prefabsNames:
-  - CubePrueba
-  - SpherePrueba
-  - CylinderPrueba
-  tiemposDeCrafting:
-  - 5
-  - 7
-  - 10
   fondoBarraPrefab: {fileID: 2808791089847474371, guid: c33d835dc8c8f0a43aff3945d1810c0b, type: 3}
   barraProgresoPrefab: {fileID: 1456988399048854983, guid: 85cd99e2fa7a1b447bae488648844ffe, type: 3}

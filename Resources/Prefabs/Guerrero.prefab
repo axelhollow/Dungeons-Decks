@@ -466,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 1
   nombre: 
-  id: 0
+  id: 99
   imagenCarta: {fileID: 0}
 --- !u!114 &8484929030692318187
 MonoBehaviour:
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 1
   nombre: Guerrero
-  id: 0
+  id: 99
   imagenCarta: {fileID: 0}
   vida: 15
   vidaAux: 15

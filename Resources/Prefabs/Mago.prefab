@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 1
   nombre: 
-  id: 0
+  id: 99
   imagenCarta: {fileID: 0}
 --- !u!114 &6206117007594555310
 MonoBehaviour:
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 1
   nombre: Aldeano
-  id: 0
+  id: 99
   imagenCarta: {fileID: 0}
   vida: 5
   vidaAux: 5

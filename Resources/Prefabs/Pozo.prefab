@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7178296078174850422}
   - component: {fileID: 4966400142487347411}
   - component: {fileID: 4689646688296376121}
+  - component: {fileID: 598528040498065001}
   m_Layer: 6
   m_Name: Pozo
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3764893819024473672}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 109, y: 0, z: -109}
   m_LocalScale: {x: 22.3, y: 1, z: 30}
   m_ConstrainProportionsScale: 0
@@ -139,3 +140,18 @@ MonoBehaviour:
   nombre: Pozo
   id: 21
   imagenCarta: {fileID: 0}
+--- !u!114 &598528040498065001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3764893819024473672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc38e66c3c51624f879ce0e887c88fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cartasIDs: 
+  fondoBarraPrefab: {fileID: 2808791089847474371, guid: c33d835dc8c8f0a43aff3945d1810c0b, type: 3}
+  barraProgresoPrefab: {fileID: 1456988399048854983, guid: 85cd99e2fa7a1b447bae488648844ffe, type: 3}

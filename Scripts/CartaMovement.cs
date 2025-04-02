@@ -37,7 +37,7 @@ public class CartaMovement : MonoBehaviour
 
                 // Limitar la posición en X y Z
                 float posX = Mathf.Clamp(posicionRatón.x, limiteXMin, limiteXMax);
-                float posZ = Mathf.Clamp(posicionRatón.z, limiteZMin + ObtenerProfundidadApilada() * 30, limiteZMax);
+                float posZ = Mathf.Clamp(posicionRatón.z, limiteZMin + ObtenerProfundidadApilada() * 15, limiteZMax);
                 transform.position = new Vector3(posX, alturaLevante, posZ);
 
 
@@ -82,32 +82,26 @@ public class CartaMovement : MonoBehaviour
                     !hit.collider.GetComponent<CartaMovement>().seleccionadaDungeon)
                 {
                     Transform cartaPadre = hit.collider.transform;
+                    Transform ultimaCartaHija = cartaPadre;
 
-                    // Buscar el último hijo de tipo Carta en el objeto
-                    Transform ultimaCartaHija = null;
-                    foreach (Transform child in cartaPadre)
+                    // Recorrer la jerarquía para encontrar la última carta hija
+                    while (ultimaCartaHija.childCount > 0)
                     {
-                        Carta cartaHija = child.GetComponent<Carta>();
-                        if (cartaHija != null && cartaHija.tipo == TipoCarta.Personaje)
+                        Transform posibleUltima = ultimaCartaHija.GetChild(ultimaCartaHija.childCount - 1);
+                        if (posibleUltima.GetComponent<Carta>() != null)
                         {
-                            ultimaCartaHija = child;
+                            ultimaCartaHija = posibleUltima;
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
 
-                    // Si hay una carta hija de tipo Personaje, asignamos a la nueva carta como la última hija
-                    if (ultimaCartaHija != null)
-                    {
-                        transform.SetParent(ultimaCartaHija);
-                        transform.localPosition = new Vector3(0f, 1f, -0.15f);
-                        transform.localRotation = Quaternion.identity;
-                    }
-                    else
-                    {
-                        // Si no se encuentra ninguna carta de tipo Personaje, se queda como la última hija del padre
-                        transform.SetParent(cartaPadre);
-                        transform.localPosition = new Vector3(0f, 1f, -0.15f);
-                        transform.localRotation = Quaternion.identity;
-                    }
+                    // Establecer la nueva carta como la última hija encontrada
+                    transform.SetParent(ultimaCartaHija);
+                    transform.localPosition = new Vector3(0f, 0.1f, -0.15f);
+                    transform.localRotation = Quaternion.identity;
                 }
                 else if (cartaActual.tipo == TipoCarta.Personaje &&
                          hit.collider.gameObject.layer == LayerMask.NameToLayer("HolderPersonaje") &&
@@ -115,7 +109,7 @@ public class CartaMovement : MonoBehaviour
                 {
                     Transform cartaPadre = hit.collider.transform;
                     transform.SetParent(cartaPadre);
-                    transform.localPosition = new Vector3(0f, 1f, 0f);
+                    transform.localPosition = new Vector3(0f, 0.1f, 0f);
                     transform.localRotation = Quaternion.identity;
                     seleccionadaDungeon = true;
                 }
@@ -125,7 +119,7 @@ public class CartaMovement : MonoBehaviour
                 {
                     Transform cartaPadre = hit.collider.transform;
                     transform.SetParent(cartaPadre);
-                    transform.localPosition = new Vector3(0f, 1f, 0f);
+                    transform.localPosition = new Vector3(0f, 0.1f, 0f);
                     transform.localRotation = Quaternion.identity;
                     seleccionadaDungeon = true;
                 }
@@ -134,13 +128,14 @@ public class CartaMovement : MonoBehaviour
                     // Si no se cumple ninguna condición, la carta vuelve a su posición ajustada
                     Vector3 posicionFinal = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
                     float posX = Mathf.Clamp(posicionFinal.x, limiteXMin, limiteXMax);
-                    float posZ = Mathf.Clamp(posicionFinal.z, limiteZMin + ObtenerProfundidadApilada() * 30, 75);
+                    float posZ = Mathf.Clamp(posicionFinal.z, limiteZMin + ObtenerProfundidadApilada() * 15, 75);
                     transform.position = new Vector3(posX, 0f, posZ);
                     transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 }
             }
         }
     }
+
 
     private float ObtenerProfundidadApilada()
         {

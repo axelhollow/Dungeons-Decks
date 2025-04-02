@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8831263436358576726}
   - component: {fileID: 3555738118699501789}
   - component: {fileID: 6521148474051287615}
+  - component: {fileID: 1188943237537049290}
   m_Layer: 6
   m_Name: Aldeano
   m_TagString: CartaPersonaje
@@ -124,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 1
   nombre: 
-  id: 0
+  id: 99
   imagenCarta: {fileID: 0}
 --- !u!114 &3555738118699501789
 MonoBehaviour:
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tipo: 1
   nombre: Aldeano
-  id: 0
+  id: 99
   imagenCarta: {fileID: 0}
   vida: 8
   vidaAux: 8
@@ -169,6 +170,21 @@ MonoBehaviour:
   distanciaRaycast: 10
   seleccionadaDungeon: 0
   holderDungeon: 0
+--- !u!114 &1188943237537049290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111878277144853832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee3167ea8ebf7e429a344d5e6adefcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cartasIDs: 
+  fondoBarraPrefab: {fileID: 2808791089847474371, guid: c33d835dc8c8f0a43aff3945d1810c0b, type: 3}
+  barraProgresoPrefab: {fileID: 1456988399048854983, guid: 85cd99e2fa7a1b447bae488648844ffe, type: 3}
 --- !u!1 &3627261220179285282
 GameObject:
   m_ObjectHideFlags: 0
