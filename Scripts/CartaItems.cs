@@ -14,11 +14,6 @@ public class CartaItems : Carta
     void Start()
     {
         originalScale = transform.localScale;
-        // Obtener el material del objeto 3D
-        Renderer renderer = GetComponent<Renderer>();
-
-        // Cambiar la textura en el material
-        renderer.material.mainTexture = imagenCarta;
     }
     void OnMouseEnter()
     {

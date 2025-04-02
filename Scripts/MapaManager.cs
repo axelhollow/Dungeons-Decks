@@ -70,10 +70,21 @@ public class MapaManager : MonoBehaviour
         nodoAnterior = nodoActual;
         nodoActual = nodoNuevo;
         nodoMapaActual = nodoActual.GetComponent<NodoMapa>();
-        nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
+
 
         yield return new WaitForSeconds(1f);
-        SceneManager.LoadScene("TableroJuego", LoadSceneMode.Additive);
-    
+        if (nodoMapaActual.tipoEvento == TipoEvento.Combate) 
+        {
+            nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
+            SceneManager.LoadScene("TableroJuego", LoadSceneMode.Additive);
+        }
+
+        if (nodoMapaActual.tipoEvento == TipoEvento.Recursos)
+        {
+            nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
+            SceneManager.LoadScene("RecursosEscene", LoadSceneMode.Additive);
+        }
+
+
     }
 }

@@ -26,41 +26,67 @@ public class PlayDungeon : MonoBehaviour
 
     public void CartasRecuperdasAventura(List<GameObject> listaCartas,List<GameObject> listaObjetos) 
     {
+        GameObject mazoObject = new GameObject();
+
+        if (MazoActual.Instancia == null)
+        {
+            mazoObject.AddComponent<MazoActual>();
+        }
 
         print(listaCartasRecuperadas.Count);
-        float z = 2f;
+        float z = 4f;
         float y = 0.3f;
-        foreach (GameObject carta in listaCartas) 
+        if (listaCartas != null)
         {
-            if (carta.tag == "Pocion") 
+            foreach (GameObject carta in listaCartas)
             {
-                carta.GetComponent<CartaItems>().aldea = true;
-            
-            }
-            carta.GetComponent<CartaMovement>().holderDungeon = false;
-            carta.GetComponent<Renderer>().material.color= Color.white;
-            carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
-            carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
-            carta.transform.SetParent(padreCartasRecuperadas.transform);
-            z += 20f;
-            y += 0.3f;
-        }
+                if (carta.tag == "Pocion")
+                {
+                    carta.GetComponent<CartaItems>().aldea = true;
 
-        foreach (GameObject carta in listaObjetos)
+                }
+                carta.GetComponent<CartaMovement>().holderDungeon = false;
+                carta.GetComponent<Renderer>().material.color = Color.white;
+                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+                carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
+                carta.transform.SetParent(padreCartasRecuperadas.transform);
+                z += 4;
+                y += 0.3f;
+            }
+        }
+        if (listaObjetos != null)
         {
-            if (carta.tag == "Pocion")
+            foreach (GameObject carta in listaObjetos)
             {
-                carta.GetComponent<CartaItems>().aldea = true;
+                if (carta.tag == "Pocion")
+                {
+                    carta.GetComponent<CartaItems>().aldea = true;
 
+                }
+                carta.GetComponent<CartaMovement>().holderDungeon = false;
+                carta.GetComponent<Renderer>().material.color = Color.white;
+                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
+                carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
+                carta.transform.SetParent(padreCartasRecuperadas.transform);
+                z += 4;
+                y += 0.3f;
             }
-            carta.GetComponent<CartaMovement>().holderDungeon = false;
-            carta.GetComponent<Renderer>().material.color = Color.white;
-            carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
-            carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
-            carta.transform.SetParent(padreCartasRecuperadas.transform);
-            z += 20f;
-            y += 0.3f;
         }
+        if (MazoActual.Instancia.listaRecursos!=null) 
+        {
+            foreach (GameObject carta in MazoActual.Instancia.listaRecursos)
+            {
+                carta.GetComponent<CartaMovement>().holderDungeon = false;
+                carta.GetComponent<Renderer>().material.color = Color.white;
+                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
+                carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
+                carta.transform.SetParent(padreCartasRecuperadas.transform);
+                z += 4;
+                y += 0.3f;
+            }
+        }
+        
+        
 
         GameManager.instance.ContinueDayShowMap();
         GameManager.instance.SeguirDay();

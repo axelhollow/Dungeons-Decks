@@ -577,7 +577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &735677894
 Transform:
   m_ObjectHideFlags: 0
@@ -787,7 +787,8 @@ MonoBehaviour:
   eleccion1: {fileID: 1568117193}
   eleccion2: {fileID: 299364038}
   eleccion3: {fileID: 937919386}
-  clave: {fileID: 0}
+  colorSeleccionado: {r: 1, g: 0.84, b: 0, a: 1}
+  recursoelegido: {fileID: 0}
 --- !u!1 &937919384
 GameObject:
   m_ObjectHideFlags: 0

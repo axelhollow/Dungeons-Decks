@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Button = UnityEngine.UI.Button;
@@ -32,6 +34,14 @@ public class EscenaRecursos : MonoBehaviour
 
     void Start()
     {
+        GameObject obj = GameObject.Find("MapaScene");
+        if (obj != null)
+        {
+            foreach (Transform child in obj.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
 
         GameObject mazoObject = new GameObject();
 
@@ -154,7 +164,15 @@ public class EscenaRecursos : MonoBehaviour
             GameObject copiasrecurso = Instantiate(recursoelegido);
             MazoActual.Instancia.listaRecursos.Add(copiasrecurso);
         }
-        
+        SceneManager.UnloadSceneAsync("RecursosEscene");
+        GameObject obj = GameObject.Find("MapaScene");
+        if (obj != null)
+        {
+            foreach (Transform child in obj.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+        }
 
 
     }
