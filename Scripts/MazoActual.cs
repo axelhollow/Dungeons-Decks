@@ -12,6 +12,8 @@ public class MazoActual : MonoBehaviour
     public Dictionary<GameObject, bool> mazoActual = new();
     public Dictionary<GameObject, bool> mazoObjetosActual = new();
 
+    public List<GameObject> listaRecursos=new();
+
     private void Awake()
     {
         if (Instancia != null && Instancia != this)
