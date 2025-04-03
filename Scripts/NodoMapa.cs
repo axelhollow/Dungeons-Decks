@@ -36,26 +36,22 @@ public class NodoMapa : MonoBehaviour
 
         selector.GetComponent<MeshRenderer>().enabled = false;
 
-        int nR = Random.Range(0, 11);
+        int nR = Random.Range(0, 12);
 
         if (nR >=0 && nR<=5) 
         {
             tipoEvento = TipoEvento.Combate;
         }
-        if (nR==6)
-        {
-            tipoEvento = TipoEvento.Tienda;
-        }
-        if (nR ==7 || nR==8)
+        if (nR ==6 || nR==7)
         {
             tipoEvento = TipoEvento.Aldeanos;
         }
-        if (nR>8)
+        if (nR>7)
         {
             tipoEvento = TipoEvento.Recursos;
         }
 
-        DiccionarioCartas = new() { { "Combate", DisenoCombate }, { "Tienda", DisenoTienda }, { "Aldeanos", DisenoAldeano }, { "Recursos", DisenoRecursos }, { "Tp", DisenoTP }, { "Boss", DisenoBoss }, { "X", DisenoX },{"PuntoPartida",DisenoPuntoPartida } };
+        DiccionarioCartas = new() { { "Combate", DisenoCombate }, { "Aldeanos", DisenoAldeano }, { "Recursos", DisenoRecursos }, { "Tp", DisenoTP }, { "Boss", DisenoBoss }, { "X", DisenoX },{"PuntoPartida",DisenoPuntoPartida } };
 
 
         // Cambiar la textura en el material
@@ -68,17 +64,18 @@ public class NodoMapa : MonoBehaviour
         if (combate) 
         {
             GetComponent<Renderer>().material = DiccionarioCartas["Combate"];
-
+            tipoEvento = TipoEvento.Combate;
         }
         if (tp)
         {
             GetComponent<Renderer>().material = DiccionarioCartas["Tp"];
+            tipoEvento = TipoEvento.Tp;
 
         }
         if (boss)
         {
             GetComponent<Renderer>().material = DiccionarioCartas["Boss"];
-
+            tipoEvento = TipoEvento.Boss;
         }
     }
 
@@ -88,7 +85,6 @@ public enum TipoEvento
     Combate,
     Recursos,
     Aldeanos,
-    Tienda,
     Tp,
     Boss
 }

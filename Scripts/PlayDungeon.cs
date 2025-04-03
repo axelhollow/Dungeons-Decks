@@ -33,23 +33,22 @@ public class PlayDungeon : MonoBehaviour
             mazoObject.AddComponent<MazoActual>();
         }
 
-        print(listaCartasRecuperadas.Count);
+        print("Recuperamos " + listaCartas.Count + " aliados");
         float z = 4f;
         float y = 0.3f;
         if (listaCartas != null)
         {
             foreach (GameObject carta in listaCartas)
             {
-                if (carta.tag == "Pocion")
-                {
-                    carta.GetComponent<CartaItems>().aldea = true;
+                GameObject cartita = Instantiate(carta);
+              
 
-                }
-                carta.GetComponent<CartaMovement>().holderDungeon = false;
-                carta.GetComponent<Renderer>().material.color = Color.white;
-                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
-                carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
-                carta.transform.SetParent(padreCartasRecuperadas.transform);
+                cartita.GetComponent<CartaMovement>().holderDungeon = false;
+                cartita.GetComponent<Renderer>().material.color = Color.white;
+                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+                cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
+                cartita.transform.SetParent(padreCartasRecuperadas.transform);
+                cartita.SetActive(true);
                 z += 4;
                 y += 0.3f;
             }
@@ -58,16 +57,19 @@ public class PlayDungeon : MonoBehaviour
         {
             foreach (GameObject carta in listaObjetos)
             {
-                if (carta.tag == "Pocion")
+                GameObject cartita = Instantiate(carta);
+               
+                if (cartita.tag == "Pocion")
                 {
-                    carta.GetComponent<CartaItems>().aldea = true;
+                    cartita.GetComponent<CartaItems>().aldea = true;
 
                 }
-                carta.GetComponent<CartaMovement>().holderDungeon = false;
-                carta.GetComponent<Renderer>().material.color = Color.white;
-                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
-                carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
-                carta.transform.SetParent(padreCartasRecuperadas.transform);
+                cartita.GetComponent<CartaMovement>().holderDungeon = false;
+                cartita.GetComponent<Renderer>().material.color = Color.white;
+                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
+                cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
+                cartita.transform.SetParent(padreCartasRecuperadas.transform);
+                cartita.SetActive(true);
                 z += 4;
                 y += 0.3f;
             }
