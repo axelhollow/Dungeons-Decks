@@ -1626,6 +1626,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: boss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoIzqu
       value: 
       objectReference: {fileID: 2058661580}
@@ -3375,7 +3379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6985903808052168260, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.8391533
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 6985903808052168260, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3665,8 +3669,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
-      propertyPath: combate
+      propertyPath: boss
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: combate
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: "Dise\xF1oTienda"

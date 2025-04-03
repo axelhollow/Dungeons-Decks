@@ -41,14 +41,15 @@ public class PlayDungeon : MonoBehaviour
             foreach (GameObject carta in listaCartas)
             {
                 GameObject cartita = Instantiate(carta);
-              
 
+                cartita.SetActive(true);
                 cartita.GetComponent<CartaMovement>().holderDungeon = false;
                 cartita.GetComponent<Renderer>().material.color = Color.white;
-                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+
                 cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
                 cartita.transform.SetParent(padreCartasRecuperadas.transform);
-                cartita.SetActive(true);
+                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+
                 z += 4;
                 y += 0.3f;
             }
@@ -64,12 +65,13 @@ public class PlayDungeon : MonoBehaviour
                     cartita.GetComponent<CartaItems>().aldea = true;
 
                 }
+                cartita.SetActive(true);
                 cartita.GetComponent<CartaMovement>().holderDungeon = false;
                 cartita.GetComponent<Renderer>().material.color = Color.white;
-                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
+                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
                 cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
                 cartita.transform.SetParent(padreCartasRecuperadas.transform);
-                cartita.SetActive(true);
+
                 z += 4;
                 y += 0.3f;
             }
@@ -80,7 +82,7 @@ public class PlayDungeon : MonoBehaviour
             {
                 carta.GetComponent<CartaMovement>().holderDungeon = false;
                 carta.GetComponent<Renderer>().material.color = Color.white;
-                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, 0, -z);
+                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
                 carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
                 carta.transform.SetParent(padreCartasRecuperadas.transform);
                 z += 4;

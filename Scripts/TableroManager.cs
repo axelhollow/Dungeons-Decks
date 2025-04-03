@@ -47,7 +47,9 @@ public class TableroManager : MonoBehaviour
     public List<GameObject> listaEnemigos = new();
     public List<GameObject> listaAliados = new();
     public List<GameObject> listaItems = new();
-
+    public GameObject boss;
+    public GameObject esbirroBossDer;
+    public GameObject esbirroBossIzqu;
 
     int numPersonajes;
 
@@ -158,22 +160,6 @@ public class TableroManager : MonoBehaviour
         MazoActual.Instancia.mazoIniciado = true;
         numPersonajes = listaAliados.Count();
         n = 0;
-       
-
-        mazoEnemigos = mazoEnemigosAux;
-        //Metemos las cartas de enemigas en su grid
-        foreach (GameObject carta in mazoEnemigos)
-        {
-            Vector3 posicionCarta = gridEnemigos[n].transform.position;
-            gridEnemigos[n].gameObject.SetActive(false);
-            var cartita = Instantiate(carta);
-            cartita.transform.position = posicionCarta;
-            cartita.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
-            listaEnemigos.Add(cartita);
-            n++;
-            cartita.SetActive(true);
-        }
-
         foreach (GameObject personaje in listaAliados)
         {
             foreach (Transform hijo in personaje.transform)
@@ -188,8 +174,56 @@ public class TableroManager : MonoBehaviour
 
 
         }
+        if (MazoActual.Instancia.bossEvent == false)
+        {
+            mazoEnemigos = mazoEnemigosAux;
+            //Metemos las cartas de enemigas en su grid
+            foreach (GameObject carta in mazoEnemigos)
+            {
+                Vector3 posicionCarta = gridEnemigos[n].transform.position;
+                gridEnemigos[n].gameObject.SetActive(false);
+                var cartita = Instantiate(carta);
+                cartita.transform.position = posicionCarta;
+                cartita.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
+                listaEnemigos.Add(cartita);
+                n++;
+                cartita.SetActive(true);
+            }
+
+            
+        }
+        else 
+        {
+            //Boss Event
+
+            //Boss
+            var enemyBoss =Instantiate(boss);
+            enemyBoss.transform.position= gridEnemigos[1].transform.position;
+            enemyBoss.transform.localScale = gridEnemigos[1].transform.localScale;
+            gridEnemigos[1].gameObject.SetActive(false);
+            enemyBoss.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
+            listaEnemigos.Add(enemyBoss);
+
+            //Esbirros dere
+            var esbirroD = Instantiate(esbirroBossDer);
+            esbirroD.transform.position = gridEnemigos[2].transform.position;
+            esbirroD.transform.localScale = gridEnemigos[2].transform.localScale;
+            gridEnemigos[2].gameObject.SetActive(false);
+            esbirroD.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
+            listaEnemigos.Add(esbirroD);
+
+
+            //Esbirro izqui
+            var esbirroI = Instantiate(esbirroBossIzqu);
+            esbirroI.transform.position = gridEnemigos[0].transform.position;
+            esbirroI.transform.localScale = gridEnemigos[0].transform.localScale;
+            gridEnemigos[0].gameObject.SetActive(false);
+            esbirroI.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
+            listaEnemigos.Add(esbirroI);
+
+        }
         #endregion
-       
+
         if (MazoActual.Instancia.mazoObjetosActual.Count == 0)
         {
             print("Mazo Objeto Vacio");
@@ -652,8 +686,6 @@ public class TableroManager : MonoBehaviour
         Cursor.visible = true;
 
     }
-
-
 
     public void ReactivarCartas()
     {

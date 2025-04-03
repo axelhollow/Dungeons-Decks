@@ -30,7 +30,12 @@ public class NodoMapa : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject mazoObject = new GameObject();
 
+        if (MazoActual.Instancia == null)
+        {
+            mazoObject.AddComponent<MazoActual>();
+        }
 
         rendererito = GetComponent<Renderer>();
 
@@ -76,10 +81,13 @@ public class NodoMapa : MonoBehaviour
         {
             GetComponent<Renderer>().material = DiccionarioCartas["Boss"];
             tipoEvento = TipoEvento.Boss;
+            MazoActual.Instancia.bossEvent = true;
         }
     }
 
 }
+
+
 public enum TipoEvento
 {
     Combate,

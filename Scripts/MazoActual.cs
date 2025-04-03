@@ -8,6 +8,7 @@ public class MazoActual : MonoBehaviour
 
     public bool mazoIniciado=false;
     public bool mazoObjetosIniciado = false;
+    public bool bossEvent = false;
 
     public Dictionary<GameObject, bool> mazoActual = new();
     public Dictionary<GameObject, bool> mazoObjetosActual = new();

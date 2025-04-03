@@ -133,5 +133,11 @@ public class MapaManager : MonoBehaviour
             //SceneManager.LoadScene("Aldea", LoadSceneMode.Additive);
         }
 
+        if (nodoMapaActual.tipoEvento == TipoEvento.Boss) 
+        {
+            SceneManager.LoadScene("TableroJuego", LoadSceneMode.Additive);
+
+
+        }
     }
 }
