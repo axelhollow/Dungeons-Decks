@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -84,7 +86,52 @@ public class MapaManager : MonoBehaviour
             nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
             SceneManager.LoadScene("RecursosEscene", LoadSceneMode.Additive);
         }
+        if (nodoMapaActual.tipoEvento == TipoEvento.Aldeanos)
+        {
+            nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
+            SceneManager.LoadScene("AldeanosEscene", LoadSceneMode.Additive);
+        }
+        if (nodoMapaActual.tipoEvento == TipoEvento.Tp)
+        {
+            print("tp pulsado");
+            nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
 
+            GameObject mazoObject = new GameObject();
+            print("ganaste");
+            if (MazoActual.Instancia == null)
+            {
+                mazoObject.AddComponent<MazoActual>();
+            }
+            List<GameObject> listaAliados = new List<GameObject>(MazoActual.Instancia.mazoActual.Keys);
+            List<GameObject> listaItems = new List<GameObject>(MazoActual.Instancia.mazoObjetosActual.Keys);
+
+            GameObject obj = GameObject.Find("MapaScene");
+            if (obj != null)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    child.gameObject.SetActive(true); // Activan cada hijo individualmente
+                }
+            }
+            else
+            {
+                Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
+            }
+            foreach (GameObject aliado in listaAliados)
+            {
+                foreach (Transform hijoTrans in aliado.transform)
+                {
+                    if (hijoTrans.gameObject.tag == "CartaAtaque")
+                    {
+                        Destroy(hijoTrans.gameObject);
+                    }
+                }
+
+            }
+            PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
+            SceneManager.UnloadSceneAsync("Mapa");
+            //SceneManager.LoadScene("Aldea", LoadSceneMode.Additive);
+        }
 
     }
 }

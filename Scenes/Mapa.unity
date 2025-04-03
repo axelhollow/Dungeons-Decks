@@ -1075,6 +1075,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1310618844521523647}
     m_Modifications:
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: tp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: combate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoIzqu
       value: 
       objectReference: {fileID: 168953744}
@@ -1471,6 +1479,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 356069540}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: tipoEvento
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: "Dise\xF1oTienda"
       value: 
       objectReference: {fileID: 2100000, guid: 4b748d09cd5fbe34a96dbab0f5b37159, type: 2}
@@ -1610,6 +1622,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1310618844521523647}
     m_Modifications:
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: tp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoIzqu
       value: 
       objectReference: {fileID: 2058661580}
@@ -1714,6 +1730,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1310618844521523647}
     m_Modifications:
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: tp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: combate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoIzqu
       value: 
@@ -3776,6 +3800,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1310618844521523647}
     m_Modifications:
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: tp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: combate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoIzqu
       value: 
       objectReference: {fileID: 634666790}
@@ -3881,12 +3913,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 1310618844521523647}
     m_Modifications:
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: tp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: combate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoIzqu
       value: 
       objectReference: {fileID: 168953744}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: caminoDerech
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
+      propertyPath: puntoPartida
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: "Dise\xF1oTienda"

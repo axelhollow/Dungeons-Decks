@@ -605,20 +605,20 @@ public class TableroManager : MonoBehaviour
             {
                 Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
             }
-            foreach(GameObject aliado in listaAliados) 
+            foreach (GameObject aliado in listaAliados)
             {
-                foreach(Transform hijoTrans in aliado.transform) 
+                foreach (Transform hijoTrans in aliado.transform)
                 {
-                    if (hijoTrans.gameObject.tag == "CartaAtaque") 
+                    if (hijoTrans.gameObject.tag == "CartaAtaque")
                     {
                         Destroy(hijoTrans.gameObject);
                     }
-                    
+
                 }
-            
+
             }
-            PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
-            SceneManager.UnloadSceneAsync("Mapa");
+            //PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
+            //SceneManager.UnloadSceneAsync("Mapa");
         }
 
     }
