@@ -81,6 +81,15 @@ public class MesaAlquimicaScript : MonoBehaviour
                 {
                     Destroy(hijo.gameObject);
                 }
+
+                switch (prefabIndex)
+                {
+                    case 0: RecetasScript.instance.pocionvida = true; break;
+                    case 1: RecetasScript.instance.pociondano = true; break;
+                    case 2: RecetasScript.instance.pocionmana = true; break;
+                    
+                }
+                   
             }
         }
 

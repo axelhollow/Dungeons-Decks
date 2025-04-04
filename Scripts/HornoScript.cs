@@ -82,6 +82,14 @@ public class HornoScript : MonoBehaviour
                 {
                     Destroy(hijo.gameObject);
                 }
+
+                switch (prefabIndex)
+                {
+                    case 0: RecetasScript.instance.hierro = true; break;
+                    case 1: RecetasScript.instance.manzanaAsada = true; break;
+                    case 2: RecetasScript.instance.botella = true; break;
+
+                }
             }
         }
 

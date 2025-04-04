@@ -80,6 +80,14 @@ public class AldeanoToPersonajes : MonoBehaviour
                 Instantiate(prefab, posicionOriginal, rotacionOriginal);
                 Destroy(gameObject);
             }
+
+            switch (prefabIndex)
+            {
+                case 0: RecetasScript.instance.guerrero = true; break;
+                case 1: RecetasScript.instance.asesino = true; break;
+                case 2: RecetasScript.instance.mago = true; break;
+
+            }
         }
 
         ResetearBarra();

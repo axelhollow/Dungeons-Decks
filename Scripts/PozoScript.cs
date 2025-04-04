@@ -78,6 +78,8 @@ public class PozoScript : MonoBehaviour
                 Instantiate(prefab, posicionOriginal + new Vector3(22f, 2f, 0f), rotacionOriginal);
 
             }
+
+            RecetasScript.instance.agua = true;
         }
 
         ResetearBarra();

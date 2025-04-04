@@ -16,8 +16,8 @@ public class CraftingScript : MonoBehaviour
     private GameObject fondoBarra;
     private GameObject barraProgreso;
 
-    private List<string> prefabsNames = new List<string> { "Palo", "Tablon", "Ladrillo", "Daga", "Espada", "Baston" };
-    private List<float> tiemposDeCrafting = new List<float> { 5f, 6f, 10f, 10f, 10f, 15f };
+    private List<string> prefabsNames = new List<string> { "Palo", "Tablon", "Ladrillo", "Daga", "Espada", "Baston","CraftingTable", "Horno", "Pozo", "Caldero","Invernadero", "Barracon", "Vertedero" };
+    private List<float> tiemposDeCrafting = new List<float> { 5f, 6f, 10f, 10f, 10f, 15f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f };
     private List<List<int>> combinacionesCorrectas = new List<List<int>>
     {
         new List<int> { 1 },//1 Tronco -> 1 palo
@@ -25,12 +25,22 @@ public class CraftingScript : MonoBehaviour
         new List<int> { 3, 3 },//2 piedras -> 1 ladrillo
         new List<int> { 2,2,4,4 },//2Palos+2Lingotes -> 1 Daga
         new List<int> { 2,4,4 },//1Palos+2Lingotes -> 1 Espada
-        new List<int> { 2,2,2,11,11 }//3 Palos+2 PolvosMagicos -> 1 Baston
+        new List<int> { 2,2,2,11,11 },//3 Palos+2 PolvosMagicos -> 1 Baston
+        new List<int> { 1,1,2,2 },//2troncos + 2 palos -> 1 Mesa crafteo
+        new List<int> { 1,1,3,3,3,3 },//2troncos + 4 piedras -> 1 Horno
+        new List<int> { 8,8,8 },//3ladrillos -> 1 Pozo
+        new List<int> { 4,4,4,11 },//3 hierro + 1 polvomagico -> 1 Caldero
+        new List<int> { 5,10,11 },//1 agua+ 1 manzana+ 1 polvomagico -> 1 Invernadero
+        new List<int> { 4,4,8,8,8 },//2 hierro + 3 ladrillo -> 1 Barracon
+        new List<int> { 7,7,7,11 },//3 tablas + 1 polvo -> 1 Vertedero
+
+
 
     };
 
     void Update()
     {
+        
 
         // Seguir detectando combinaciones y cambios en las cartas
         List<int> currentCartasIDs = ObtenerIDsCartas();
@@ -85,6 +95,24 @@ public class CraftingScript : MonoBehaviour
                 foreach (Transform hijo in transform)
                 {
                     Destroy(hijo.gameObject);
+                }
+
+                switch (prefabIndex)
+                {
+                    case 0: RecetasScript.instance.palo = true; break;
+                    case 1: RecetasScript.instance.tablones = true; break;
+                    case 2: RecetasScript.instance.ladrillo = true; break;
+                    case 3: RecetasScript.instance.daga = true; break;
+                    case 4: RecetasScript.instance.espada = true; break;
+                    case 5: RecetasScript.instance.baston = true; break;
+                    case 6: RecetasScript.instance.mesacrafteo = true; break;
+                    case 7: RecetasScript.instance.horno = true; break;
+                    case 8: RecetasScript.instance.pozo = true; break;
+                    case 9: RecetasScript.instance.caldero = true; break;
+                    case 10: RecetasScript.instance.invernadero = true; break;
+                    case 11: RecetasScript.instance.barracon = true; break;
+                    case 12: RecetasScript.instance.vertedero = true; break;
+
                 }
             }
         }
