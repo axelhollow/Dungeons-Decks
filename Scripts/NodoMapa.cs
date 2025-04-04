@@ -81,7 +81,6 @@ public class NodoMapa : MonoBehaviour
         {
             GetComponent<Renderer>().material = DiccionarioCartas["Boss"];
             tipoEvento = TipoEvento.Boss;
-            MazoActual.Instancia.bossEvent = true;
         }
     }
 

@@ -57,46 +57,53 @@ public class EscenaRecursos : MonoBehaviour
         // Obtiene el material del objeto
 
         Material material;
-        material=AnadirMaterial(eleccion1);
-        if (material != null && material.mainTexture != null)
+        if (eleccion1 != null)
         {
-            // Convierte la textura en un Sprite y la asigna al Image del botón
-            Texture2D textura = (Texture2D)material.mainTexture;
-            eleccion1.image.sprite = Sprite.Create(textura, new Rect(0, 0, textura.width, textura.height), new Vector2(0.5f, 0.5f));
-
-            foreach (Transform hijo in eleccion1.gameObject.transform)
+            material = AnadirMaterial(eleccion1);
+            if (material != null && material.mainTexture != null)
             {
-                hijo.gameObject.GetComponent<TextMeshProUGUI>().text = cantidad.ToString();
+                // Convierte la textura en un Sprite y la asigna al Image del botón
+                Texture2D textura = (Texture2D)material.mainTexture;
+                eleccion1.image.sprite = Sprite.Create(textura, new Rect(0, 0, textura.width, textura.height), new Vector2(0.5f, 0.5f));
 
+                foreach (Transform hijo in eleccion1.gameObject.transform)
+                {
+                    hijo.gameObject.GetComponent<TextMeshProUGUI>().text = cantidad.ToString();
+
+                }
             }
         }
-
-        material = AnadirMaterial(eleccion2);
-        if (material != null && material.mainTexture != null)
+        if (eleccion2 != null)
         {
-            // Convierte la textura en un Sprite y la asigna al Image del botón
-            Texture2D textura = (Texture2D)material.mainTexture;
-            eleccion2.image.sprite = Sprite.Create(textura, new Rect(0, 0, textura.width, textura.height), new Vector2(0.5f, 0.5f));
-            foreach (Transform hijo in eleccion2.gameObject.transform)
+            material = AnadirMaterial(eleccion2);
+            if (material != null && material.mainTexture != null)
             {
-                cantidad = Random.Range(1, 5);
-                hijo.gameObject.GetComponent<TextMeshProUGUI>().text = cantidad.ToString();
+                // Convierte la textura en un Sprite y la asigna al Image del botón
+                Texture2D textura = (Texture2D)material.mainTexture;
+                eleccion2.image.sprite = Sprite.Create(textura, new Rect(0, 0, textura.width, textura.height), new Vector2(0.5f, 0.5f));
+                foreach (Transform hijo in eleccion2.gameObject.transform)
+                {
+                    cantidad = Random.Range(1, 5);
+                    hijo.gameObject.GetComponent<TextMeshProUGUI>().text = cantidad.ToString();
+                }
             }
         }
-
-        material = AnadirMaterial(eleccion3);
-
-        if (material != null && material.mainTexture != null)
+        if (eleccion3 != null)
         {
-            // Convierte la textura en un Sprite y la asigna al Image del botón
-            Texture2D textura = (Texture2D)material.mainTexture;
-            eleccion3.image.sprite = Sprite.Create(textura, new Rect(0, 0, textura.width, textura.height), new Vector2(0.5f, 0.5f));
-            foreach (Transform hijo in eleccion3.gameObject.transform)
-            {
-                cantidad = Random.Range(1, 5);
-                hijo.gameObject.GetComponent<TextMeshProUGUI>().text = cantidad.ToString();
-            }
+            material = AnadirMaterial(eleccion3);
 
+            if (material != null && material.mainTexture != null)
+            {
+                // Convierte la textura en un Sprite y la asigna al Image del botón
+                Texture2D textura = (Texture2D)material.mainTexture;
+                eleccion3.image.sprite = Sprite.Create(textura, new Rect(0, 0, textura.width, textura.height), new Vector2(0.5f, 0.5f));
+                foreach (Transform hijo in eleccion3.gameObject.transform)
+                {
+                    cantidad = Random.Range(1, 5);
+                    hijo.gameObject.GetComponent<TextMeshProUGUI>().text = cantidad.ToString();
+                }
+
+            }
         }
 
 
@@ -164,7 +171,14 @@ public class EscenaRecursos : MonoBehaviour
             GameObject copiasrecurso = Instantiate(recursoelegido);
             MazoActual.Instancia.listaRecursos.Add(copiasrecurso);
         }
-        SceneManager.UnloadSceneAsync("RecursosEscene");
+        if (IsSceneLoaded("RecursosEscene"))
+        {
+            SceneManager.UnloadSceneAsync("RecursosEscene");
+        }
+        else
+        {
+            SceneManager.UnloadSceneAsync("RecompensaCombate");
+        }
         GameObject obj = GameObject.Find("MapaScene");
         if (obj != null)
         {
@@ -175,6 +189,18 @@ public class EscenaRecursos : MonoBehaviour
         }
 
 
+    }
+    bool IsSceneLoaded(string name)
+    {
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.name == name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Material AnadirMaterial(Button buton)

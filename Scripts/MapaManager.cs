@@ -136,8 +136,8 @@ public class MapaManager : MonoBehaviour
         if (nodoMapaActual.tipoEvento == TipoEvento.Boss) 
         {
             SceneManager.LoadScene("TableroJuego", LoadSceneMode.Additive);
-
-
+            nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
+            MazoActual.Instancia.bossEvent = true;
         }
     }
 }

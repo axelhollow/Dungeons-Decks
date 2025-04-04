@@ -47,6 +47,9 @@ public class TableroManager : MonoBehaviour
     public List<GameObject> listaEnemigos = new();
     public List<GameObject> listaAliados = new();
     public List<GameObject> listaItems = new();
+    
+
+    //BOSS
     public GameObject boss;
     public GameObject esbirroBossDer;
     public GameObject esbirroBossIzqu;
@@ -176,18 +179,27 @@ public class TableroManager : MonoBehaviour
         }
         if (MazoActual.Instancia.bossEvent == false)
         {
-            mazoEnemigos = mazoEnemigosAux;
-            //Metemos las cartas de enemigas en su grid
+           int numeroEnemigos= Random.Range(1, 4);
+           
+           int vuelta = 1;
+           mazoEnemigos = mazoEnemigosAux;
+
             foreach (GameObject carta in mazoEnemigos)
             {
-                Vector3 posicionCarta = gridEnemigos[n].transform.position;
-                gridEnemigos[n].gameObject.SetActive(false);
-                var cartita = Instantiate(carta);
-                cartita.transform.position = posicionCarta;
-                cartita.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
-                listaEnemigos.Add(cartita);
-                n++;
-                cartita.SetActive(true);
+                if (vuelta <= numeroEnemigos)
+                {
+                    int enemigoIndice = Random.Range(0, 3);
+
+                    Vector3 posicionCarta = gridEnemigos[n].transform.position;
+                    gridEnemigos[n].gameObject.SetActive(false);
+                    var cartita = Instantiate(mazoEnemigos[enemigoIndice]);
+                    cartita.transform.position = posicionCarta;
+                    cartita.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
+                    listaEnemigos.Add(cartita);
+                    n++;
+                    cartita.SetActive(true);
+                    vuelta++;
+                }
             }
 
             
@@ -220,6 +232,7 @@ public class TableroManager : MonoBehaviour
             gridEnemigos[0].gameObject.SetActive(false);
             esbirroI.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
             listaEnemigos.Add(esbirroI);
+            MazoActual.Instancia.bossEvent = false;
 
         }
         #endregion
@@ -626,19 +639,21 @@ public class TableroManager : MonoBehaviour
         {
 
             print("ganaste");
-            GameObject obj = GameObject.Find("MapaScene");
-            if (obj != null)
-            {
-                foreach (Transform child in obj.transform)
-                {
-                    child.gameObject.SetActive(true); // Activan cada hijo individualmente
-                }
-                SceneManager.UnloadSceneAsync("TableroJuego");
-            }
-            else
-            {
-                Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
-            }
+            //GameObject obj = GameObject.Find("MapaScene");
+            //if (obj != null)
+            //{
+            //    foreach (Transform child in obj.transform)
+            //    {
+            //        child.gameObject.SetActive(true); // Activan cada hijo individualmente
+            //    }
+            //    
+            //}
+            //else
+            //{
+            //    Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
+            //}
+            SceneManager.LoadScene("RecompensaCombate", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync("TableroJuego");
             foreach (GameObject aliado in listaAliados)
             {
                 foreach (Transform hijoTrans in aliado.transform)
