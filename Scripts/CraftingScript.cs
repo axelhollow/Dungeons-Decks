@@ -29,7 +29,7 @@ public class CraftingScript : MonoBehaviour
         new List<int> { 1,1,2,2 },//2troncos + 2 palos -> 1 Mesa crafteo
         new List<int> { 1,1,3,3,3,3 },//2troncos + 4 piedras -> 1 Horno
         new List<int> { 8,8,8 },//3ladrillos -> 1 Pozo
-        new List<int> { 4,4,4,11 },//3 hierro + 1 polvomagico -> 1 Caldero
+        new List<int> { 4,4,4 },//3 hierro + 1 polvomagico -> 1 Caldero
         new List<int> { 5,10,11 },//1 agua+ 1 manzana+ 1 polvomagico -> 1 Invernadero
         new List<int> { 4,4,8,8,8 },//2 hierro + 3 ladrillo -> 1 Barracon
         new List<int> { 7,7,7,11 },//3 tablas + 1 polvo -> 1 Vertedero
