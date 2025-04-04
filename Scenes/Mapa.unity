@@ -991,7 +991,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6069017061190591001}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4583172288364237123}
+        m_TargetAssemblyTypeName: MapaManager, Assembly-CSharp
+        m_MethodName: volverALaAldea
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &990161435845418763
 GameObject:
   m_ObjectHideFlags: 0
@@ -3204,7 +3216,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2185103214912007487}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4583172288364237123}
+        m_TargetAssemblyTypeName: MapaManager, Assembly-CSharp
+        m_MethodName: QuitarCanvas
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!33 &4188682872217292999
 MeshFilter:
   m_ObjectHideFlags: 0

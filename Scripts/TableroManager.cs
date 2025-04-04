@@ -480,12 +480,8 @@ public class TableroManager : MonoBehaviour
 
                         }
                     }
-
-
                 }
             }
-
-
         }
     }
     void CambiarColor(GameObject obj, Color nuevoColor)

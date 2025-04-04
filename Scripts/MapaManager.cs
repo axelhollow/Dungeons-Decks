@@ -97,9 +97,9 @@ public class MapaManager : MonoBehaviour
             print("tp pulsado");
             nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
 
-            //canvasTP.gameObject.SetActive(true);
+            canvasTP.gameObject.SetActive(true);
 
-           volverALaAldea();
+            //volverALaAldea();
 
         }
 
@@ -109,6 +109,11 @@ public class MapaManager : MonoBehaviour
             nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
             MazoActual.Instancia.bossEvent = true;
         }
+    }
+
+    public void QuitarCanvas() 
+    {
+        canvasTP.gameObject.SetActive(false);
     }
 
     public void volverALaAldea() 
