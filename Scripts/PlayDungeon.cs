@@ -90,8 +90,19 @@ public class PlayDungeon : MonoBehaviour
             }
         }
         
+        //Borramos las cartas del banner
+        foreach(GameObject personaje in personajesPaLaDungeon) 
+        {
+            Destroy(personaje);
         
-
+        }
+        foreach (GameObject objetos in objetosPaLaDungeon)
+        {
+            Destroy(objetos);
+        }
+        MazoActual.Instancia.mazoActual = new();
+        MazoActual.Instancia.mazoIniciado = false;
+        personajesPaLaDungeon.Clear();
         GameManager.instance.ContinueDayShowMap();
         GameManager.instance.SeguirDay();
         CameraMovementAldea.instance.DesbloquearBloquearCamaraCombate();
@@ -135,6 +146,7 @@ public class PlayDungeon : MonoBehaviour
 
     public void RecogerListas()
     {
+        Debug.Log("RecogerLista");
         personajesPaLaDungeon.Clear();
         objetosPaLaDungeon.Clear();
 
