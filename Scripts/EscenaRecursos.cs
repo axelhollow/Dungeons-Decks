@@ -184,6 +184,11 @@ public class EscenaRecursos : MonoBehaviour
         {
             foreach (Transform child in obj.transform)
             {
+                if (child.GetComponent<Canvas>() != null)
+                {
+                    continue;
+                }
+
                 child.gameObject.SetActive(true);
             }
         }

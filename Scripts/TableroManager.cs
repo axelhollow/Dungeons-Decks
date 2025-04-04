@@ -472,7 +472,8 @@ public class TableroManager : MonoBehaviour
                         GameObject poti = diccObjetosVivos[listaItems[i]];
                         if (MazoActual.Instancia.mazoObjetosActual.ContainsKey(poti)) 
                         { 
-                            MazoActual.Instancia.mazoObjetosActual[poti] = false;
+                            //MazoActual.Instancia.mazoObjetosActual[poti] = false;
+                            MazoActual.Instancia.mazoObjetosActual.Remove(poti);
                             listaItems[i].SetActive(false);
                             listaItems.Remove(listaItems[i]);
                             pocionSeleccionada = null;
@@ -585,7 +586,8 @@ public class TableroManager : MonoBehaviour
                                 if (MazoActual.Instancia.mazoActual.ContainsKey(carta))
                                 {
                                     print("se elimina la carta del mazo");
-                                    MazoActual.Instancia.mazoActual[carta] = false;
+                                    //MazoActual.Instancia.mazoActual[carta] = false;
+                                    MazoActual.Instancia.mazoActual.Remove(carta);
                                 }
 
                             }
@@ -639,19 +641,6 @@ public class TableroManager : MonoBehaviour
         {
 
             print("ganaste");
-            //GameObject obj = GameObject.Find("MapaScene");
-            //if (obj != null)
-            //{
-            //    foreach (Transform child in obj.transform)
-            //    {
-            //        child.gameObject.SetActive(true); // Activan cada hijo individualmente
-            //    }
-            //    
-            //}
-            //else
-            //{
-            //    Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
-            //}
             SceneManager.LoadScene("RecompensaCombate", LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync("TableroJuego");
             foreach (GameObject aliado in listaAliados)
@@ -666,8 +655,6 @@ public class TableroManager : MonoBehaviour
                 }
 
             }
-            //PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
-            //SceneManager.UnloadSceneAsync("Mapa");
         }
 
     }

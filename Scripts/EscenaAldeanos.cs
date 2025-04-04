@@ -50,6 +50,10 @@ public class EscenaAldeanos : MonoBehaviour
         {
             foreach (Transform child in obj.transform)
             {
+                if (child.GetComponent<Canvas>() != null)
+                {
+                    continue;
+                }
                 child.gameObject.SetActive(true);
             }
         }
