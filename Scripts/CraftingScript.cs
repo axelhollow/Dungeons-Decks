@@ -16,8 +16,8 @@ public class CraftingScript : MonoBehaviour
     private GameObject fondoBarra;
     private GameObject barraProgreso;
 
-    private List<string> prefabsNames = new List<string> { "Palo", "Tablon", "Ladrillo", "Daga", "Espada", "Baston","CraftingTable", "Horno", "Pozo", "Caldero","Invernadero", "Barracon", "Vertedero" };
-    private List<float> tiemposDeCrafting = new List<float> { 5f, 6f, 10f, 10f, 10f, 15f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f };
+    private List<string> prefabsNames = new List<string> { "Palo", "Tablon", "Ladrillo", "Daga", "Espada", "Baston","CraftingTable", "Horno", "Pozo", "Caldero","Invernadero", "Barracon", "Vertedero","AguasTermales" };
+    private List<float> tiemposDeCrafting = new List<float> { 5f, 6f, 10f, 10f, 10f, 15f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f, 10f,10f,10f,10f,10f,10f };
     private List<List<int>> combinacionesCorrectas = new List<List<int>>
     {
         new List<int> { 1 },//1 Tronco -> 1 palo
@@ -33,9 +33,7 @@ public class CraftingScript : MonoBehaviour
         new List<int> { 5,10,11 },//1 agua+ 1 manzana+ 1 polvomagico -> 1 Invernadero
         new List<int> { 4,4,8,8,8 },//2 hierro + 3 ladrillo -> 1 Barracon
         new List<int> { 7,7,7,11 },//3 tablas + 1 polvo -> 1 Vertedero
-
-
-
+        new List<int> { 3,3,3,3,10,10,11 },//4 pierdas + 2 aguas + 2 polvos -> 1 AguaTermal
     };
 
     void Update()
@@ -112,6 +110,7 @@ public class CraftingScript : MonoBehaviour
                     case 10: RecetasScript.instance.invernadero = true; break;
                     case 11: RecetasScript.instance.barracon = true; break;
                     case 12: RecetasScript.instance.vertedero = true; break;
+                    case 13: RecetasScript.instance.aguasTermales = true; break;
 
                 }
             }

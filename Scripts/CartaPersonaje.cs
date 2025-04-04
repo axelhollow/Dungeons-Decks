@@ -33,6 +33,12 @@ public class CartaPersonaje : Carta
         textoVida.text = vida.ToString();
     }
 
+    public void AumentarVida(int cura)
+    {
+        vida = cura;
+        textoVida.text = vida.ToString();
+    }
+
 
 
     public void RestarMana(int manaUsado)

@@ -94,6 +94,9 @@ public class RecetasScript : MonoBehaviour
     public bool vertedero;
     public List<GameObject> imagenesVertedero;
 
+    public bool aguasTermales;
+    public List<GameObject> imagenesAguasTermales;
+
     public static RecetasScript instance;
 
     protected virtual void Awake()
@@ -148,6 +151,7 @@ public class RecetasScript : MonoBehaviour
             if (pozo) SetImagenesInactive(imagenesPozo);
             if (tablones) SetImagenesInactive(imagenesTablones);
             if (tronco) SetImagenesInactive(imagenesTronco);
+            if (aguasTermales) SetImagenesInactive(imagenesAguasTermales);
 
             yield return new WaitForSeconds(3f);
         }

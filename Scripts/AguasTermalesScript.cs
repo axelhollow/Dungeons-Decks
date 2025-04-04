@@ -40,7 +40,7 @@ public class AguasTermalesScript : MonoBehaviour
             cartaPersonajeReferencia = cartaActual;
 
             // Si se ha colocado una carta Personaje y no está al 100% de vida, iniciar la curación
-            if (cartaPersonajeReferencia != null && cartaPersonajeReferencia.vida < cartaPersonajeReferencia.vidaAux)
+            if (cartaPersonajeReferencia != null && cartaPersonajeReferencia.vida <= cartaPersonajeReferencia.vidaAux)
             {
                 IniciarCuracion();
             }
@@ -57,7 +57,7 @@ public class AguasTermalesScript : MonoBehaviour
         }
 
         // Si la vida ya está completa, no hacer nada
-        if (cartaPersonajeReferencia.vida >= cartaPersonajeReferencia.vidaAux)
+        if (cartaPersonajeReferencia.vida > cartaPersonajeReferencia.vidaAux)
             return;
 
         CrearBarraProgreso();
@@ -76,10 +76,10 @@ public class AguasTermalesScript : MonoBehaviour
             yield return null;
         }
 
-        // Al completar el tiempo, se cura la vida del personaje a su máximo (vidaAux)
+        // Al completar el tiempo, aumenta la vida en 3
         if (cartaPersonajeReferencia != null)
         {
-            cartaPersonajeReferencia.CurarVida(cartaPersonajeReferencia.vidaAux);
+            cartaPersonajeReferencia.AumentarVida(cartaPersonajeReferencia.vidaAux+3);
         }
 
         ResetearBarra();
