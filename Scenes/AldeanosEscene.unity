@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99ae8fd4c5f53c84fbbc166fce77e80b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aldeano: {fileID: 111878277144853832, guid: 8ee0d4666ab30d14b8f592a9e56db709, type: 3}
+  aldeano: {fileID: 111878277144853832, guid: a2bc606f32dde8f4ba97c231bf07e621, type: 3}
   botonEleccion: {fileID: 1568117193}
   dorado: {r: 1, g: 0.84, b: 0, a: 1}
 --- !u!1 &1064761091

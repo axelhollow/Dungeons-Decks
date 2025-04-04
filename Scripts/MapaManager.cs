@@ -11,6 +11,7 @@ public class MapaManager : MonoBehaviour
     public GameObject nodoAnterior;
     private NodoMapa nodoMapaActual;
     public List<GameObject> listaNodos;
+    public Canvas canvasTP;
 
 
 
@@ -96,41 +97,10 @@ public class MapaManager : MonoBehaviour
             print("tp pulsado");
             nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
 
-            GameObject mazoObject = new GameObject();
-            print("ganaste");
-            if (MazoActual.Instancia == null)
-            {
-                mazoObject.AddComponent<MazoActual>();
-            }
-            List<GameObject> listaAliados = new List<GameObject>(MazoActual.Instancia.mazoActual.Keys);
-            List<GameObject> listaItems = new List<GameObject>(MazoActual.Instancia.mazoObjetosActual.Keys);
+            //canvasTP.gameObject.SetActive(true);
 
-            GameObject obj = GameObject.Find("MapaScene");
-            if (obj != null)
-            {
-                foreach (Transform child in obj.transform)
-                {
-                    child.gameObject.SetActive(true); // Activan cada hijo individualmente
-                }
-            }
-            else
-            {
-                Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
-            }
-            foreach (GameObject aliado in listaAliados)
-            {
-                foreach (Transform hijoTrans in aliado.transform)
-                {
-                    if (hijoTrans.gameObject.tag == "CartaAtaque")
-                    {
-                        Destroy(hijoTrans.gameObject);
-                    }
-                }
+           volverALaAldea();
 
-            }
-            PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
-            SceneManager.UnloadSceneAsync("Mapa");
-            //SceneManager.LoadScene("Aldea", LoadSceneMode.Additive);
         }
 
         if (nodoMapaActual.tipoEvento == TipoEvento.Boss) 
@@ -139,5 +109,44 @@ public class MapaManager : MonoBehaviour
             nodoMapaActual.GetComponent<Renderer>().material = nodoMapaActual.DiccionarioCartas["X"];
             MazoActual.Instancia.bossEvent = true;
         }
+    }
+
+    public void volverALaAldea() 
+    {
+        GameObject mazoObject = new GameObject();
+        print("ganaste");
+        if (MazoActual.Instancia == null)
+        {
+            mazoObject.AddComponent<MazoActual>();
+        }
+        List<GameObject> listaAliados = new List<GameObject>(MazoActual.Instancia.mazoActual.Keys);
+        List<GameObject> listaItems = new List<GameObject>(MazoActual.Instancia.mazoObjetosActual.Keys);
+
+        GameObject obj = GameObject.Find("MapaScene");
+        if (obj != null)
+        {
+            foreach (Transform child in obj.transform)
+            {
+                child.gameObject.SetActive(true); // Activan cada hijo individualmente
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
+        }
+        foreach (GameObject aliado in listaAliados)
+        {
+            foreach (Transform hijoTrans in aliado.transform)
+            {
+                if (hijoTrans.gameObject.tag == "CartaAtaque")
+                {
+                    Destroy(hijoTrans.gameObject);
+                }
+            }
+
+        }
+        PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
+        SceneManager.UnloadSceneAsync("Mapa");
+
     }
 }
