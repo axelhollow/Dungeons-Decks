@@ -10,6 +10,7 @@ public class CartaPersonaje : Carta
     public int vida;
     public int vidaAux;
     public int mana;
+    public bool vidaMax=false;
     public ParticleSystem efectoAtaque;
     public int manaAux;
     public bool mazoYaGenerado=false;
