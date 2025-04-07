@@ -395,7 +395,7 @@ public class TableroManager : MonoBehaviour
                 {
                     if (ataqueSeleccioando.transform.parent == personajeSeleccionado.transform)
                     {
-                        StartCoroutine(EfectoAtaqueCartasPersonajes(personajeSeleccionado.GetComponent<CartaPersonaje>().efectoAtaque, obj));
+                        StartCoroutine(EfectoAtaqueCartasPersonajes(efectoActual, obj));
                       
                     }
 
@@ -678,19 +678,15 @@ public class TableroManager : MonoBehaviour
 
     IEnumerator EfectoAtaqueCartasPersonajes(GameObject efecto,GameObject enemigo) 
     {
-        
-
+        efecto.transform.position=enemigo.transform.position;
+        Instantiate(efecto);
+        yield return new WaitForSeconds(0.8f);
         int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;
         int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
         int manaRestante = manaActual - costeCarta;
 
         if (manaRestante >= 0)
         {
-            efecto.transform.position = enemigo.transform.position;
-             
-            efecto.transform.position = new Vector3(efecto.transform.position.x, efecto.transform.position.y + 10f, efecto.transform.position.z);
-            Instantiate(efecto);
-            yield return new WaitForSeconds(0.8f);
 
             //Gestionar uso de mana
             manaActual = manaRestante;
