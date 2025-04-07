@@ -395,7 +395,7 @@ public class TableroManager : MonoBehaviour
                 {
                     if (ataqueSeleccioando.transform.parent == personajeSeleccionado.transform)
                     {
-                        StartCoroutine(EfectoAtaqueCartasPersonajes(efectoActual, obj));
+                        StartCoroutine(EfectoAtaqueCartasPersonajes(personajeSeleccionado.GetComponent<CartaPersonaje>().efectoAtaque, obj));
                       
                     }
 
@@ -679,6 +679,7 @@ public class TableroManager : MonoBehaviour
     IEnumerator EfectoAtaqueCartasPersonajes(GameObject efecto,GameObject enemigo) 
     {
         efecto.transform.position=enemigo.transform.position;
+        efecto.transform.position= new Vector3(efecto.transform.position.x, efecto.transform.position.y+10, efecto.transform.position.z);
         Instantiate(efecto);
         yield return new WaitForSeconds(0.8f);
         int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;

@@ -164,36 +164,40 @@ public class EscenaRecursos : MonoBehaviour
 
     public void botonAceptar() 
     {
-        int vueltas = materialSeleccionado[recursoelegido];
+        if (materialSeleccionado != null && materialSeleccionado.Count > 0)
+        {
+            int vueltas = materialSeleccionado[recursoelegido];
 
-        for (int i = 1; i <= vueltas; i++)
-        {
-            GameObject copiasrecurso = Instantiate(recursoelegido);
-            MazoActual.Instancia.listaRecursos.Add(copiasrecurso);
-        }
-        if (IsSceneLoaded("RecursosEscene"))
-        {
-            SceneManager.UnloadSceneAsync("RecursosEscene");
-        }
-        if (IsSceneLoaded("RecompensaCombate"))
-        {
-            SceneManager.UnloadSceneAsync("RecompensaCombate");
-        }
-        if (IsSceneLoaded("RecompensaCombateBOSS"))
-        {
-            SceneManager.UnloadSceneAsync("RecompensaCombateBOSS");
-        }
-        GameObject obj = GameObject.Find("MapaScene");
-        if (obj != null)
-        {
-            foreach (Transform child in obj.transform)
+
+            for (int i = 1; i <= vueltas; i++)
             {
-                if (child.GetComponent<Canvas>() != null)
+                GameObject copiasrecurso = Instantiate(recursoelegido);
+                MazoActual.Instancia.listaRecursos.Add(copiasrecurso);
+            }
+            if (IsSceneLoaded("RecursosEscene"))
+            {
+                SceneManager.UnloadSceneAsync("RecursosEscene");
+            }
+            if (IsSceneLoaded("RecompensaCombate"))
+            {
+                SceneManager.UnloadSceneAsync("RecompensaCombate");
+            }
+            if (IsSceneLoaded("RecompensaCombateBOSS"))
+            {
+                SceneManager.UnloadSceneAsync("RecompensaCombateBOSS");
+            }
+            GameObject obj = GameObject.Find("MapaScene");
+            if (obj != null)
+            {
+                foreach (Transform child in obj.transform)
                 {
-                    continue;
-                }
+                    if (child.GetComponent<Canvas>() != null)
+                    {
+                        continue;
+                    }
 
-                child.gameObject.SetActive(true);
+                    child.gameObject.SetActive(true);
+                }
             }
         }
 
