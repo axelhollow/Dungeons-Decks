@@ -99,8 +99,6 @@ public class MapaManager : MonoBehaviour
 
             canvasTP.gameObject.SetActive(true);
 
-            //volverALaAldea();
-
         }
 
         if (nodoMapaActual.tipoEvento == TipoEvento.Boss) 
@@ -119,7 +117,6 @@ public class MapaManager : MonoBehaviour
     public void volverALaAldea() 
     {
         GameObject mazoObject = new GameObject();
-        print("ganaste");
         if (MazoActual.Instancia == null)
         {
             mazoObject.AddComponent<MazoActual>();

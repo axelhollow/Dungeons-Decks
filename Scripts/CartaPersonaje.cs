@@ -21,10 +21,14 @@ public class CartaPersonaje : Carta
     public TextMeshPro TextoMana;
 
 
-    public void RestarVida(int daño)
+    public void RestarVida(int attak)
     {
-        vida -= daño;
+        print("rESTANDO VIDA A :" + gameObject.name);
+        vida = vida- attak;
+        if (vida < 0) vida = 0;
         textoVida.text = vida.ToString();
+        print("daño: " + attak);
+        print("vida: "+vida);
     }
     public void CurarVida(int cura)
     {
@@ -35,7 +39,7 @@ public class CartaPersonaje : Carta
 
     public void AumentarVida(int cura)
     {
-        vida = cura;
+        vidaAux = cura;
         textoVida.text = vida.ToString();
     }
 

@@ -26,14 +26,6 @@ public class PlayDungeon : MonoBehaviour
 
     public void CartasRecuperdasAventura(List<GameObject> listaCartas,List<GameObject> listaObjetos) 
     {
-        GameObject mazoObject = new GameObject();
-
-        if (MazoActual.Instancia == null)
-        {
-            mazoObject.AddComponent<MazoActual>();
-        }
-
-        print("Recuperamos " + listaCartas.Count + " aliados");
         float z = 4f;
         float y = 0.3f;
         if (listaCartas != null)
@@ -41,13 +33,13 @@ public class PlayDungeon : MonoBehaviour
             foreach (GameObject carta in listaCartas)
             {
                 GameObject cartita = Instantiate(carta);
-
+                //cartita.transform.SetParent(padreCartasRecuperadas.transform);
                 cartita.SetActive(true);
                 cartita.GetComponent<CartaMovement>().holderDungeon = false;
                 cartita.GetComponent<Renderer>().material.color = Color.white;
 
                 cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
-                cartita.transform.SetParent(padreCartasRecuperadas.transform);
+
                 cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
 
                 z += 4;
@@ -59,7 +51,7 @@ public class PlayDungeon : MonoBehaviour
             foreach (GameObject carta in listaObjetos)
             {
                 GameObject cartita = Instantiate(carta);
-               
+                //cartita.transform.SetParent(padreCartasRecuperadas.transform);
                 if (cartita.tag == "Pocion")
                 {
                     cartita.GetComponent<CartaItems>().aldea = true;
@@ -70,7 +62,7 @@ public class PlayDungeon : MonoBehaviour
                 cartita.GetComponent<Renderer>().material.color = Color.white;
                 cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
                 cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
-                cartita.transform.SetParent(padreCartasRecuperadas.transform);
+
 
                 z += 4;
                 y += 0.3f;
@@ -80,11 +72,13 @@ public class PlayDungeon : MonoBehaviour
         {
             foreach (GameObject carta in MazoActual.Instancia.listaRecursos)
             {
-                carta.GetComponent<CartaMovement>().holderDungeon = false;
-                carta.GetComponent<Renderer>().material.color = Color.white;
-                carta.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
-                carta.transform.localScale = padreCartasRecuperadas.transform.localScale;
-                carta.transform.SetParent(padreCartasRecuperadas.transform);
+                GameObject cartita = Instantiate(carta);
+                //cartita.transform.SetParent(padreCartasRecuperadas.transform);
+                cartita.GetComponent<CartaMovement>().holderDungeon = false;
+                cartita.GetComponent<Renderer>().material.color = Color.white;
+                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+                cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
+  
                 z += 4;
                 y += 0.3f;
             }
@@ -102,6 +96,7 @@ public class PlayDungeon : MonoBehaviour
         }
         MazoActual.Instancia.mazoActual = new();
         MazoActual.Instancia.mazoIniciado = false;
+        MazoActual.Instancia.mazoObjetosIniciado = false;
         personajesPaLaDungeon.Clear();
         GameManager.instance.ContinueDayShowMap();
         GameManager.instance.SeguirDay();
@@ -177,6 +172,15 @@ public class PlayDungeon : MonoBehaviour
         GenerarDungeon();
     }
 
+    private void Start()
+    {
+        GameObject mazoObject = new GameObject();
+
+        if (MazoActual.Instancia == null)
+        {
+            mazoObject.AddComponent<MazoActual>();
+        }
+    }
     public List<GameObject> RecuperarPersonajes()
     {
         return personajesPaLaDungeon;

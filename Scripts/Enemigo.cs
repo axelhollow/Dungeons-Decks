@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemigo : MonoBehaviour
 {
     public Texture2D imagenCarta;
-    public int daño;
+    public int att;
     public int vida;
     public int vidaAux;
     public string nombre;
@@ -14,6 +14,7 @@ public class Enemigo : MonoBehaviour
 
     //INFO UI
    public TextMeshPro textoVida;
+    public TextMeshPro textoAtt;
     //Efectos
     public GameObject efectoAtaque;
 
@@ -26,16 +27,20 @@ public class Enemigo : MonoBehaviour
         originalScale= transform.localScale;
         vida = vidaAux;
         textoVida.text = vida.ToString();
+        textoAtt.text = att.ToString();
         // Obtener el material del objeto 3D
         Renderer renderer = GetComponent<Renderer>();
 
         // Cambiar la textura en el material
         renderer.material.mainTexture = imagenCarta;
+
+
     }
 
     public void RestarVida(int daño) 
     {
         vida = vida - daño;
+        if(vida<0)vida=0;
         textoVida.text = vida.ToString();
     }
 

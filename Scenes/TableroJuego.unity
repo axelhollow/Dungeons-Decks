@@ -184,7 +184,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147624809}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -289,7 +289,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191852698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834fc428e61fe084eb556dd137a97ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  efectoActual: {fileID: 0}
+  efectoActual: {fileID: 6855314210357232287, guid: 7c2a9b83b809a0848915fabd9596b68b, type: 3}
   mazo:
   - {fileID: 7315737110772551012, guid: 6156782e53be98a4f8bd52f8e6d340c8, type: 3}
   - {fileID: 5487844783267485474, guid: 4b9c23e27b301f64c9122200cb6b7445, type: 3}
@@ -832,6 +832,7 @@ MonoBehaviour:
   - {fileID: 7315737110772551012, guid: ae45a50723aafd34cb353501463dbdbe, type: 3}
   - {fileID: 4080440797006505090, guid: a25a9a94339fd564688f00c2c19c0726, type: 3}
   - {fileID: 5359749257066741512, guid: c87dcd772c237624391dc263d48f6b24, type: 3}
+  recomepnsaBoss: 0
   gridPersonajes:
   - {fileID: 9177600718137516015}
   - {fileID: 9177600718089054090}
@@ -935,7 +936,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571478937}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1104,7 +1105,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 792040120}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1967,7 +1968,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732924809}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2072,7 +2073,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760617274}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

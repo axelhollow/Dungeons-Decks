@@ -11,7 +11,7 @@ public class MazoActual : MonoBehaviour
     public bool bossEvent = false;
 
     public Dictionary<GameObject, bool> mazoActual = new();
-    public Dictionary<GameObject, bool> mazoObjetosActual = new();
+    public Dictionary<GameObject, bool> mazoObjetosActual=new();
 
     public List<GameObject> listaRecursos=new();
 

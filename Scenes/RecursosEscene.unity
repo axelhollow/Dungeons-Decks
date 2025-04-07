@@ -457,7 +457,7 @@ RectTransform:
   m_GameObject: {fileID: 362569808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 0.3492869, y: 0.3492869, z: 0.3492869}
+  m_LocalScale: {x: 0.47031483, y: 0.47031483, z: 0.47031483}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1310936933}
@@ -782,7 +782,6 @@ MonoBehaviour:
   - {fileID: 2838401457624245870, guid: 0a02f8a2d7e700843b1831618799bf12, type: 3}
   - {fileID: 3057801745565952965, guid: 2f7dbe7328d9098479f911f8a76ad479, type: 3}
   - {fileID: 7393091354972696984, guid: 7cf66167338971f4ba0cb51375154f4f, type: 3}
-  - {fileID: 2665102591925978825, guid: 5ca1fe1a5a398da48808e719f09e9ec9, type: 3}
   - {fileID: 4499902867163648427, guid: c405755b3af19724db01b2a743a88688, type: 3}
   eleccion1: {fileID: 1568117193}
   eleccion2: {fileID: 299364038}
