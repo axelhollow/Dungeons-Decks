@@ -18244,7 +18244,7 @@ GameObject:
   - component: {fileID: 1507968670}
   - component: {fileID: 1507968669}
   - component: {fileID: 1507968668}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tablero Dungeon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
