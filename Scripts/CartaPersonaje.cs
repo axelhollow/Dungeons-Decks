@@ -9,8 +9,9 @@ public class CartaPersonaje : Carta
 
     public int vida;
     public int vidaAux;
+    public bool vidaMax=false;
     public int mana;
-    public ParticleSystem efectoAtaque;
+    public GameObject efectoAtaque;
     public int manaAux;
     public bool mazoYaGenerado=false;
     public Dictionary<GameObject, bool> manoActual=new();
@@ -21,10 +22,14 @@ public class CartaPersonaje : Carta
     public TextMeshPro TextoMana;
 
 
-    public void RestarVida(int daño)
+    public void RestarVida(int attak)
     {
-        vida -= daño;
+        print("rESTANDO VIDA A :" + gameObject.name);
+        vida = vida- attak;
+        if (vida < 0) vida = 0;
         textoVida.text = vida.ToString();
+        print("daño: " + attak);
+        print("vida: "+vida);
     }
     public void CurarVida(int cura)
     {
@@ -35,10 +40,14 @@ public class CartaPersonaje : Carta
 
     public void AumentarVida(int cura)
     {
-        vida = cura;
-        textoVida.text = vida.ToString();
+        vidaAux = cura;
+        textoVida.text = vidaAux.ToString();
     }
-
+    public void DismunyuirVidaMax(int cura)
+    {
+        vidaAux = cura;
+        textoVida.text = vidaAux.ToString();
+    }
 
 
     public void RestarMana(int manaUsado)
@@ -52,9 +61,12 @@ public class CartaPersonaje : Carta
         TextoMana.text = vida.ToString();
     }
 
+   // aassas
+
 
     void Start()
     {
+        
         vida = vidaAux;
         textoVida.text = vida.ToString();
         manaAux = mana;

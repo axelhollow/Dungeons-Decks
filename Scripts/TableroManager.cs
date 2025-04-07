@@ -27,6 +27,8 @@ public class TableroManager : MonoBehaviour
     public List<GameObject> mazoEnemigos;
     public List<GameObject> mazoEnemigosAux;
 
+    public bool recomepnsaBoss=false;
+
     //Grid Personajes
     public Transform[] gridPersonajes;
     //Grid Items
@@ -153,9 +155,9 @@ public class TableroManager : MonoBehaviour
                 if (MazoActual.Instancia.mazoIniciado==false)
                 {
                     MazoActual.Instancia.mazoActual.Add(carta, true);
-                   
+                    diccVivos.Add(cartita, carta);
                 }
-                diccVivos.Add(cartita, carta);
+                
                 carta.SetActive(false);
             }
             n++;
@@ -177,9 +179,66 @@ public class TableroManager : MonoBehaviour
 
 
         }
+        if (MazoActual.Instancia.mazoObjetosIniciado==false)
+        {
+            print("Mazo Objeto Vacio");
+            mazotilizables = new();
+            mazotilizables = PlayDungeon.instance.RecuperarObjetos();
+
+        }
+        else
+        {
+            print("recuperamos mazo Objetos");
+            mazotilizables = new();
+
+            foreach (KeyValuePair<GameObject, bool> par in MazoActual.Instancia.mazoObjetosActual)
+            {
+                GameObject cartaGuardada = par.Key;   // Accede a la clave (GameObject)
+                bool viva = par.Value;// Accede al valor (bool)
+                if (viva != false)
+                {
+                    print(cartaGuardada.name);
+                    mazotilizables.Add(cartaGuardada);
+                }
+
+            }
+
+        }
+        n = 0;
+        //Metemos las cartas de Objeto en su grid
+        foreach (GameObject carta in mazotilizables)
+        {
+            print("ENTRA objetos");
+            Vector3 posicionCarta = gridItems[n].transform.position;
+            gridItems[n].gameObject.SetActive(false);
+            if (carta != null)
+            {
+
+                GameObject cartita = Instantiate(carta);
+                cartita.SetActive(true);
+                cartita.GetComponent<CartaMovement>().holderDungeon = true;
+                cartita.GetComponent<CartaItems>().aldea = false;
+                cartita.transform.position = posicionCarta;
+                cartita.transform.SetParent(GameObject.FindWithTag("ListaDePotis").transform);
+                cartita.transform.localScale = tamanoItem;
+
+
+                diccObjetosVivos.Add(cartita, carta);
+                listaItems.Add(cartita);
+                if (MazoActual.Instancia.mazoObjetosIniciado == false)
+                {
+                    MazoActual.Instancia.mazoObjetosActual.Add(carta, true);
+
+                }
+                carta.SetActive(false);
+            }
+            n++;
+        }
+        MazoActual.Instancia.mazoObjetosIniciado = true;
+
         if (MazoActual.Instancia.bossEvent == false)
         {
-           int numeroEnemigos= Random.Range(1, 4);
+           int numeroEnemigos= Random.Range(1, mazoEnemigos.Count);
            
            int vuelta = 1;
            mazoEnemigos = mazoEnemigosAux;
@@ -188,15 +247,14 @@ public class TableroManager : MonoBehaviour
             {
                 if (vuelta <= numeroEnemigos)
                 {
-                    int enemigoIndice = Random.Range(0, 3);
+                    int enemigoIndice = Random.Range(0, mazoEnemigos.Count);
 
-                    Vector3 posicionCarta = gridEnemigos[n].transform.position;
-                    gridEnemigos[n].gameObject.SetActive(false);
+                    Vector3 posicionCarta = gridEnemigos[vuelta-1].transform.position;
+                    gridEnemigos[vuelta - 1].gameObject.SetActive(false);
                     var cartita = Instantiate(mazoEnemigos[enemigoIndice]);
                     cartita.transform.position = posicionCarta;
                     cartita.transform.SetParent(GameObject.FindWithTag("ListaDeEnemigos").transform);
                     listaEnemigos.Add(cartita);
-                    n++;
                     cartita.SetActive(true);
                     vuelta++;
                 }
@@ -207,7 +265,7 @@ public class TableroManager : MonoBehaviour
         else 
         {
             //Boss Event
-
+            recomepnsaBoss=true; 
             //Boss
             var enemyBoss =Instantiate(boss);
             enemyBoss.transform.position= gridEnemigos[1].transform.position;
@@ -237,60 +295,7 @@ public class TableroManager : MonoBehaviour
         }
         #endregion
 
-        if (MazoActual.Instancia.mazoObjetosActual.Count == 0)
-        {
-            print("Mazo Objeto Vacio");
-            mazotilizables = new();
-            mazotilizables = PlayDungeon.instance.RecuperarObjetos();
-
-        }
-        else
-        {
-            print("recuperamos mazo Objetos");
-            mazotilizables = new();
-
-            foreach (KeyValuePair<GameObject, bool> par in MazoActual.Instancia.mazoObjetosActual)
-            {
-                GameObject cartaGuardada = par.Key;   // Accede a la clave (GameObject)
-                bool viva = par.Value;// Accede al valor (bool)
-                if (viva != false)
-                {
-                    mazotilizables.Add(cartaGuardada);
-                }
-
-            }
-
-        }
-         n = 0;
-        //Metemos las cartas de Objeto en su grid
-        foreach (GameObject carta in mazotilizables)
-        {
-            print("ENTRA objetos");
-            Vector3 posicionCarta = gridItems[n].transform.position;
-            gridItems[n].gameObject.SetActive(false);
-            if (carta != null)
-            {
-
-                GameObject cartita = Instantiate(carta);
-                cartita.SetActive(true);
-                cartita.GetComponent<CartaMovement>().holderDungeon = true;
-                cartita.GetComponent<CartaItems>().aldea = false;
-                cartita.transform.position = posicionCarta;
-                cartita.transform.SetParent(GameObject.FindWithTag("ListaDePotis").transform);
-                cartita.transform.localScale = tamanoItem;
-
-                listaItems.Add(cartita);
-                if (MazoActual.Instancia.mazoObjetosIniciado == false)
-                {
-                    MazoActual.Instancia.mazoObjetosActual.Add(carta, true);
-
-                }
-                diccObjetosVivos.Add(cartita, carta);
-                carta.SetActive(false);
-            }
-            n++;
-        }
-        MazoActual.Instancia.mazoObjetosIniciado = true;
+       
     }
 
     private void Update()
@@ -329,7 +334,7 @@ public class TableroManager : MonoBehaviour
                     }
 
                     // Cambiar su color a rojo
-                    CambiarColor(obj, Color.red);
+                    CambiarColor(obj, Color.gray);
 
                     // Guardar el nuevo personaje seleccionado
                     personajeSeleccionado = obj;
@@ -379,7 +384,7 @@ public class TableroManager : MonoBehaviour
                         if (rend != null)
                         {
                             colorOriginal = rend.material.color; // Guarda el color original la primera vez
-                            rend.material.color = Color.red;
+                            rend.material.color = Color.gray;
 
                         }
                     }
@@ -390,43 +395,8 @@ public class TableroManager : MonoBehaviour
                 {
                     if (ataqueSeleccioando.transform.parent == personajeSeleccionado.transform)
                     {
-                        int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;
-                        int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
-                        int manaRestante = manaActual - costeCarta;
-
-                        if (manaRestante >= 0)
-                        {
-
-                            //Gestionar uso de mana
-                            manaActual = manaRestante;
-                            personajeSeleccionado.GetComponent<CartaPersonaje>().TextoMana.text = manaActual.ToString();
-                            ataqueSeleccioando.transform.parent.GetComponent<CartaPersonaje>().mana = manaActual;
-
-                            //Marcar Carta Como Usada
-                            if (personajeSeleccionado != null)
-                            {
-                                CartaPersonaje cartaPersonaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
-
-                                if (cartaPersonaje.manoActual.ContainsKey(ataqueSeleccioando))
-                                {
-                                    cartaPersonaje.manoActual[ataqueSeleccioando] = !cartaPersonaje.manoActual[ataqueSeleccioando];
-
-                                    ataqueSeleccioando.SetActive(false);
-
-                                    //Restar vida al enemigo
-                                    int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().damage;
-                                    obj.GetComponent<Enemigo>().RestarVida(dañoCarta);
-                                }
-                            }
-                            foreach (Transform hijo in ataqueSeleccioando.transform.parent.transform)
-                            {
-                                if (hijo.tag == "CartaAtaque")
-                                {
-                                    hijo.gameObject.GetComponent<Minicarta>().RestaurarDamage();
-                                }
-
-                            }
-                        }
+                        StartCoroutine(EfectoAtaqueCartasPersonajes(personajeSeleccionado.GetComponent<CartaPersonaje>().efectoAtaque, obj));
+                      
                     }
 
                 }
@@ -448,6 +418,7 @@ public class TableroManager : MonoBehaviour
                     if (pocion.tipoPocion == TipoPocion.vida)
                     {
                         personaje.CurarVida(pocion.cantidadEfecto);
+
                     }
                     if (pocion.tipoPocion == TipoPocion.mana)
                     {
@@ -467,19 +438,19 @@ public class TableroManager : MonoBehaviour
                             }
                         }
                     }
-                    if (diccObjetosVivos.ContainsKey(listaItems[i]))
-                    {
-                        GameObject poti = diccObjetosVivos[listaItems[i]];
-                        if (MazoActual.Instancia.mazoObjetosActual.ContainsKey(poti)) 
-                        { 
-                            //MazoActual.Instancia.mazoObjetosActual[poti] = false;
-                            MazoActual.Instancia.mazoObjetosActual.Remove(poti);
-                            listaItems[i].SetActive(false);
-                            listaItems.Remove(listaItems[i]);
-                            pocionSeleccionada = null;
-
+                    GameObject pocionActual = diccObjetosVivos[pocionSeleccionada];
+                        print("diccVivos contiene ese personaje");
+                        if (MazoActual.Instancia.mazoObjetosActual.ContainsKey(pocionActual))
+                        {
+                            print("se elimina la carta del mazo");
+                            MazoActual.Instancia.mazoObjetosActual[pocionActual] = false;
+                            MazoActual.Instancia.mazoObjetosActual.Remove(pocionActual);
                         }
-                    }
+
+                    pocionSeleccionada.SetActive(false);
+                    listaItems.Remove(pocionSeleccionada);
+                    pocionSeleccionada = null;
+
                 }
             }
         }
@@ -606,6 +577,8 @@ public class TableroManager : MonoBehaviour
         if (listaAliados == null || listaAliados.Count == 0)
         {
             print("perdiste");
+           StartCoroutine(volverALaAldeaPerdiste());
+            
 
         }
 
@@ -637,7 +610,14 @@ public class TableroManager : MonoBehaviour
         {
 
             print("ganaste");
-            SceneManager.LoadScene("RecompensaCombate", LoadSceneMode.Additive);
+            if (recomepnsaBoss == false)
+            {
+                SceneManager.LoadScene("RecompensaCombate", LoadSceneMode.Additive);
+            }
+            else 
+            {
+                SceneManager.LoadScene("RecompensaCombateBOSS", LoadSceneMode.Additive);
+            }
             SceneManager.UnloadSceneAsync("TableroJuego");
             foreach (GameObject aliado in listaAliados)
             {
@@ -651,8 +631,17 @@ public class TableroManager : MonoBehaviour
                 }
 
             }
+            recomepnsaBoss = false;
         }
 
+    }
+    IEnumerator volverALaAldeaPerdiste()
+    {
+        yield return new WaitForSeconds(1f);
+        Cursor.visible = true;
+        PlayDungeon.instance.CartasRecuperdasAventura(null, null);
+        SceneManager.UnloadSceneAsync("Mapa");
+        SceneManager.UnloadSceneAsync("TableroJuego");
     }
 
     IEnumerator AcabarTurno()
@@ -662,26 +651,78 @@ public class TableroManager : MonoBehaviour
         //Turno Enemigo
         foreach (GameObject enemigo in listaEnemigos)
         {
-            yield return new WaitForSeconds(0.4f);
+            
             Enemigo enemiguito = enemigo.GetComponent<Enemigo>();
             //seleccionamos objetivo al que atacar
-            int numeroAleatorio = Random.Range(0, numPersonajes);
+            yield return new WaitForSeconds(1f);
+            int numeroAleatorio = Random.Range(0, listaAliados.Count()-1);
             if (listaAliados.Count() > 0)
             {
                 CartaPersonaje personaje = listaAliados[numeroAleatorio].GetComponent<CartaPersonaje>();
-
                 efectoActual = enemiguito.efectoAtaque;
                 efectoActual.transform.position = personaje.transform.position;
-
                 enemiguito.transform.localScale = enemiguito.originalScale * enemiguito.scaleFactor;
                 Instantiate(efectoActual);
-                yield return new WaitForSeconds(1f);
-                personaje.RestarVida(enemiguito.daño);
+                yield return new WaitForSeconds(0.8f);
+                personaje.RestarVida(enemiguito.att);
+                print(personaje.name);
                 enemiguito.transform.localScale = enemiguito.originalScale;
+           
             }
+            
         }
         ReactivarCartas();
         Cursor.visible = true;
+
+    }
+
+    IEnumerator EfectoAtaqueCartasPersonajes(GameObject efecto,GameObject enemigo) 
+    {
+        
+
+        int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;
+        int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
+        int manaRestante = manaActual - costeCarta;
+
+        if (manaRestante >= 0)
+        {
+            efecto.transform.position = enemigo.transform.position;
+             
+            efecto.transform.position = new Vector3(efecto.transform.position.x, efecto.transform.position.y + 10f, efecto.transform.position.z);
+            Instantiate(efecto);
+            yield return new WaitForSeconds(0.8f);
+
+            //Gestionar uso de mana
+            manaActual = manaRestante;
+            personajeSeleccionado.GetComponent<CartaPersonaje>().TextoMana.text = manaActual.ToString();
+            ataqueSeleccioando.transform.parent.GetComponent<CartaPersonaje>().mana = manaActual;
+
+            //Marcar Carta Como Usada
+            if (personajeSeleccionado != null)
+            {
+                CartaPersonaje cartaPersonaje = personajeSeleccionado.GetComponent<CartaPersonaje>();
+
+                if (cartaPersonaje.manoActual.ContainsKey(ataqueSeleccioando))
+                {
+                    cartaPersonaje.manoActual[ataqueSeleccioando] = !cartaPersonaje.manoActual[ataqueSeleccioando];
+
+                    ataqueSeleccioando.SetActive(false);
+
+                    //Restar vida al enemigo
+                    int dañoCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().damage;
+                    enemigo.GetComponent<Enemigo>().RestarVida(dañoCarta);
+                }
+            }
+            foreach (Transform hijo in ataqueSeleccioando.transform.parent.transform)
+            {
+                if (hijo.tag == "CartaAtaque")
+                {
+                    hijo.gameObject.GetComponent<Minicarta>().RestaurarDamage();
+                }
+
+            }
+        }
+
 
     }
 
@@ -703,11 +744,14 @@ public class TableroManager : MonoBehaviour
                 }
             }
         }
-        if (listaAliados[0].transform != null && listaAliados[0].transform.childCount > 0)
+        if (listaAliados != null)
         {
-            foreach (Transform hijo in listaAliados[0].transform) // Recorre todos los hijos
+            if (listaAliados[0].transform != null && listaAliados[0].transform.childCount > 0)
             {
-                hijo.gameObject.SetActive(true);
+                foreach (Transform hijo in listaAliados[0].transform) // Recorre todos los hijos
+                {
+                    hijo.gameObject.SetActive(true);
+                }
             }
         }
 

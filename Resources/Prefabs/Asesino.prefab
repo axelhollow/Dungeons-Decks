@@ -128,8 +128,9 @@ MonoBehaviour:
   imagenCarta: {fileID: 0}
   vida: 10
   vidaAux: 10
+  vidaMax: 0
   mana: 5
-  efectoAtaque: {fileID: 0}
+  efectoAtaque: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
   manaAux: 5
   mazoYaGenerado: 0
   ataque1: {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}

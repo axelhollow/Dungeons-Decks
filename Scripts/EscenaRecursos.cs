@@ -51,7 +51,7 @@ public class EscenaRecursos : MonoBehaviour
         }
 
 
-         n = Random.Range(0, 6);
+         n = Random.Range(0, listaRecursos.Count);
         cantidad = Random.Range(1, 5);
 
         // Obtiene el material del objeto
@@ -175,9 +175,13 @@ public class EscenaRecursos : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync("RecursosEscene");
         }
-        else
+        if (IsSceneLoaded("RecompensaCombate"))
         {
             SceneManager.UnloadSceneAsync("RecompensaCombate");
+        }
+        if (IsSceneLoaded("RecompensaCombateBOSS"))
+        {
+            SceneManager.UnloadSceneAsync("RecompensaCombateBOSS");
         }
         GameObject obj = GameObject.Find("MapaScene");
         if (obj != null)

@@ -145,6 +145,7 @@ MonoBehaviour:
   imagenCarta: {fileID: 0}
   vida: 8
   vidaAux: 8
+  vidaMax: 0
   mana: 5
   efectoAtaque: {fileID: 0}
   manaAux: 5

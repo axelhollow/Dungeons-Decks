@@ -22,12 +22,13 @@ public class AguasTermalesScript : MonoBehaviour
         List<int> ids = ObtenerIDsCartas();
 
         // Solo permitir si hay una sola carta con id 99 y vida incompleta
-        if (ids.Count == 1 && ids[0] == 99 && cartasPersonaje.Count == 1 && cartasPersonaje[0].vida <= cartasPersonaje[0].vidaAux)
+        if (ids.Count == 1 && ids[0] == 99 && cartasPersonaje.Count == 1 && cartasPersonaje[0].vidaMax==false)
         {
             if (curacionCoroutine == null)
             {
                 cartaCandidata = cartasPersonaje[0];
                 IniciarCuracion();
+                
             }
         }
         else
@@ -74,6 +75,7 @@ public class AguasTermalesScript : MonoBehaviour
         if (cartaCandidata != null && cartaCandidata.vida <= cartaCandidata.vidaAux)
         {
             cartaCandidata.AumentarVida(cartaCandidata.vidaAux + 3);
+            cartaCandidata.vidaMax = true;
         }
 
         ResetearBarra();
