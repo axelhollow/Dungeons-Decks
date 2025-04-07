@@ -25,7 +25,6 @@ public class CartaPersonaje : Carta
 
     public void RestarVida(int attak)
     {
-        print("rESTANDO VIDA A :" + gameObject.name);
         vida = vida- attak;
         if (vida < 0) vida = 0;
         textoVida.text = vida.ToString();
@@ -79,6 +78,7 @@ public class CartaPersonaje : Carta
     {
         return new CartaPersonajeData
         {
+            prefabName = gameObject.name.Replace("(Clone)", "").Trim(),
             vida = this.vida,
             vidaAux = this.vidaAux,
             vidaMax = this.vidaMax,
@@ -89,7 +89,7 @@ public class CartaPersonaje : Carta
             ataque1 = ataque1?.name,
             ataque2 = ataque2?.name,
             ataque3 = ataque3?.name,
-            manoActual = manoActual.ToDictionary(kvp => kvp.Key.name, kvp => kvp.Value)
+
         };
     }
     public void LoadFromData(CartaPersonajeData data)
@@ -101,17 +101,13 @@ public class CartaPersonaje : Carta
         manaAux = data.manaAux;
         mazoYaGenerado = data.mazoYaGenerado;
 
-        efectoAtaque = Resources.Load<GameObject>("Prefabs/" + data.efectoAtaque);
-        ataque1 = Resources.Load<GameObject>("Prefabs/" + data.ataque1);
-        ataque2 = Resources.Load<GameObject>("Prefabs/" + data.ataque2);
-        ataque3 = Resources.Load<GameObject>("Prefabs/" + data.ataque3);
+        efectoAtaque = Resources.Load<GameObject>("Prefabs/EfectosAtaque/" + data.efectoAtaque);
+        ataque1 = Resources.Load<GameObject>("Assets/Prefabs/Ataques/" + data.ataque1);
+        print(data.ataque1);
+        ataque2 = Resources.Load<GameObject>("Assets/Prefabs/Ataques/" + data.ataque2);
+        ataque3 = Resources.Load<GameObject>("Assets/Prefabs/Ataques/" + data.ataque3);
 
-        manoActual = new Dictionary<GameObject, bool>();
-        foreach (var kvp in data.manoActual)
-        {
-            var go = Resources.Load<GameObject>("Prefabs/" + kvp.Key);
-            if (go != null) manoActual.Add(go, kvp.Value);
-        }
+      
     }
 
 }
