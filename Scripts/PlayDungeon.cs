@@ -39,6 +39,12 @@ public class PlayDungeon : MonoBehaviour
 
                 cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
 
+                if (cartita.GetComponent<CartaPersonaje>().vidaMax == true) 
+                {
+                    cartita.GetComponent<CartaPersonaje>().vidaMax = false;
+                    cartita.GetComponent<CartaPersonaje>().DisminuirVidaMax(3);
+                }
+
                 z += 4;
                 y += 0.3f;
             }

@@ -41,7 +41,15 @@ public class CartaPersonaje : Carta
 
     public void AumentarVida(int cura)
     {
+        vida = cura;
         vidaAux = cura;
+        textoVida.text = vida.ToString();
+    }
+
+    public void DisminuirVidaMax(int disminucion)
+    {
+        vida -= disminucion;
+        vidaAux -= disminucion;
         textoVida.text = vida.ToString();
     }
 
