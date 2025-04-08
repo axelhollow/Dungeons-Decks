@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,30 @@ public class CartaItems : Carta
             transform.localScale = originalScale; // Restaura el tamaño original
         }
     }
+    public CartaPocionData ToData()
+    {
+        return new CartaPocionData
+        {
+            prefabName=this.name,
+            aldea = this.aldea,
+            tipoPocion = this.tipoPocion, 
+            cantidadEfecto = this.cantidadEfecto,
+            usada = this.usada,
+            originalScale = this.originalScale,
+            x=transform.position.x,
+            y=transform.position.y,
+            z=transform.position.z
+        };
+    }
+    public void FromData(CartaPocionData data)
+    {
+        this.aldea = data.aldea;
+        this.tipoPocion = data.tipoPocion;
+        this.cantidadEfecto = data.cantidadEfecto;
+        this.usada = data.usada;
+        this.originalScale = data.originalScale;
+        gameObject.transform.position = new Vector3(data.x, data.y, data.z);
+    }
 }
 public enum TipoPocion
 {
@@ -37,4 +62,5 @@ public enum TipoPocion
     mana,
     ataque
 }
+
 

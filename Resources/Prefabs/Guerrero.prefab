@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 2665313485548079131}
   m_Layer: 6
   m_Name: Guerrero
-  m_TagString: CartaPersonaje
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -486,8 +486,8 @@ MonoBehaviour:
   imagenCarta: {fileID: 0}
   vida: 15
   vidaAux: 15
-  vidaMax: 0
   mana: 6
+  vidaMax: 0
   efectoAtaque: {fileID: 2360655870356088562, guid: 57a776ff377f3c44e8403e2067a4d41f, type: 3}
   manaAux: 6
   mazoYaGenerado: 0

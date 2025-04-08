@@ -89,6 +89,7 @@ public class CartaPersonaje : Carta
             ataque1 = ataque1?.name,
             ataque2 = ataque2?.name,
             ataque3 = ataque3?.name,
+            x=gameObject.transform.position.x, y= gameObject.transform.position.y, z= gameObject.transform.position.z,
 
         };
     }
@@ -100,13 +101,11 @@ public class CartaPersonaje : Carta
         mana = data.mana;
         manaAux = data.manaAux;
         mazoYaGenerado = data.mazoYaGenerado;
-
-        efectoAtaque = Resources.Load<GameObject>("Prefabs/EfectosAtaque/" + data.efectoAtaque);
-        ataque1 = Resources.Load<GameObject>("Assets/Prefabs/Ataques/" + data.ataque1);
-        print(data.ataque1);
-        ataque2 = Resources.Load<GameObject>("Assets/Prefabs/Ataques/" + data.ataque2);
-        ataque3 = Resources.Load<GameObject>("Assets/Prefabs/Ataques/" + data.ataque3);
-
+        efectoAtaque = Resources.Load<GameObject>("EfectosAtaque/" + data.efectoAtaque);
+        ataque1 = Resources.Load<GameObject>("Ataques/" + data.ataque1);
+        ataque2 = Resources.Load<GameObject>("Ataques/" + data.ataque2);
+        ataque3 = Resources.Load<GameObject>("Ataques/" + data.ataque3);
+        gameObject.transform.position =new Vector3( data.x,data.y,data.z);
       
     }
 

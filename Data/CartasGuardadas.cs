@@ -8,3 +8,5 @@ public class CartasGuardadas
     public List<CartaPersonajeData> cartas = new();
 }
 
+
+

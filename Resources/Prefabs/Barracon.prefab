@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 661248549399557146}
   m_Layer: 6
   m_Name: Barracon
-  m_TagString: Untagged
+  m_TagString: MaterialesYconstrucciones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -16,4 +16,7 @@ public class CartaPersonajeData
     public string ataque1;       // Ruta del prefab para ataque 1
     public string ataque2;       // Ruta del prefab para ataque 2
     public string ataque3;       // Ruta del prefab para ataque 3
+    public float x;
+    public float y;
+    public float z;
 }

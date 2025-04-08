@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4032394114328956111}
   m_Layer: 6
   m_Name: Espada
-  m_TagString: Untagged
+  m_TagString: MaterialesYconstrucciones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

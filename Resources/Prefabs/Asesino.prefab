@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2255274780039948405}
   - component: {fileID: 312139466511795514}
   - component: {fileID: 6419208458462942777}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Asesino
   m_TagString: CartaPersonaje
   m_Icon: {fileID: 0}
@@ -128,8 +128,8 @@ MonoBehaviour:
   imagenCarta: {fileID: 0}
   vida: 10
   vidaAux: 10
-  vidaMax: 0
   mana: 5
+  vidaMax: 0
   efectoAtaque: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
   manaAux: 5
   mazoYaGenerado: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alturaLevante: 6
   distanciaRaycast: 10
-  seleccionadaDungeon: 0
+  seleccionadaDungeon: 1
   holderDungeon: 0
 --- !u!114 &6419208458462942777
 MonoBehaviour:
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 8212425514806318958}
   - component: {fileID: 2251124105728507073}
   - component: {fileID: 5306776665743573759}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Vida
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +352,7 @@ GameObject:
   - component: {fileID: 354187839297688622}
   - component: {fileID: 6343081524203077158}
   - component: {fileID: 5896382744340393389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mana
   m_TagString: Untagged
   m_Icon: {fileID: 0}

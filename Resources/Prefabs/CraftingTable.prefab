@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5242440941355432452}
   m_Layer: 6
   m_Name: CraftingTable
-  m_TagString: Untagged
+  m_TagString: MaterialesYconstrucciones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,13 +153,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cartasIDs: 
-  prefabsNames:
-  - Palo
-  - SpherePrueba
-  - CylinderPrueba
-  tiemposDeCrafting:
-  - 5
-  - 7
-  - 10
   fondoBarraPrefab: {fileID: 2808791089847474371, guid: c33d835dc8c8f0a43aff3945d1810c0b, type: 3}
   barraProgresoPrefab: {fileID: 1456988399048854983, guid: 85cd99e2fa7a1b447bae488648844ffe, type: 3}

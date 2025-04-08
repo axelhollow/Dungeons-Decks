@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4100826366275401693}
   m_Layer: 6
   m_Name: AguasTermales
-  m_TagString: Untagged
+  m_TagString: MaterialesYconstrucciones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
