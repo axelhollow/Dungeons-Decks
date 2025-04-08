@@ -177,7 +177,7 @@ public  class SaveSystem : MonoBehaviour
                     GameObject nuevaCarta = GameObject.Instantiate(prefab);
 
                     // Obtener el script CartaPersonaje de la carta instanciada
-                    var cartaScript = nuevaCarta.GetComponent<CartaPersonaje>();
+                    var cartaScript = nuevaCarta.GetComponent<Carta>();
 
                     if (cartaScript != null)
                     {
@@ -242,7 +242,7 @@ public  class SaveSystem : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning("La carta instanciada no tiene el componente Carta.");
+                        Debug.LogWarning("La carta instanciada no tiene el componente CartaItems.");
                     }
                 }
                 else
