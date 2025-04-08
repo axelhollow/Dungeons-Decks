@@ -59,6 +59,8 @@ public class CartaMovement : MonoBehaviour
 
                 // Levantar la carta cuando se hace clic
                 transform.position = new Vector3(transform.position.x, alturaLevante, transform.position.z);
+
+                AudioManager.instance.PlayFX("CardGrab");
             }
         }
 
@@ -133,7 +135,9 @@ public class CartaMovement : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 }
             }
+            AudioManager.instance.PlayFX("CardDrop");   
         }
+        
     }
 
 

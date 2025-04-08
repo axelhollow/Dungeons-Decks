@@ -4880,13 +4880,73 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fxVolumeSlider
       value: 
       objectReference: {fileID: 935799806}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: music.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: musicVolumeSlider
       value: 
       objectReference: {fileID: 1355510589}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 64e5a729953f9b3468470b5286e46c3f, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[0].name
+      value: CardGrab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bcf8ab55c7e5e0e43800075ec47fe54b, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[1].name
+      value: CardDrop
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[1].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[0].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[1].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: music.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1519cc7d9e572c142b97ebcd09e10973, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: music.Array.data[0].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: music.Array.data[0].name
+      value: Musica1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: music.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: music.Array.data[0].volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7748934171363029985, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: m_Name
       value: AudioManager

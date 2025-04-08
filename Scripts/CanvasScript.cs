@@ -7,7 +7,7 @@ public class CanvasScript : MonoBehaviour
 {
     public void Start()
     {
-        //AudioManager.instance.PlayMusic("");
+        AudioManager.instance.PlayMusic("Musica1");
     }
     public void LoadGame()
     {
