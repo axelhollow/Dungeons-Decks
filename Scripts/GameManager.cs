@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text diaTexto;        // Asigna el TextMeshPro para mostrar el día
     public float duration = 10f;     // Tiempo en segundos para vaciar el slider (100% -> 0%)
 
-    private int currentDay = 1;
-    private float currentPercentage = 100f;
+    public int currentDay = 1;
+    public float currentPercentage = 100f;
 
     private bool endDay = false;
     public List<CartaPersonaje> cartasPersonaje = new List<CartaPersonaje>(); // Lista de cartas encontradas
@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        diaTexto.text = "Día " + currentDay;
         if (Input.GetKeyDown(KeyCode.Space) && endDay == false)
         {
             // Cambiar entre pausa, normal y velocidad x2

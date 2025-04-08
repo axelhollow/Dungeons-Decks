@@ -13,6 +13,11 @@ public  class SaveSystem : MonoBehaviour
         GuardarCartas(path, "CartaPersonaje");
         GuardarCartas(pathCartasRecursos, "MaterialesYconstrucciones");
         GuardarCartas(pociones, "Pocion");
+
+        //Guardar el dia  la barra del dia 
+        PlayerPrefs.SetInt("Dia", GameManager.instance.currentDay);
+        PlayerPrefs.SetFloat("ProgresoDia", GameManager.instance.currentPercentage);
+        PlayerPrefs.Save();
     }
     public void GuardarCartas(string ruta,string tag) 
     {
@@ -85,6 +90,11 @@ public  class SaveSystem : MonoBehaviour
         cargarCartas(path);
         path = Application.persistentDataPath + "/cartasPociones_guardadas.json";
         cargarCartas(path);
+
+        //Cargar datso dia
+
+        GameManager.instance.currentDay= PlayerPrefs.GetInt("Dia", 0);
+        GameManager.instance.currentPercentage = PlayerPrefs.GetFloat("ProgresoDia", 0);
     }
     public void cargarCartas(string path) 
     {
