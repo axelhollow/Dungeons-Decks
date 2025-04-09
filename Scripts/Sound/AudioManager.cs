@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
@@ -81,6 +82,30 @@ public class AudioManager : MonoBehaviour
         // Actualiza los mezcladores con los valores iniciales
         mainAudioMixer.SetFloat("MusicVolume", Mathf.Log10(musicVolume) * 20);
         mainAudioMixer.SetFloat("FXVolume", Mathf.Log10(fxVolume) * 20);
+    }
+
+    void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Inicio")
+        {
+            GameObject musicaSliderObj = GameObject.Find("Musica");
+            GameObject efectosSliderObj = GameObject.Find("EfectosFX");
+
+            if (musicaSliderObj != null)
+            {
+                musicVolumeSlider = musicaSliderObj.GetComponent<Slider>();
+                musicVolumeSlider.value = musicVolume;
+                musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
+            }
+
+            if (efectosSliderObj != null)
+            {
+                fxVolumeSlider = efectosSliderObj.GetComponent<Slider>();
+                fxVolumeSlider.value = fxVolume;
+                fxVolumeSlider.onValueChanged.AddListener(SetFXVolume);
+            }
+
+        }
     }
 
     public void SetMusicVolume(float volume)
