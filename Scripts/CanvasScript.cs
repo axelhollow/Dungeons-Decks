@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,14 +6,24 @@ using UnityEngine.SceneManagement;
 
 public class CanvasScript : MonoBehaviour
 {
+    public static event Action<bool> OnEstadoCambiado; // Evento que pasa un bool
+  
+
+
     public void Start()
     {
         AudioManager.instance.PlayMusic("Musica1");
+
     }
-    public void LoadGame()
+    public void NuevaPartida()
+    {
+        SceneManager.LoadScene("AldeaNueva", LoadSceneMode.Single);
+    }
+    public void CargarPartida()
     {
         SceneManager.LoadScene("Aldea", LoadSceneMode.Single);
     }
+   
 
 
     public void SalirDelJuego()

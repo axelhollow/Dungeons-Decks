@@ -22,32 +22,44 @@ public class GameManager : MonoBehaviour
 
     public Canvas canvas;
 
-    public static GameManager instance;
-    protected virtual void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
+  
+    public bool CargarPartida;
+
 
     private void Start()
     {
+
         textoVelocidad.text = "x1";
         diaTexto.text = "Día " + currentDay;
         diaSlider.maxValue = 100f;
         diaSlider.value = currentPercentage;
 
+
+        GameObject saveSystem = new GameObject();
+
+        if (SaveSystem.Instancia == null)
+        {
+            saveSystem.AddComponent<SaveSystem>();
+        }
+        if (CargarPartida == true) 
+        {
+            SaveSystem.Instancia.CargarTodas();
+        }
+
     }
 
+    public void CongelarJuego() 
+    {
+        Time.timeScale = 0f;
+    }
+    public void DesCongelarJuego()
+    {
+        Time.timeScale = 1f;
+    }
     void Update()
     {
-        diaTexto.text = "Día " + currentDay;
+
+
         if (Input.GetKeyDown(KeyCode.Space) && endDay == false)
         {
             // Cambiar entre pausa, normal y velocidad x2
@@ -121,6 +133,7 @@ public class GameManager : MonoBehaviour
         textoVelocidad.text = "x1";
         canvas.gameObject.SetActive(true);
     }
+    
 
 
 

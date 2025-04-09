@@ -104,6 +104,7 @@ public class CameraMovementAldea : MonoBehaviour
                 Vector3 move = new Vector3(horizontal, 0, vertical) * moveSpeed * Time.deltaTime;
                 followTarget.Translate(move, Space.World);
 
+
                 // Limitar el movimiento dentro del área permitida
                 Vector3 clampedPosition = followTarget.position;
                 clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);

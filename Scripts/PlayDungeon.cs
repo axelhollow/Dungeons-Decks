@@ -19,7 +19,8 @@ public class PlayDungeon : MonoBehaviour
 
     public GameObject padreCartasRecuperadas;
 
-
+    public GameObject gameManagerObj;
+    public GameManager gameManaguer;
 
     public void CartasRecuperdasAventura(List<GameObject> listaCartas,List<GameObject> listaObjetos) 
     {
@@ -101,8 +102,8 @@ public class PlayDungeon : MonoBehaviour
         MazoActual.Instancia.mazoIniciado = false;
         MazoActual.Instancia.mazoObjetosIniciado = false;
         personajesPaLaDungeon.Clear();
-        GameManager.instance.ContinueDayShowMap();
-        GameManager.instance.SeguirDay();
+        gameManaguer.ContinueDayShowMap();
+        gameManaguer.SeguirDay();
         CameraMovementAldea.instance.DesbloquearBloquearCamaraCombate();
     }
     protected virtual void Awake()
@@ -177,12 +178,11 @@ public class PlayDungeon : MonoBehaviour
 
     private void Start()
     {
-        GameObject mazoObject = new GameObject();
-
-        if (MazoActual.Instancia == null)
+        if (gameManagerObj==null) 
         {
-            mazoObject.AddComponent<MazoActual>();
+        gameManagerObj= GameObject.Find("GameManager");
         }
+        gameManaguer=gameManagerObj.GetComponent<GameManager>();
     }
     public List<GameObject> RecuperarPersonajes()
     {
@@ -199,7 +199,7 @@ public class PlayDungeon : MonoBehaviour
         Debug.Log("Número de personajes en la dungeon: " + personajesPaLaDungeon.Count);
         Debug.Log("Número de objetos en la dungeon: " + objetosPaLaDungeon.Count);
 
-        GameManager.instance.StopDayShowMap();
+        gameManaguer.StopDayShowMap();
         CameraMovementAldea.instance.BloquearCamaraCombate();
         SceneManager.LoadScene("Mapa",LoadSceneMode.Additive);
         

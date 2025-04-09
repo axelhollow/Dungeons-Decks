@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 
 public  class SaveSystem : MonoBehaviour
 {
@@ -8,16 +9,30 @@ public  class SaveSystem : MonoBehaviour
     private string pathCartasRecursos => Application.persistentDataPath + "/cartasRecursosYconstrucciones_guardadas.json";
     private string pociones => Application.persistentDataPath + "/cartasPociones_guardadas.json";
 
+    public static SaveSystem Instancia;
+  void Awake()
+    {
+        if (Instancia == null)
+        {
+            Instancia = this;
+            DontDestroyOnLoad(gameObject); // No se destruye al cambiar de escena
+        }
+        else
+        {
+            Destroy(gameObject); // Si ya existe uno, destruye este duplicado
+        }
+    }
     public  void GuardarTodas()
     {
         GuardarCartas(path, "CartaPersonaje");
         GuardarCartas(pathCartasRecursos, "MaterialesYconstrucciones");
         GuardarCartas(pociones, "Pocion");
 
-        //Guardar el dia  la barra del dia 
-        PlayerPrefs.SetInt("Dia", GameManager.instance.currentDay);
-        PlayerPrefs.SetFloat("ProgresoDia", GameManager.instance.currentPercentage);
-        PlayerPrefs.Save();
+        
+
+        //PlayerPrefs.SetInt("Dia", GameManager.instance.currentDay);
+        //PlayerPrefs.SetFloat("ProgresoDia", GameManager.instance.currentPercentage);
+        //PlayerPrefs.Save();
     }
     public void GuardarCartas(string ruta,string tag) 
     {
@@ -91,13 +106,28 @@ public  class SaveSystem : MonoBehaviour
         path = Application.persistentDataPath + "/cartasPociones_guardadas.json";
         cargarCartas(path);
 
-        //Cargar datso dia
 
-        GameManager.instance.currentDay= PlayerPrefs.GetInt("Dia", 0);
-        GameManager.instance.currentPercentage = PlayerPrefs.GetFloat("ProgresoDia", 0);
+        //GameManager gameManager = new GameManager();
+
+        //if (MazoActual.Instancia == null)
+        //{
+        //    gameManager.AddComponent<GameManager>();
+        //}
+        ////Cargar datso dia
+        //if (GameManager.instance != null)
+        //{
+        //    gameManager.currentDay = PlayerPrefs.GetInt("Dia", 0);
+        //    gameManager.currentPercentage = PlayerPrefs.GetFloat("ProgresoDia", 0);
+        //}
+        //else
+        //{
+        //    Debug.LogError("GameManager.instance es null");
+        //}
+
     }
     public void cargarCartas(string path) 
     {
+
         if (path == Application.persistentDataPath + "/cartas_guardadas.json")
         {
             // Verificar si el archivo existe
@@ -116,7 +146,7 @@ public  class SaveSystem : MonoBehaviour
             // Comprobar si la lista de cartas tiene elementos
             if (dataGlobal.cartas == null || dataGlobal.cartas.Count == 0)
             {
-                Debug.LogWarning("No hay cartas para cargar.");
+                Debug.LogWarning("No hay personajes para cargar.");
                 return;
             }
 
@@ -169,7 +199,7 @@ public  class SaveSystem : MonoBehaviour
             // Comprobar si la lista de cartas tiene elementos
             if (dataGlobal.cartas == null || dataGlobal.cartas.Count == 0)
             {
-                Debug.LogWarning("No hay cartas para cargar.");
+                Debug.LogWarning("No hay materiales para cargar.");
                 return;
             }
 
@@ -225,7 +255,7 @@ public  class SaveSystem : MonoBehaviour
             // Comprobar si la lista de cartas tiene elementos
             if (dataGlobal.cartas == null || dataGlobal.cartas.Count == 0)
             {
-                Debug.LogWarning("No hay cartas para cargar.");
+                Debug.LogWarning("No hay pociones para cargar.");
                 return;
             }
 
