@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 220835346}
   - component: {fileID: 220835345}
   - component: {fileID: 220835347}
+  - component: {fileID: 220835348}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -541,6 +542,19 @@ MonoBehaviour:
   minZ: -100
   maxZ: 100
   combatiendo: 0
+--- !u!114 &220835348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220835344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7902e6ce14db6a6499ad35596b5c1e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraMovementScript: {fileID: 220835347}
 --- !u!1 &297255875
 GameObject:
   m_ObjectHideFlags: 0
@@ -3056,7 +3070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4941609763987745722, guid: 3f0d955a57590d444bb198e942dc65a2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6460208953288174907, guid: 3f0d955a57590d444bb198e942dc65a2, type: 3}
       propertyPath: m_LocalScale.x

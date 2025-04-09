@@ -1,19 +1,20 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class CameraMovementAldea : MonoBehaviour
 {
-    public Transform followTarget;        // El objeto vacÌo que la c·mara va a seguir
+    public Transform followTarget;        // El objeto vac√≠o que la c√°mara va a seguir
     public float moveSpeed = 5f;            // Velocidad de movimiento
     public float zoomSpeed = 2f;            // Velocidad del zoom
-    public float minZoom = 40f;             // Zoom mÌnimo (Orthographic Size)
-    public float maxZoom = 80f;             // Zoom m·ximo (Orthographic Size)
+    public float minZoom = 40f;             // Zoom m√≠nimo (Orthographic Size)
+    public float maxZoom = 80f;             // Zoom m√°ximo (Orthographic Size)
 
-    public CinemachineVirtualCamera virtualCamera;  // La c·mara virtual de Cinemachine
+    public CinemachineVirtualCamera virtualCamera;  // La c√°mara virtual de Cinemachine
     private float currentZoom = 60f;        // Valor de zoom actual
 
     public float minX = -200f, maxX = 200f;
@@ -21,7 +22,7 @@ public class CameraMovementAldea : MonoBehaviour
 
     public bool combatiendo = false;
 
-    // Variables para el arrastre con el ratÛn
+    // Variables para el arrastre con el rat√≥n
     private bool isDragging = false;
     private Vector3 lastMousePosition;
 
@@ -48,15 +49,33 @@ public class CameraMovementAldea : MonoBehaviour
         {
             currentZoom = virtualCamera.m_Lens.OrthographicSize;
         }
+
+        // Asignar el follow si existe
+        GameObject followObj = GameObject.Find("CameraFollow");
+        if (followObj != null)
+        {
+            followTarget = followObj.transform;
+            virtualCamera.Follow = followTarget; // ¬°ESTO ES CLAVE!
+        }
     }
 
     void Update()
     {
+        if (followTarget == null)
+        {
+            GameObject followObj = GameObject.Find("CameraFollow");
+            if (followObj != null)
+            {
+                followTarget = followObj.transform;
+                virtualCamera.Follow = followTarget; // Aseg√∫rate de que siempre est√© asignado
+            }
+        }
+
         if (!combatiendo)
         {
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                // Lanzamos un raycast desde la posiciÛn del ratÛn
+                // Lanzamos un raycast desde la posici√≥n del rat√≥n
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
@@ -77,20 +96,20 @@ public class CameraMovementAldea : MonoBehaviour
 
             if (isDragging)
             {
-                // Convertir la posiciÛn actual y la anterior del ratÛn al mundo
+                // Convertir la posici√≥n actual y la anterior del rat√≥n al mundo
                 Vector3 currentMouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.y));
                 Vector3 lastMouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(lastMousePosition.x, lastMousePosition.y, Camera.main.transform.position.y));
 
-                // Calculamos el delta y lo invertimos para mover la c·mara en sentido contrario
+                // Calculamos el delta y lo invertimos para mover la c√°mara en sentido contrario
                 Vector3 delta = currentMouseWorldPos - lastMouseWorldPos;
                 Vector3 move = new Vector3(-delta.x, 0, -delta.z);
 
                 followTarget.position += move;
 
-                // Actualizamos la posiciÛn del ratÛn para el siguiente frame
+                // Actualizamos la posici√≥n del rat√≥n para el siguiente frame
                 lastMousePosition = Input.mousePosition;
 
-                // Limitar el movimiento dentro del ·rea permitida
+                // Limitar el movimiento dentro del √°rea permitida
                 Vector3 clampedPosition = followTarget.position;
                 clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
                 clampedPosition.z = Mathf.Clamp(clampedPosition.z, minZ, maxZ);
@@ -105,18 +124,18 @@ public class CameraMovementAldea : MonoBehaviour
                 followTarget.Translate(move, Space.World);
 
 
-                // Limitar el movimiento dentro del ·rea permitida
+                // Limitar el movimiento dentro del √°rea permitida
                 Vector3 clampedPosition = followTarget.position;
                 clampedPosition.x = Mathf.Clamp(clampedPosition.x, minX, maxX);
                 clampedPosition.z = Mathf.Clamp(clampedPosition.z, minZ, maxZ);
                 followTarget.position = clampedPosition;
             }
 
-            // Evitar zoom si el cursor est· sobre UI
+            // Evitar zoom si el cursor est√° sobre UI
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            // Zoom con el scroll del ratÛn
+            // Zoom con el scroll del rat√≥n
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (scroll != 0)
             {
