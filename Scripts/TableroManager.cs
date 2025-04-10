@@ -631,7 +631,6 @@ public class TableroManager : MonoBehaviour
             }
             recomepnsaBoss = false;
         }
-
     }
     IEnumerator volverALaAldeaPerdiste()
     {
@@ -660,18 +659,18 @@ public class TableroManager : MonoBehaviour
                 efectoActual = enemiguito.efectoAtaque;
                 efectoActual.transform.position = personaje.transform.position;
                 enemiguito.transform.localScale = enemiguito.originalScale * enemiguito.scaleFactor;
+
+                AudioManager.instance.PlayFX("Guerrero");
                 Instantiate(efectoActual);
+
                 yield return new WaitForSeconds(0.8f);
                 personaje.RestarVida(enemiguito.att);
                 print(personaje.name);
                 enemiguito.transform.localScale = enemiguito.originalScale;
-           
-            }
-            
+            } 
         }
         ReactivarCartas();
         Cursor.visible = true;
-
     }
 
     IEnumerator EfectoAtaqueCartasPersonajes(GameObject efecto,GameObject enemigo) 
@@ -679,6 +678,7 @@ public class TableroManager : MonoBehaviour
         efecto.transform.position=enemigo.transform.position;
         efecto.transform.position= new Vector3(efecto.transform.position.x, efecto.transform.position.y+10, efecto.transform.position.z);
         Instantiate(efecto);
+        AudioManager.instance.PlayFX(personajeSeleccionado.GetComponent<CartaPersonaje>().nombre);
         yield return new WaitForSeconds(0.8f);
         int manaActual = personajeSeleccionado.GetComponent<CartaPersonaje>().mana;
         int costeCarta = ataqueSeleccioando.GetComponentInChildren<Minicarta>().coste;
@@ -686,7 +686,6 @@ public class TableroManager : MonoBehaviour
 
         if (manaRestante >= 0)
         {
-
             //Gestionar uso de mana
             manaActual = manaRestante;
             personajeSeleccionado.GetComponent<CartaPersonaje>().TextoMana.text = manaActual.ToString();
@@ -717,8 +716,6 @@ public class TableroManager : MonoBehaviour
 
             }
         }
-
-
     }
 
     public void ReactivarCartas()

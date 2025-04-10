@@ -5376,7 +5376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.size
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fxVolumeSlider
@@ -5407,6 +5407,38 @@ PrefabInstance:
       value: CardDrop
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bddb503868f5b5b41b3a15a8c4ceb300, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[2].name
+      value: Guerrero
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 00c9d966ff42a4a4f88039215f101a09, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[3].name
+      value: Mago
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 12f554c67973d124b8fab819d5cd6750, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[4].name
+      value: Asesino
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 425aa5e750393e94ca0d95b0785608dc, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[5].name
+      value: Enemigo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.data[0].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -5415,11 +5447,43 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[2].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[3].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[4].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.data[0].volume
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.data[1].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[2].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[3].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[4].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[5].volume
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}

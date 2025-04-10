@@ -204,6 +204,8 @@ public class EscenaRecursos : MonoBehaviour
             {
                 RecetasScript.instance.polvomagico = true;
 
+                volverALaAldea();
+
                 SceneManager.UnloadSceneAsync("RecompensaCombateBOSS");
             }
             GameObject obj = GameObject.Find("MapaScene");
@@ -223,6 +225,45 @@ public class EscenaRecursos : MonoBehaviour
 
 
     }
+
+    public void volverALaAldea()
+    {
+        GameObject mazoObject = new GameObject();
+        if (MazoActual.Instancia == null)
+        {
+            mazoObject.AddComponent<MazoActual>();
+        }
+        List<GameObject> listaAliados = new List<GameObject>(MazoActual.Instancia.mazoActual.Keys);
+        List<GameObject> listaItems = new List<GameObject>(MazoActual.Instancia.mazoObjetosActual.Keys);
+
+        GameObject obj = GameObject.Find("MapaScene");
+        if (obj != null)
+        {
+            foreach (Transform child in obj.transform)
+            {
+                child.gameObject.SetActive(true); // Activan cada hijo individualmente
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el objeto 'MapaScene'.");
+        }
+        foreach (GameObject aliado in listaAliados)
+        {
+            foreach (Transform hijoTrans in aliado.transform)
+            {
+                if (hijoTrans.gameObject.tag == "CartaAtaque")
+                {
+                    Destroy(hijoTrans.gameObject);
+                }
+            }
+
+        }
+        PlayDungeon.instance.CartasRecuperdasAventura(listaAliados, listaItems);
+        SceneManager.UnloadSceneAsync("Mapa");
+
+    }
+
     bool IsSceneLoaded(string name)
     {
         for (int i = 0; i < SceneManager.sceneCount; i++)

@@ -43,7 +43,9 @@ public class EscenaAldeanos : MonoBehaviour
     {
         GameObject copiasrecurso = Instantiate(aldeano);
         MazoActual.Instancia.listaRecursos.Add(copiasrecurso);
-        
+
+
+
         SceneManager.UnloadSceneAsync("AldeanosEscene");
         GameObject obj = GameObject.Find("MapaScene");
         if (obj != null)

@@ -1920,7 +1920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: boss
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 650385621065947484, guid: 8957083a4f8d01449937a4816df4fb43, type: 3}
       propertyPath: combate

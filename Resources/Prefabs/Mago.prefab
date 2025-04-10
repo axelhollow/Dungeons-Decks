@@ -310,13 +310,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipo: 1
-  nombre: Aldeano
+  nombre: Mago
   id: 99
   imagenCarta: {fileID: 0}
   vida: 5
   vidaAux: 5
-  vidaMax: 0
   mana: 8
+  vidaMax: 0
   efectoAtaque: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
   manaAux: 8
   mazoYaGenerado: 0
