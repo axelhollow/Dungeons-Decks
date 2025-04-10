@@ -120,6 +120,7 @@ public class EscenaRecursos : MonoBehaviour
                 recursoelegido = diccionarioMateriales[eleccion1];
                 SeleccionarBoton(eleccion1);
                 print(diccionarioMateriales[eleccion1].name);
+                RecursosLoad(diccionarioMateriales[eleccion1].name);
                 print(int.Parse(eleccion1.GetComponentInChildren<TextMeshProUGUI>().text));
                 break;
             case "Elecion 2": 
@@ -128,6 +129,7 @@ public class EscenaRecursos : MonoBehaviour
                 recursoelegido = diccionarioMateriales[eleccion2];
                 SeleccionarBoton(eleccion2);
                 print(diccionarioMateriales[eleccion2].name);
+                RecursosLoad(diccionarioMateriales[eleccion2].name);
                 print(int.Parse(eleccion2.GetComponentInChildren<TextMeshProUGUI>().text));
                 break;
             case "Elecion 3": 
@@ -136,10 +138,27 @@ public class EscenaRecursos : MonoBehaviour
                 recursoelegido = diccionarioMateriales[eleccion3];
                 SeleccionarBoton(eleccion3);
                 print(diccionarioMateriales[eleccion3].name);
+                RecursosLoad(diccionarioMateriales[eleccion3].name);
                 print(int.Parse(eleccion3.GetComponentInChildren<TextMeshProUGUI>().text));
                 break;
         }
         
+    }
+
+    private void RecursosLoad(string recurso)
+    {
+        if (recurso.Equals("MineralHierro"))
+        {
+            RecetasScript.instance.mineralhierro = true;
+        }
+        if (recurso.Equals("Piedra"))
+        {
+            RecetasScript.instance.piedra = true;
+        }
+        if (recurso.Equals("Cristal"))
+        {
+            RecetasScript.instance.cristal = true;
+        }
     }
 
     public void SeleccionarBoton(Button nuevoBoton)
@@ -183,6 +202,8 @@ public class EscenaRecursos : MonoBehaviour
             }
             if (IsSceneLoaded("RecompensaCombateBOSS"))
             {
+                RecetasScript.instance.polvomagico = true;
+
                 SceneManager.UnloadSceneAsync("RecompensaCombateBOSS");
             }
             GameObject obj = GameObject.Find("MapaScene");

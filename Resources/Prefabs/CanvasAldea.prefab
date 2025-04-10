@@ -9267,7 +9267,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2138747097235814982}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.31304348
+  m_Size: 0.31304345
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9753,7 +9753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.00009288519}
   m_SizeDelta: {x: 0, y: 3450}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6238542797114824789
@@ -9837,7 +9837,7 @@ MonoBehaviour:
   mago: 0
   imagenesMago:
   - {fileID: 2051674190552826426}
-  manzana: 0
+  manzana: 1
   imagenesManzana:
   - {fileID: 5616971628491073228}
   - {fileID: 5047967556641376263}
@@ -9845,7 +9845,7 @@ MonoBehaviour:
   imagenesManzanaAsada:
   - {fileID: 1842668973584203635}
   - {fileID: 3346868625467954378}
-  mesacrafteo: 0
+  mesacrafteo: 1
   imagenesMesaCrafteo:
   - {fileID: 8036600762751443070}
   - {fileID: 5445777964337323709}
@@ -9890,7 +9890,7 @@ MonoBehaviour:
   imagenesTablones:
   - {fileID: 3272441117473019407}
   - {fileID: 5039291273627324606}
-  tronco: 0
+  tronco: 1
   imagenesTronco:
   - {fileID: 3977164731123706827}
   - {fileID: 8709025505300728060}
