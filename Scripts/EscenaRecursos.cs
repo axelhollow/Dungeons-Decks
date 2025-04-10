@@ -222,8 +222,6 @@ public class EscenaRecursos : MonoBehaviour
                 }
             }
         }
-
-
     }
 
     public void volverALaAldea()

@@ -5484,7 +5484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.data[5].volume
-      value: 0.5
+      value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: music.Array.data[0].clip
