@@ -82,7 +82,7 @@ public class EscenaRecursos : MonoBehaviour
                 eleccion2.image.sprite = Sprite.Create(textura, new Rect(0, 0, textura.width, textura.height), new Vector2(0.5f, 0.5f));
                 foreach (Transform hijo in eleccion2.gameObject.transform)
                 {
-                    cantidad = Random.Range(1, 5);
+                    cantidad = Random.Range(1, 3);
                     hijo.gameObject.GetComponent<TextMeshProUGUI>().text = cantidad.ToString();
                 }
             }

@@ -78,15 +78,18 @@ public class PlayDungeon : MonoBehaviour
             {
                 foreach (GameObject carta in MazoActual.Instancia.listaRecursos)
                 {
-                    GameObject cartita = Instantiate(carta);
-                    //cartita.transform.SetParent(padreCartasRecuperadas.transform);
-                    cartita.GetComponent<CartaMovement>().holderDungeon = false;
-                    cartita.GetComponent<Renderer>().material.color = Color.white;
-                    cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
-                    cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
+                    if (carta != null)
+                    {
+                        GameObject cartita = Instantiate(carta);
+                        //cartita.transform.SetParent(padreCartasRecuperadas.transform);
+                        cartita.GetComponent<CartaMovement>().holderDungeon = false;
+                        cartita.GetComponent<Renderer>().material.color = Color.white;
+                        cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+                        cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
 
-                    z += 4;
-                    y += 0.3f;
+                        z += 4;
+                        y += 0.3f;
+                    }
                 }
             }
         }
@@ -100,6 +103,15 @@ public class PlayDungeon : MonoBehaviour
         foreach (GameObject objetos in objetosPaLaDungeon)
         {
             Destroy(objetos);
+        }
+
+        GameObject miObjeto = GameObject.Find("New Game Object");
+        foreach (GameObject obj in GameObject.FindObjectsOfType<GameObject>())
+        {
+            if (obj.name == "New Game Object")
+            {
+                Destroy(obj);
+            }
         }
         MazoActual.Instancia.mazoActual = new();
         MazoActual.Instancia.mazoIniciado = false;

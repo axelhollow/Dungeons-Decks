@@ -26,6 +26,7 @@ public class TableroManager : MonoBehaviour
     public List<GameObject> mazoEnemigosAux;
 
     public bool recomepnsaBoss=false;
+    public bool miTurno = true;
 
     //Grid Personajes
     public Transform[] gridPersonajes;
@@ -236,7 +237,7 @@ public class TableroManager : MonoBehaviour
 
         if (MazoActual.Instancia.bossEvent == false)
         {
-           int numeroEnemigos= Random.Range(1, mazoEnemigos.Count);
+           int numeroEnemigos= Random.Range(1, mazoEnemigos.Count+1);
            
            int vuelta = 1;
            mazoEnemigos = mazoEnemigosAux;
@@ -310,7 +311,11 @@ public class TableroManager : MonoBehaviour
                 GameObject obj = hit.collider.gameObject;
                 if (obj.CompareTag("TerminarTurno"))
                 {
-                    StartCoroutine("AcabarTurno");
+                    if (miTurno)
+                    {
+                        miTurno = false;
+                        StartCoroutine("AcabarTurno");
+                    }
                 }
 
                 if (obj.CompareTag("CartaPersonaje"))
@@ -653,7 +658,7 @@ public class TableroManager : MonoBehaviour
             Enemigo enemiguito = enemigo.GetComponent<Enemigo>();
             //seleccionamos objetivo al que atacar
             yield return new WaitForSeconds(1f);
-            int numeroAleatorio = Random.Range(0, listaAliados.Count()-1);
+            int numeroAleatorio = Random.Range(0, listaAliados.Count());
             if (listaAliados.Count() > 0)
             {
                 CartaPersonaje personaje = listaAliados[numeroAleatorio].GetComponent<CartaPersonaje>();
@@ -756,6 +761,7 @@ public class TableroManager : MonoBehaviour
                 }
             }
         }
+        miTurno = true;
 
     }
 }

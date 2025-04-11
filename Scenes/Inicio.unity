@@ -5376,7 +5376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fxVolumeSlider
@@ -5439,6 +5439,14 @@ PrefabInstance:
       value: Enemigo
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 425aa5e750393e94ca0d95b0785608dc, type: 3}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[6].name
+      value: Aldeano
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.data[0].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -5463,6 +5471,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.data[0].volume
       value: 0.5
       objectReference: {fileID: 0}
@@ -5484,6 +5496,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
       propertyPath: fx.Array.data[5].volume
+      value: 0.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}
+      propertyPath: fx.Array.data[6].volume
       value: 0.92
       objectReference: {fileID: 0}
     - target: {fileID: 2083961167438707300, guid: e539a21908f749a49a269c30d9fd6e41, type: 3}

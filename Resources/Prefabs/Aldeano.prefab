@@ -147,7 +147,7 @@ MonoBehaviour:
   vidaAux: 5
   mana: 5
   vidaMax: 0
-  efectoAtaque: {fileID: 2360655870356088562, guid: 57a776ff377f3c44e8403e2067a4d41f, type: 3}
+  efectoAtaque: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   manaAux: 5
   mazoYaGenerado: 0
   ataque1: {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}
