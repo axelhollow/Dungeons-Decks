@@ -637,7 +637,7 @@ public class TableroManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Cursor.visible = true;
-        PlayDungeon.instance.CartasRecuperdasAventura(null, null);
+        PlayDungeon.instance.CartasRecuperdasAventura(null, null,true);
         SceneManager.UnloadSceneAsync("Mapa");
         SceneManager.UnloadSceneAsync("TableroJuego");
     }
@@ -740,11 +740,19 @@ public class TableroManager : MonoBehaviour
         }
         if (listaAliados != null)
         {
-            if (listaAliados[0].transform != null && listaAliados[0].transform.childCount > 0)
+            if (listaAliados != null && listaAliados[0].transform.childCount > 0)
             {
-                foreach (Transform hijo in listaAliados[0].transform) // Recorre todos los hijos
+                foreach (GameObject aliado in listaAliados)
                 {
-                    hijo.gameObject.SetActive(true);
+
+                    foreach (Transform hijo in aliado.transform) // Recorre todos los hijos
+                    {
+                        if (hijo.tag == "CartaAtaque")
+                        {
+                            hijo.gameObject.SetActive(false);
+                        }
+                    }
+                    RestaurarColor(aliado);
                 }
             }
         }

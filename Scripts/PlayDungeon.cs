@@ -22,7 +22,7 @@ public class PlayDungeon : MonoBehaviour
     public GameObject gameManagerObj;
     public GameManager gameManaguer;
 
-    public void CartasRecuperdasAventura(List<GameObject> listaCartas,List<GameObject> listaObjetos) 
+    public void CartasRecuperdasAventura(List<GameObject> listaCartas,List<GameObject> listaObjetos, bool pierdes) 
     {
         float z = 4f;
         float y = 0.3f;
@@ -72,19 +72,22 @@ public class PlayDungeon : MonoBehaviour
                 y += 0.3f;
             }
         }
-        if (MazoActual.Instancia.listaRecursos!=null) 
+        if (pierdes != true)
         {
-            foreach (GameObject carta in MazoActual.Instancia.listaRecursos)
+            if (MazoActual.Instancia.listaRecursos != null)
             {
-                GameObject cartita = Instantiate(carta);
-                //cartita.transform.SetParent(padreCartasRecuperadas.transform);
-                cartita.GetComponent<CartaMovement>().holderDungeon = false;
-                cartita.GetComponent<Renderer>().material.color = Color.white;
-                cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
-                cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
-  
-                z += 4;
-                y += 0.3f;
+                foreach (GameObject carta in MazoActual.Instancia.listaRecursos)
+                {
+                    GameObject cartita = Instantiate(carta);
+                    //cartita.transform.SetParent(padreCartasRecuperadas.transform);
+                    cartita.GetComponent<CartaMovement>().holderDungeon = false;
+                    cartita.GetComponent<Renderer>().material.color = Color.white;
+                    cartita.transform.position = padreCartasRecuperadas.transform.position + new Vector3(0, y, -z);
+                    cartita.transform.localScale = padreCartasRecuperadas.transform.localScale;
+
+                    z += 4;
+                    y += 0.3f;
+                }
             }
         }
         
