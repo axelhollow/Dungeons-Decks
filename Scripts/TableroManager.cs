@@ -551,8 +551,9 @@ public class TableroManager : MonoBehaviour
                                 if (MazoActual.Instancia.mazoActual.ContainsKey(carta))
                                 {
                                     print("se elimina la carta del mazo");
-                                    //MazoActual.Instancia.mazoActual[carta] = false;
+                                    MazoActual.Instancia.mazoActual[carta] = false;
                                     MazoActual.Instancia.mazoActual.Remove(carta);
+                                    listaAliados.Remove(carta);
                                 }
 
                             }

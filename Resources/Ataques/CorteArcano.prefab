@@ -463,8 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombre: 
-  damage: 0
-  damageAux: 0
+  damage: 3
+  damageAux: 3
   coste: 2
   imagenCarta: {fileID: 2800000, guid: eba3a29ca179b734e8c176f91408d38e, type: 3}
   textoDamage: {fileID: 8220176253298161990}
