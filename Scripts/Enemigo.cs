@@ -28,11 +28,11 @@ public class Enemigo : MonoBehaviour
         vida = vidaAux;
         textoVida.text = vida.ToString();
         textoAtt.text = att.ToString();
-        // Obtener el material del objeto 3D
-        Renderer renderer = GetComponent<Renderer>();
+        //// Obtener el material del objeto 3D
+        //Renderer renderer = GetComponent<Renderer>();
 
-        // Cambiar la textura en el material
-        renderer.material.mainTexture = imagenCarta;
+        //// Cambiar la textura en el material
+        //renderer.material.mainTexture = imagenCarta;
 
 
     }

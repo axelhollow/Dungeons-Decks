@@ -856,8 +856,8 @@ MonoBehaviour:
   listaAliados: []
   listaItems: []
   boss: {fileID: 7315737110772551012, guid: 37d03334dcdda2c4b9c41b21a2ddd8af, type: 3}
-  esbirroBossDer: {fileID: 7315737110772551012, guid: ae45a50723aafd34cb353501463dbdbe, type: 3}
-  esbirroBossIzqu: {fileID: 4080440797006505090, guid: a25a9a94339fd564688f00c2c19c0726, type: 3}
+  esbirroBossDer: {fileID: 7315737110772551012, guid: 129efd78f42adc84da5540c1787efb86, type: 3}
+  esbirroBossIzqu: {fileID: 7315737110772551012, guid: 129efd78f42adc84da5540c1787efb86, type: 3}
   listaPersonajesPadre: {fileID: 635141857}
 --- !u!4 &542270977
 Transform:

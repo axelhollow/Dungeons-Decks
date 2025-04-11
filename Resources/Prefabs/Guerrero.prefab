@@ -484,16 +484,16 @@ MonoBehaviour:
   nombre: Guerrero
   id: 99
   imagenCarta: {fileID: 0}
-  vida: 15
-  vidaAux: 15
-  mana: 6
+  vida: 13
+  vidaAux: 13
+  mana: 4
   vidaMax: 0
   efectoAtaque: {fileID: 2360655870356088562, guid: 57a776ff377f3c44e8403e2067a4d41f, type: 3}
-  manaAux: 6
+  manaAux: 4
   mazoYaGenerado: 0
-  ataque1: {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}
-  ataque2: {fileID: 5122223806699215244, guid: 81ebb865191737942beae7fd7a6d819c, type: 3}
-  ataque3: {fileID: 7112640407728221363, guid: 98fe9d5f8cf3fab4d92854b8bec7bf97, type: 3}
+  ataque1: {fileID: 8088943063078101099, guid: 73e6e956e2d0c8740af103d43eb63337, type: 3}
+  ataque2: {fileID: 8088943063078101099, guid: f702bcf30fba5cb41be4dea81f452afc, type: 3}
+  ataque3: {fileID: 8088943063078101099, guid: 54edd305fb478614db87edd48833f57d, type: 3}
   textoVida: {fileID: 1488359232457233258}
   TextoMana: {fileID: 3503466496001170830}
 --- !u!114 &2665313485548079131

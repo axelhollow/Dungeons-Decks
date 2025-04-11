@@ -126,16 +126,16 @@ MonoBehaviour:
   nombre: Asesino
   id: 99
   imagenCarta: {fileID: 0}
-  vida: 10
-  vidaAux: 10
-  mana: 5
+  vida: 8
+  vidaAux: 8
+  mana: 6
   vidaMax: 0
   efectoAtaque: {fileID: 5985634496115995773, guid: 463cf9f7af4680240898f6aeba3fe3e6, type: 3}
-  manaAux: 5
+  manaAux: 6
   mazoYaGenerado: 0
-  ataque1: {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}
-  ataque2: {fileID: 5122223806699215244, guid: 81ebb865191737942beae7fd7a6d819c, type: 3}
-  ataque3: {fileID: 7112640407728221363, guid: 98fe9d5f8cf3fab4d92854b8bec7bf97, type: 3}
+  ataque1: {fileID: 5122223806699215244, guid: b48341f6ac111d74d9ce7a21b9576942, type: 3}
+  ataque2: {fileID: 8088943063078101099, guid: 80e56e790b202cc4fa8e9ba589b6230c, type: 3}
+  ataque3: {fileID: 8088943063078101099, guid: e1687e7653d8ce4479a1ba6a460c4506, type: 3}
   textoVida: {fileID: 5306776665743573759}
   TextoMana: {fileID: 5896382744340393389}
 --- !u!114 &312139466511795514

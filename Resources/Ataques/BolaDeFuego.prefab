@@ -25,17 +25,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2824380544582406521}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.619}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -0.38755}
   m_LocalScale: {x: 0.06605521, y: 0.06605521, z: 0.06605521}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5830059961365913663}
-  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.14891, y: -0}
-  m_SizeDelta: {x: 5.53958, y: 3.6504}
+  m_AnchoredPosition: {x: 0.34978023, y: 0.95}
+  m_SizeDelta: {x: 3.69929, y: 3.5156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5579022422339513240
 MeshRenderer:
@@ -126,15 +126,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 31.45
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -196,17 +196,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3908204038766255217}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -0.603}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: -0.37981}
   m_LocalScale: {x: 0.06605521, y: 0.06605521, z: 0.06605521}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5830059961365913663}
-  m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.14891, y: -0}
-  m_SizeDelta: {x: 5.53958, y: 3.6504}
+  m_AnchoredPosition: {x: -0.34389, y: 1.03}
+  m_SizeDelta: {x: 4.44042, y: 3.3351}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6831183973517949277
 MeshRenderer:
@@ -297,15 +297,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 29.85
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -370,15 +370,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8088943063078101099}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -26, y: 57.84, z: -28}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -74, y: 57.84, z: -28}
   m_LocalScale: {x: 22.7, y: 1, z: 29.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7490361887571392540}
   - {fileID: 325371460404417664}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2728009848660281448
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -407,7 +407,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79c1c28d7e4815945b979f7f26990a04, type: 2}
+  - {fileID: 2100000, guid: a6c7e7e2063e83b4ca4210c5a77624db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -463,11 +463,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nombre: 
-  damage: 0
-  damageAux: 0
-  coste: 2
+  damage: 5
+  damageAux: 5
+  coste: 3
   imagenCarta: {fileID: 2800000, guid: eba3a29ca179b734e8c176f91408d38e, type: 3}
-  textoDamage: {fileID: 0}
+  textoDamage: {fileID: 8220176253298161990}
   textoMana: {fileID: 7198136336302056116}
   originalScale: {x: 0, y: 0, z: 0}
   scaleFactor: 1.25

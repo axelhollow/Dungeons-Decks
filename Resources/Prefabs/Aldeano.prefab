@@ -143,8 +143,8 @@ MonoBehaviour:
   nombre: Aldeano
   id: 99
   imagenCarta: {fileID: 0}
-  vida: 8
-  vidaAux: 8
+  vida: 5
+  vidaAux: 5
   mana: 5
   vidaMax: 0
   efectoAtaque: {fileID: 2360655870356088562, guid: 57a776ff377f3c44e8403e2067a4d41f, type: 3}

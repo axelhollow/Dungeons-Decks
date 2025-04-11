@@ -315,14 +315,14 @@ MonoBehaviour:
   imagenCarta: {fileID: 0}
   vida: 5
   vidaAux: 5
-  mana: 8
+  mana: 3
   vidaMax: 0
   efectoAtaque: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
-  manaAux: 8
+  manaAux: 3
   mazoYaGenerado: 0
-  ataque1: {fileID: 8088943063078101099, guid: b320ae5fb247d454f919abf83ba41654, type: 3}
-  ataque2: {fileID: 5122223806699215244, guid: 81ebb865191737942beae7fd7a6d819c, type: 3}
-  ataque3: {fileID: 7112640407728221363, guid: 98fe9d5f8cf3fab4d92854b8bec7bf97, type: 3}
+  ataque1: {fileID: 8088943063078101099, guid: 8f91d04ba62733a488cb1c132f0bf575, type: 3}
+  ataque2: {fileID: 8088943063078101099, guid: ba6ff9c1af8f27241aff1256019d8323, type: 3}
+  ataque3: {fileID: 8088943063078101099, guid: 9c5d23d91bfd32948b4ea4b6ab109482, type: 3}
   textoVida: {fileID: 2607467966536651639}
   TextoMana: {fileID: 272350018853785600}
 --- !u!114 &8793625222665893167

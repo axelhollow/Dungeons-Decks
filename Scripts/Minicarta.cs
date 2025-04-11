@@ -31,11 +31,11 @@ public class Minicarta : MonoBehaviour
 
         originalScale = transform.localScale;
 
-        // Obtener el material del objeto 3D
-        Renderer renderer = GetComponent<Renderer>();
+        //// Obtener el material del objeto 3D
+        //Renderer renderer = GetComponent<Renderer>();
 
-        // Cambiar la textura en el material
-        renderer.material.mainTexture = imagenCarta;
+        //// Cambiar la textura en el material
+        //renderer.material.mainTexture = imagenCarta;
     }
 
     public void AumentarDamage(int damaguito) 
