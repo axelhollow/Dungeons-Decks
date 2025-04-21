@@ -38,8 +38,6 @@ public class CraftingScript : MonoBehaviour
 
     void Update()
     {
-        
-
         // Seguir detectando combinaciones y cambios en las cartas
         List<int> currentCartasIDs = ObtenerIDsCartas();
         currentCartasIDs.Sort();

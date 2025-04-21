@@ -4,48 +4,48 @@ using UnityEngine;
 
 public class CartaMovement : MonoBehaviour
 {
-        private Vector3 posicionOriginal;
-        private bool estaSiendoArrastrada = false;
-        private Vector3 offset; // Diferencia entre el punto de clic y el centro de la carta
+    private Vector3 posicionOriginal;
+    private bool estaSiendoArrastrada = false;
+    private Vector3 offset; // Diferencia entre el punto de clic y el centro de la carta
 
-        public float alturaLevante = 6f; // Cuánto se levanta la carta cuando se hace clic
-        public float distanciaRaycast = 10f; // Distancia del Raycast para detectar cartas debajo
+    public float alturaLevante = 6f; // Cuánto se levanta la carta cuando se hace clic
+    public float distanciaRaycast = 10f; // Distancia del Raycast para detectar cartas debajo
 
-        private Vector3 ultimaPosicionRatón;
+    private Vector3 ultimaPosicionRatón;
 
-        private float limiteXMin = -235f;
-        private float limiteXMax = 235f;
-        private float limiteZMin = -120f;
-        private float limiteZMax = 120f;
+    private float limiteXMin = -235f;
+    private float limiteXMax = 235f;
+    private float limiteZMin = -120f;
+    private float limiteZMax = 120f;
 
-        public bool seleccionadaDungeon = false;
-        public bool holderDungeon = false;
+    public bool seleccionadaDungeon = false;
+    public bool holderDungeon = false;
 
-        void Start()
+    void Start()
+    {
+        // Guardamos la posición original de la carta
+        posicionOriginal = transform.position;
+        ultimaPosicionRatón = transform.position; // Inicializamos la posición del ratón
+    }
+
+    void Update()
+    {
+        if (estaSiendoArrastrada)
         {
-            // Guardamos la posición original de la carta
-            posicionOriginal = transform.position;
-            ultimaPosicionRatón = transform.position; // Inicializamos la posición del ratón
+            // Convertir la posición del ratón a coordenadas del mundo
+            Vector3 posicionRatón = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
+
+            // Limitar la posición en X y Z
+            float posX = Mathf.Clamp(posicionRatón.x, limiteXMin, limiteXMax);
+            float posZ = Mathf.Clamp(posicionRatón.z, limiteZMin + ObtenerProfundidadApilada() * 15, limiteZMax);
+            transform.position = new Vector3(posX, alturaLevante, posZ);
+
+
+            ultimaPosicionRatón = posicionRatón;
         }
+    }
 
-        void Update()
-        {
-            if (estaSiendoArrastrada)
-            {
-                // Convertir la posición del ratón a coordenadas del mundo
-                Vector3 posicionRatón = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Camera.main.transform.position.z));
-
-                // Limitar la posición en X y Z
-                float posX = Mathf.Clamp(posicionRatón.x, limiteXMin, limiteXMax);
-                float posZ = Mathf.Clamp(posicionRatón.z, limiteZMin + ObtenerProfundidadApilada() * 15, limiteZMax);
-                transform.position = new Vector3(posX, alturaLevante, posZ);
-
-
-                ultimaPosicionRatón = posicionRatón;
-            }
-        }
-
-        private void OnMouseDown()
+    private void OnMouseDown()
         {
             if (!holderDungeon)
             {
@@ -158,7 +158,7 @@ public class CartaMovement : MonoBehaviour
             return profundidadBase;
         }
 
-        private float ObtenerProfundidadHijos(Transform carta)
+    private float ObtenerProfundidadHijos(Transform carta)
         {
             float profundidad = 0f;
 
