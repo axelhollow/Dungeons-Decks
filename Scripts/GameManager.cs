@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -21,6 +22,9 @@ public class GameManager : MonoBehaviour
     public List<Carta> cartasComida = new List<Carta>(); // Lista para cartas de comida
 
     public Canvas canvas;
+
+    public Canvas canvasDerrota;
+    public TMP_Text textoderrota;
 
   
     public bool CargarPartida;
@@ -205,7 +209,8 @@ public class GameManager : MonoBehaviour
         if (cartasPersonaje.Count == 0 && currentDay > 1)
         {
             StopDay();
-            Debug.Log("HAS PERDIDO BOBO");
+            canvasDerrota.gameObject.SetActive(true);
+            textoderrota.text = $"Has logrado sobrevivir: {currentDay-1} días";
         }
         else
         {
@@ -230,4 +235,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Se encontraron " + cartasComida.Count + " cartas de comida.");
     }
 
+
+    public void VolverInicio()
+    {
+        SceneManager.LoadScene("Inicio");
+    }
 }
