@@ -153,8 +153,10 @@ public  class SaveSystem : MonoBehaviour
             // Iterar sobre cada carta en la lista de cartas
             foreach (var data in dataGlobal.cartas)
             {
+                string input = data.prefabName;
+                string resultado = input.Split('(')[0].Trim();
                 // Cargar el prefab principal de la carta
-                GameObject prefab = Resources.Load<GameObject>("Prefabs/" + data.prefabName);
+                GameObject prefab = Resources.Load<GameObject>("Prefabs/" + resultado);
 
                 if (prefab != null)
                 {

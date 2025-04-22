@@ -53,3 +53,6 @@ MonoBehaviour:
   cartasPersonaje: []
   cartasComida: []
   canvas: {fileID: 0}
+  canvasDerrota: {fileID: 0}
+  textoderrota: {fileID: 0}
+  CargarPartida: 0

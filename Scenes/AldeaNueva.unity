@@ -3415,10 +3415,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1972539748}
     - target: {fileID: 2055310614404855201, guid: 7ee46b1f5263f1f45a26f28e9983f8cd, type: 3}
-      propertyPath: CargarPartida
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2055310614404855201, guid: 7ee46b1f5263f1f45a26f28e9983f8cd, type: 3}
       propertyPath: textoVelocidad
       value: 
       objectReference: {fileID: 361241404}
