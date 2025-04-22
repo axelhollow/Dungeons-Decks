@@ -2744,6 +2744,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3625780628505190748, guid: ddd0c0d4e7f4e3f44843ae69507cd28d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1354049226}
+    - target: {fileID: 3625780628505190748, guid: ddd0c0d4e7f4e3f44843ae69507cd28d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: VolverInicio
+      objectReference: {fileID: 0}
     - target: {fileID: 6264656232087368857, guid: ddd0c0d4e7f4e3f44843ae69507cd28d, type: 3}
       propertyPath: m_Name
       value: CanvasDerrota
@@ -2844,7 +2852,7 @@ Canvas:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1990782902 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6606246857670966975, guid: ddd0c0d4e7f4e3f44843ae69507cd28d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8500597101403300714, guid: ddd0c0d4e7f4e3f44843ae69507cd28d, type: 3}
   m_PrefabInstance: {fileID: 1990782900}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

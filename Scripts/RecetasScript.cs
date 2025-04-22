@@ -112,51 +112,39 @@ public class RecetasScript : MonoBehaviour
         }
     }
 
-    void Start()
+    public void Update()
     {
-        StartCoroutine(DesactivarImagenesCada3Segundos());
+        if (agua) SetImagenesInactive(imagenesAgua);
+        if (aldeano) SetImagenesInactive(imagenesAldeano);
+        if (asesino) SetImagenesInactive(imagenesAsesino);
+        if (barracon) SetImagenesInactive(imagenesBarracon);
+        if (baston) SetImagenesInactive(imagenesBaston);
+        if (botella) SetImagenesInactive(imagenesBotella);
+        if (caldero) SetImagenesInactive(imagenesCaldero);
+        if (cristal) SetImagenesInactive(imagenesCristal);
+        if (daga) SetImagenesInactive(imagenesDaga);
+        if (espada) SetImagenesInactive(imagenesEspada);
+        if (guerrero) SetImagenesInactive(imagenesGuerrero);
+        if (hierro) SetImagenesInactive(imagenesHierro);
+        if (horno) SetImagenesInactive(imagenesHorno);
+        if (invernadero) SetImagenesInactive(imagenesInvernadero);
+        if (ladrillo) SetImagenesInactive(imagenesLadrillo);
+        if (mago) SetImagenesInactive(imagenesMago);
+        if (manzana) SetImagenesInactive(imagenesManzana);
+        if (manzanaAsada) SetImagenesInactive(imagenesManzanaAsada);
+        if (mesacrafteo) SetImagenesInactive(imagenesMesaCrafteo);
+        if (mineralhierro) SetImagenesInactive(imagenesMineralHierro);
+        if (palo) SetImagenesInactive(imagenesPalo);
+        if (piedra) SetImagenesInactive(imagenesPiedra);
+        if (pociondano) SetImagenesInactive(imagenesPocionDano);
+        if (pocionmana) SetImagenesInactive(imagenesPocionMana);
+        if (pocionvida) SetImagenesInactive(imagenesPocionVida);
+        if (polvomagico) SetImagenesInactive(imagenesPolvoMagico);
+        if (pozo) SetImagenesInactive(imagenesPozo);
+        if (tablones) SetImagenesInactive(imagenesTablones);
+        if (tronco) SetImagenesInactive(imagenesTronco);
+        if (aguasTermales) SetImagenesInactive(imagenesAguasTermales);
     }
-
-    IEnumerator DesactivarImagenesCada3Segundos()
-    {
-        while (true)
-        {
-            // Ejecutamos el desactivado de las imágenes cada 3 segundos
-            if (agua) SetImagenesInactive(imagenesAgua);
-            if (aldeano) SetImagenesInactive(imagenesAldeano);
-            if (asesino) SetImagenesInactive(imagenesAsesino);
-            if (barracon) SetImagenesInactive(imagenesBarracon);
-            if (baston) SetImagenesInactive(imagenesBaston);
-            if (botella) SetImagenesInactive(imagenesBotella);
-            if (caldero) SetImagenesInactive(imagenesCaldero);
-            if (cristal) SetImagenesInactive(imagenesCristal);
-            if (daga) SetImagenesInactive(imagenesDaga);
-            if (espada) SetImagenesInactive(imagenesEspada);
-            if (guerrero) SetImagenesInactive(imagenesGuerrero);
-            if (hierro) SetImagenesInactive(imagenesHierro);
-            if (horno) SetImagenesInactive(imagenesHorno);
-            if (invernadero) SetImagenesInactive(imagenesInvernadero);
-            if (ladrillo) SetImagenesInactive(imagenesLadrillo);
-            if (mago) SetImagenesInactive(imagenesMago);
-            if (manzana) SetImagenesInactive(imagenesManzana);
-            if (manzanaAsada) SetImagenesInactive(imagenesManzanaAsada);
-            if (mesacrafteo) SetImagenesInactive(imagenesMesaCrafteo);
-            if (mineralhierro) SetImagenesInactive(imagenesMineralHierro);
-            if (palo) SetImagenesInactive(imagenesPalo);
-            if (piedra) SetImagenesInactive(imagenesPiedra);
-            if (pociondano) SetImagenesInactive(imagenesPocionDano);
-            if (pocionmana) SetImagenesInactive(imagenesPocionMana);
-            if (pocionvida) SetImagenesInactive(imagenesPocionVida);
-            if (polvomagico) SetImagenesInactive(imagenesPolvoMagico);
-            if (pozo) SetImagenesInactive(imagenesPozo);
-            if (tablones) SetImagenesInactive(imagenesTablones);
-            if (tronco) SetImagenesInactive(imagenesTronco);
-            if (aguasTermales) SetImagenesInactive(imagenesAguasTermales);
-
-            yield return new WaitForSeconds(3f);
-        }
-    }
-
 
     void SetImagenesInactive(List<GameObject> imagenes)
     {
